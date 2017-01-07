@@ -9,7 +9,7 @@ export class PostsService {
   }
 
   getPosts(){
-    return this.http.get('http://localhost:3004/posts')
+    return this.http.get('http://localhost:3004/input_text_parts')
       .map(res => res.json());
   }
 }

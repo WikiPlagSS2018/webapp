@@ -1,0 +1,51 @@
+{
+  "input_text_parts": [
+    {
+      "start": 1,
+      "end": 6,
+      "article_positions": [
+        {
+          "title": "Hund",
+          "id": 0,
+          "score": 0.5,
+          "start": 5,
+          "end": 11
+        },
+        {
+          "title": "Katze",
+          "id": 6,
+          "score": 0.8,
+          "start": 11,
+          "end": 16
+        }
+      ]
+    },
+    {
+      "start": 20,
+      "end": 30,
+      "article_positions": [
+        {
+          "title": "Affe",
+          "id": 3,
+          "score": 0.3,
+          "start": 25,
+          "end": 35
+        },
+        {
+          "title": "Katze",
+          "id": 6,
+          "score": 0.4,
+          "start": 100,
+          "end": 110
+        },
+        {
+          "title": "Löwe",
+          "id": 10,
+          "score": 0.9,
+          "start": 111,
+          "end": 121
+        }
+      ]
+    }
+  ]
+}
