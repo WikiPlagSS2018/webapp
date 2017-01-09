@@ -4,14 +4,7 @@ import { PlagPositionsService } from '../services/plag-positions.service'
 @Component({
   moduleId: 'module.id',
   selector: 'output-comp',
-  //templateUrl: './app/components/output.component.html',
-  template: `
-  <div *ngFor="let pp of plagPositions">
-  {{pp.name}}
-  {{pp.id}}  
-  </div>
-  
-  `,
+  templateUrl: './app/components/output.component.html',
   providers: [PlagPositionsService]
 })
 export class OutputComponent  {
