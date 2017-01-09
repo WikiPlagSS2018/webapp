@@ -3,13 +3,13 @@ import {Http} from "@angular/http"
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class PostsService {
+export class PlagPositionsService {
   constructor(private http: Http){
     console.log("init...")
   }
 
-  getPosts(){
-    return this.http.get('http://localhost:3004/input_text_parts')
+  getPlagPositions(){
+    return this.http.get('http://localhost:3004/plagPositions')
       .map(res => res.json());
   }
 }

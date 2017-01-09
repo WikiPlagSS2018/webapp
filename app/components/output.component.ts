@@ -1,14 +1,29 @@
 import { Component } from '@angular/core';
-import { PostsService } from '../services/posts.service'
+import { PlagPositionsService } from '../services/plag-positions.service'
 
 @Component({
+  moduleId: 'module.id',
   selector: 'output-comp',
-  templateUrl: './app/components/output.component.html',
-  providers: [PostsService]
+  //templateUrl: './app/components/output.component.html',
+  template: `
+  <div *ngFor="let pp of plagPositions">
+  {{pp.name}}
+  {{pp.id}}  
+  </div>
+  
+  `,
+  providers: [PlagPositionsService]
 })
 export class OutputComponent  {
-  constructor(private postsService: PostsService){
-    this.postsService.getPosts().subscribe(posts => console.log(posts));
+  plagPositions: PlagPositions;
+
+  constructor(private plagPositionsService: PlagPositionsService){
+    this.plagPositionsService.getPlagPositions().subscribe(plagPositions => this.plagPositions = plagPositions);
   }
 
+}
+
+interface PlagPositions {
+  name: string;
+  id: number;
 }
