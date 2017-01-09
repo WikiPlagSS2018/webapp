@@ -8,15 +8,16 @@ import { PlagPositionsService } from '../services/plag-positions.service'
   providers: [PlagPositionsService]
 })
 export class OutputComponent  {
-  plagPositions: PlagPositions;
+  plagPositions: PlagPositions[];
 
   constructor(private plagPositionsService: PlagPositionsService){
     this.plagPositionsService.getPlagPositions().subscribe(plagPositions => this.plagPositions = plagPositions);
+    //this.plagPositionsService.getPlagPositions().subscribe(plagPositions => console.log(plagPositions));
   }
 
 }
 
 interface PlagPositions {
-  name: string;
-  id: number;
+  tagged_input_text: string;
+  plags: string[][];
 }

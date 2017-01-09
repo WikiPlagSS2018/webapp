@@ -9,7 +9,7 @@ export class PlagPositionsService {
   }
 
   getPlagPositions(){
-    return this.http.get('http://localhost:3004/plagPositions')
+    return this.http.get('http://localhost:3004/plag_positions')
       .map(res => res.json());
   }
 }

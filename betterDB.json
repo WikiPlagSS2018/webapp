@@ -1,0 +1,38 @@
+{
+  "plag_positions": [
+    {
+      "tagged_input_text": "Das ist ein tolles <em id=0>Plagiat. Bla bla.</em> Hier geht <em id=1>der Text</em> weiter.",
+      "plags": [
+        {
+          "wiki_excerpts": [
+            {
+              "title": "Hund",
+              "id": 4,
+              "start": 5,
+              "end": 7,
+              "excerpt": "[...] Test Test Bla Test Blubb <em>Plagiat. Bla bla.</em> Hund Bla Test Bellen Blubb [...]"
+            },
+            {
+              "title": "Katze",
+              "id": 9,
+              "start": 20,
+              "end": 22,
+              "excerpt": "[...] Katze Bla Test Miau Blubb <em>Plagiat. Bla bla.</em> Test Test Bla Test Blubb [...]"
+            }
+          ]
+        },
+        {
+          "wiki_excerpts": [
+            {
+              "title": "Giraffe",
+              "id": 201,
+              "start": 11,
+              "end": 12,
+              "excerpt": "[...] Test Test Bla Test Blubb <em>der Text</em> Hund Bla Test Gelb Blubb [...]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
