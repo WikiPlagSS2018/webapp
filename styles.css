@@ -13,7 +13,7 @@ h1 {
   font-size: 250%;
 }
 
-.plag {
+.input_plag, .wiki_plag{
   background-color: gold;
 }
 

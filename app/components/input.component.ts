@@ -10,6 +10,6 @@ export class InputComponent  {
   sendEventEmitter:EventEmitter<string> = new EventEmitter();
 
   send() {
-    this.sendEventEmitter.emit('send');
+    this.sendEventEmitter.emit();
   }
 }

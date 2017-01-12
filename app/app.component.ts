@@ -1,6 +1,7 @@
 import {Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory} from '@angular/core';
 import {OutputComponent} from "./components/output.component";
 
+
 @Component({
   selector: 'my-app',
   templateUrl: './app/app.component.html',
@@ -16,7 +17,7 @@ export class AppComponent  {
     //this.addComponents()
   }
 
-  addComponents(send) {
+  addComponents() {
 
     //let compFactory: ComponentFactory<any>;
 
