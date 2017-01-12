@@ -10,6 +10,7 @@ import {HttpModule} from "@angular/http";
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule ],
   declarations: [ AppComponent, InputComponent, OutputComponent ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  entryComponents: [ OutputComponent ]
 })
 export class AppModule { }

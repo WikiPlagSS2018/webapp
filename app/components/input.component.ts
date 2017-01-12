@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'input-comp',
@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
 })
 export class InputComponent  {
   inputText:string;
+  @Output()
+  sendEventEmitter:EventEmitter<string> = new EventEmitter();
+
+  send() {
+    this.sendEventEmitter.emit('send');
+  }
 }

@@ -1,3 +1,11 @@
 <img src="./res/img/logo.png" />
-<input-comp></input-comp>
-<output-comp></output-comp>
+<input-comp (sendEventEmitter)="addComponents($event)"></input-comp>
+
+
+
+<div>
+  <div class="container">
+    <template #subContainer1></template>
+  </div>
+</div>
+
