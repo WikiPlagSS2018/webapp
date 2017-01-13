@@ -6,10 +6,11 @@ import {InputComponent} from "./components/input.component";
 import {OutputComponent} from "./components/output.component";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
+import {ClickablePipe} from "./pipes/clickable.pipe";
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule ],
-  declarations: [ AppComponent, InputComponent, OutputComponent ],
+  declarations: [ AppComponent, InputComponent, OutputComponent, ClickablePipe ],
   bootstrap:    [ AppComponent ],
   entryComponents: [ OutputComponent ]
 })

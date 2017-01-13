@@ -15,5 +15,8 @@ h1 {
 
 .input_plag, .wiki_plag{
   background-color: gold;
+  text-decoration: underline;
+  cursor:pointer;
+
 }
 

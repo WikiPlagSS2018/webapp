@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
+import { ClickablePipe } from '../pipes/clickable.pipe';
 
 @Component({
   moduleId: 'module.id',
   selector: 'output-comp',
   templateUrl: './app/components/output.component.html',
-  providers: [PlagPositionsService]
-})
+  providers: [PlagPositionsService],
+  })
 export class OutputComponent  {
 
   plagPositions: PlagPositions[];
@@ -19,8 +20,15 @@ export class OutputComponent  {
 
   }
 
+  @HostListener('click', ['$event'])
+  onClick(e:any) {
+    if (e.target.classList.contains('input_plag')) {
+      this.bla();
+    }
+  }
+
   bla(){
-    console.log("bla!!!!!!!!!!")
+    console.log("Hallo");
   }
 }
 
