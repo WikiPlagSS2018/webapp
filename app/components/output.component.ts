@@ -20,16 +20,22 @@ export class OutputComponent  {
 
   }
 
+  bla(id:any){
+    console.log("id: " +id);
+  }
+
   @HostListener('click', ['$event'])
   onClick(e:any) {
     if (e.target.classList.contains('input_plag')) {
-      this.bla();
+      /*
+       var id = e.target.id;
+       this.bla(id);
+       */
     }
   }
 
-  bla(){
-    console.log("Hallo");
-  }
+
+
 }
 
 interface PlagPositions {
