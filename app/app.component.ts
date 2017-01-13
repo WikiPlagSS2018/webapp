@@ -1,5 +1,5 @@
-import {Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory} from '@angular/core';
-import {OutputComponent} from "./components/output.component";
+import { Component } from '@angular/core';
+import { OutputComponent } from "./components/output.component";
 
 
 @Component({
@@ -7,23 +7,18 @@ import {OutputComponent} from "./components/output.component";
   templateUrl: './app/app.component.html',
 })
 export class AppComponent  {
-  name: string
-  @ViewChild('subContainer1', {read: ViewContainerRef}) subContainer1: ViewContainerRef;
+  showInput: boolean;
+  showOutput: boolean;
 
-  constructor(
-    private compFactoryResolver: ComponentFactoryResolver
-  ) {
-    this.name = 'Angular2'
-    //this.addComponents()
+  constructor() {
+    this.showInput = true;
+    this.showOutput = false;
+
   }
 
-  addComponents() {
-
-    //let compFactory: ComponentFactory<any>;
-
-    let compFactory = this.compFactoryResolver.resolveComponentFactory(OutputComponent);
-    this.subContainer1.createComponent(compFactory);
-
+  toggleComponents() {
+    this.showInput = !this.showInput;
+    this.showOutput = !this.showOutput;
   }
 
 }

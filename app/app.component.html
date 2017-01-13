@@ -1,11 +1,9 @@
 <img src="./res/img/logo.png" />
-<input-comp (sendEventEmitter)="addComponents()"></input-comp>
 
-
-
-<div>
-  <div class="container">
-    <template #subContainer1></template>
-  </div>
+<div *ngIf="showInput">
+  <input-comp (sendEventEmitter)="toggleComponents()"></input-comp>
 </div>
 
+<div *ngIf="showOutput">
+  <output-comp (sendEventEmitter)="toggleComponents()"></output-comp>
+</div>
