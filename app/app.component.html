@@ -1,9 +1,9 @@
 <img src="./res/img/logo.png" />
 
 <div *ngIf="showInput">
-  <input-comp (sendEventEmitter)="toggleComponents()"></input-comp>
+  <input-comp (toggleEventEmitter)="toggleComponents()"></input-comp>
 </div>
 
 <div *ngIf="showOutput">
-  <output-comp (sendEventEmitter)="toggleComponents()"></output-comp>
+  <output-comp (toggleEventEmitter)="toggleComponents()"></output-comp>
 </div>

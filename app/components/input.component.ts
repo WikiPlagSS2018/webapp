@@ -7,9 +7,9 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class InputComponent  {
   inputText:string;
   @Output()
-  sendEventEmitter:EventEmitter<string> = new EventEmitter();
+  toggleEventEmitter:EventEmitter<string> = new EventEmitter();
 
   send() {
-    this.sendEventEmitter.emit();
+    this.toggleEventEmitter.emit();
   }
 }

@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, Output, EventEmitter} from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
 import { ClickablePipe } from '../pipes/clickable.pipe';
 
@@ -9,14 +9,25 @@ import { ClickablePipe } from '../pipes/clickable.pipe';
   providers: [PlagPositionsService],
   })
 export class OutputComponent  {
-
+  @Output()
+  toggleEventEmitter:EventEmitter<string> = new EventEmitter();
   plagPositions: PlagPositions[];
-  _tagged_input_text: string
+  _tagged_input_text: string;
+  _plags: any[];
+  articleListOfSelectedPlag: any;
+  textOfSelectedArticle: any;
+
 
   constructor(private plagPositionsService: PlagPositionsService){
-    this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {this.plagPositions = plagPositions; this._tagged_input_text = this.plagPositions && this.plagPositions[0].tagged_input_text });
-    //this.text = "Das ist ein tolles <span (click)=\"bla()\" class=\"input_plag\" id=0>Plagiat. Bla bla.</span> Bla!";
-    //this.plagPositionsService.getPlagPositions().subscribe(plagPositions => console.log(plagPositions));
+    this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {this.plagPositions = plagPositions;
+      this._tagged_input_text = this.plagPositions && this.plagPositions[0].tagged_input_text;
+      this._plags = this.plagPositions && this.plagPositions[0].plags;
+      this.articleListOfSelectedPlag = this._plags[0].wiki_excerpts;
+      this.textOfSelectedArticle = this.articleListOfSelectedPlag[0].excerpt;
+        console.log(this._plags[0].wiki_excerpts[0].title)});
+
+
+
 
   }
 
@@ -31,8 +42,17 @@ export class OutputComponent  {
        var id = e.target.id;
        this.bla(id);
        */
+      console.log("input_plag");
+    }
+    if (e.target.classList.contains('wiki_title')) {
+      console.log("wiki_title");
     }
   }
+
+  newInput() {
+    this.toggleEventEmitter.emit();
+  }
+
 
 
 
@@ -40,5 +60,5 @@ export class OutputComponent  {
 
 interface PlagPositions {
   tagged_input_text: string;
-  plags: string[][];
+  plags: any[];
 }

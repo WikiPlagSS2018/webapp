@@ -8,15 +8,33 @@ textarea {
 }
 
 h1 {
-  color: #369;
+  color: #b4302e;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
 
-.input_plag, .wiki_plag{
-  background-color: gold;
+table {
+  border-collapse: collapse;
+  border-radius: 10px;
+  background-color: #e4e4e4;'
+}
+
+th,td {
+  vertical-align: top;
+  padding: 10px;
+  border: 1px solid black;
+
+}
+
+
+
+.input_plag, .wiki_plag {
+  background-color: red;
+  cursor:pointer;
+}
+
+.wiki_title {
   text-decoration: underline;
   cursor:pointer;
-
 }
 
