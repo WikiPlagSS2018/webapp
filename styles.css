@@ -45,19 +45,26 @@ button {
   margin-top: 10px;
 }
 
-.input_plag, .wiki_plag {
+.input_plag {
   padding: -1px 4px;
   background-color: indianred;
   cursor:pointer;
 }
+
+.wiki_plag {
+  padding: -1px 4px;
+  background-color: indianred;
+}
+
 
 .wiki_title {
   text-decoration: underline;
   cursor:pointer;
 }
 
-.td_plag_text {
+.plag_text {
   background: white;
+  padding: 5px;
   box-shadow: 0 0 5px 0 #333;
 }
 
@@ -66,5 +73,5 @@ button {
 }
 
 .article_list {
-  /*Style article list*/
+  padding: 5px;
 }

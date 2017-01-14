@@ -10,5 +10,6 @@ export class InputComponent  {
 
   send() {
     this.sendEventEmitter.emit();
+    this.inputText = '';
   }
 }
