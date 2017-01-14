@@ -46,7 +46,9 @@ export class OutputComponent  {
   }
 
   newInput() {
-    this.newInputEventEmitter.emit();
+    if(confirm('Do you really want to analyse an new text?')){
+      this.newInputEventEmitter.emit();
+    }
   }
 }
 

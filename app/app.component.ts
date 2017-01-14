@@ -13,7 +13,6 @@ export class AppComponent  {
   constructor() {
     this.hideInput = false;
     this.hideOutput = true;
-
   }
 
   toggleComponents() {
