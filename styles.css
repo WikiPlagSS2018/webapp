@@ -3,8 +3,11 @@ body {
 }
 
 textarea {
-  width: 90%;
-  height: 150px;
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  border-radius: 5px;
+  box-shadow: none;
 }
 
 h1 {
@@ -13,23 +16,31 @@ h1 {
   font-size: 250%;
 }
 
-table {
+.tbl_output {
   border-collapse: collapse;
-  border-radius: 10px;
-  background-color: #e4e4e4;'
 }
 
 th,td {
   vertical-align: top;
-  padding: 10px;
-  border: 1px solid black;
-
+  padding: 15px;
+  margin: 5px;
 }
 
-
+button {
+  background-color:#b4302e;
+  border-radius:5px;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-size:17px;
+  padding:8px 8px;
+  text-decoration:none;
+  margin-top: 10px;
+}
 
 .input_plag, .wiki_plag {
-  background-color: red;
+  padding: 1px 4px;
+  background-color: indianred;
   cursor:pointer;
 }
 
@@ -38,3 +49,15 @@ th,td {
   cursor:pointer;
 }
 
+.td_plag_text {
+  background: white;
+  box-shadow: 0 0 5px 0 #333;
+}
+
+.td_article_list {
+  white-space: nowrap;
+}
+
+.article_list {
+
+}
