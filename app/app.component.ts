@@ -7,18 +7,18 @@ import { OutputComponent } from "./components/output.component";
   templateUrl: './app/app.component.html',
 })
 export class AppComponent  {
-  showInput: boolean;
-  showOutput: boolean;
+  hideInput: boolean;
+  hideOutput: boolean;
 
   constructor() {
-    this.showInput = true;
-    this.showOutput = false;
+    this.hideInput = false;
+    this.hideOutput = true;
 
   }
 
   toggleComponents() {
-    this.showInput = !this.showInput;
-    this.showOutput = !this.showOutput;
+    this.hideInput = !this.hideInput;
+    this.hideOutput = !this.hideOutput;
   }
 
 }

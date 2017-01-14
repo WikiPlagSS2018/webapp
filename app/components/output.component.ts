@@ -9,8 +9,8 @@ import { ClickablePipe } from '../pipes/clickable.pipe';
   providers: [PlagPositionsService],
   })
 export class OutputComponent  {
-  @Output()
-  toggleEventEmitter:EventEmitter<string> = new EventEmitter();
+  @Output() newInputEventEmitter = new EventEmitter();
+
   plagPositions: PlagPositions[];
   _tagged_input_text: string;
   _plags: any[];
@@ -25,10 +25,6 @@ export class OutputComponent  {
       this.articleListOfSelectedPlag = this._plags[0].wiki_excerpts;
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[0].excerpt;
         console.log(this._plags[0].wiki_excerpts[0].title)});
-
-
-
-
   }
 
   bla(id:any){
@@ -50,12 +46,8 @@ export class OutputComponent  {
   }
 
   newInput() {
-    this.toggleEventEmitter.emit();
+    this.newInputEventEmitter.emit();
   }
-
-
-
-
 }
 
 interface PlagPositions {
