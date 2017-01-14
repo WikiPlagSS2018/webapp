@@ -1,14 +1,10 @@
 import {Component, HostListener, Output, EventEmitter, Pipe, PipeTransform} from '@angular/core';
 import {PlagPositionsService} from '../services/plag-positions.service';
-import {ClickablePipe} from '../pipes/clickable.pipe';
 import {DomSanitizer} from "@angular/platform-browser";
-import {isUndefined} from "util";
 
 @Pipe({name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform {
-  constructor(private sanitized: DomSanitizer) {
-  }
-
+  constructor(private sanitized: DomSanitizer) {}
   transform(value: any) {
     return this.sanitized.bypassSecurityTrustHtml(value);
   }
@@ -60,10 +56,10 @@ export class OutputComponent {
     }
     if (event.target.classList.contains('wiki_title')) {
       this.clickedArticlId = event.target.id;
+      this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticlId].excerpt;
 
       //Highlight selected title
       /*
-      this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticlId].excerpt;
       if(this.prevSelArticle){
         this.prevSelArticle.style.border = 'none';
       }
