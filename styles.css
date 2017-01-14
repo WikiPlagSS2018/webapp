@@ -2,12 +2,19 @@ body {
   background-color: #e4e4e4;
 }
 
+img {
+  max-width: 100%;
+}
+
 textarea {
-  width: 100%;
+  width: 99%;
   max-width: 800px;
-  height: 300px;
-  border-radius: 5px;
+  height: 500px;
+  border-radius: 3px;
   box-shadow: none;
+  outline: none;
+  border: 1px solid #b4302e;
+  font-size: 80%;
 }
 
 h1 {
@@ -39,7 +46,7 @@ button {
 }
 
 .input_plag, .wiki_plag {
-  padding: 1px 4px;
+  padding: -1px 4px;
   background-color: indianred;
   cursor:pointer;
 }
