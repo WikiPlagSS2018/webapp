@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class PlagPositionsService {
   constructor(private http: Http){
-    console.log("init...")
+    console.info("init PlagPositionsService");
   }
 
   getPlagPositions(){

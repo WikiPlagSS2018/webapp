@@ -33,6 +33,9 @@ export class OutputComponent {
   @HostListener('click', ['$event'])
   onClick(event: any) {
     if (event.target.classList.contains('input_plag')) {
+      this.clickedPlagId = event.target.id;
+      console.info("Clicked on plag with id " + this.clickedPlagId);
+
       //Highlight selected plag
       /*
       if(this.prevSelPlag){
@@ -42,22 +45,24 @@ export class OutputComponent {
       this.prevSelPlag = event.target;
       */
 
-      this.clickedPlagId = event.target.id;
       this.articleListOfSelectedPlag = this._plags[this.clickedPlagId].wiki_excerpts;
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[0].excerpt;
+
     }
     if (event.target.classList.contains('wiki_title')) {
       this.clickedArticlId = event.target.id;
-      this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticlId].excerpt;
+      console.info("Clicked on article with id " + this.clickedArticlId);
 
       //Highlight selected title
       /*
-      if(this.prevSelArticle){
-        this.prevSelArticle.style.border = 'none';
-      }
-      event.target.style.border = '2px solid black';
-      this.prevSelArticle = event.target;
-      */
+       if(this.prevSelArticle){
+       this.prevSelArticle.style.border = 'none';
+       }
+       event.target.style.border = '2px solid black';
+       this.prevSelArticle = event.target;
+       */
+
+      this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticlId].excerpt;
     }
   }
 
