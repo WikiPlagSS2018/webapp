@@ -1,14 +1,6 @@
-import {Component, HostListener, Output, EventEmitter, Pipe, PipeTransform} from '@angular/core';
+import {Component, HostListener, Output, EventEmitter} from '@angular/core';
 import {PlagPositionsService} from '../services/plag-positions.service';
-import {DomSanitizer} from "@angular/platform-browser";
 
-@Pipe({name: 'safeHtml'})
-export class SafeHtmlPipe implements PipeTransform {
-  constructor(private sanitized: DomSanitizer) {}
-  transform(value: any) {
-    return this.sanitized.bypassSecurityTrustHtml(value);
-  }
-}
 @Component({
   moduleId: 'module.id',
   selector: 'output-comp',
