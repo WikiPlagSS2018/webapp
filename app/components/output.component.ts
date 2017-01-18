@@ -63,16 +63,21 @@ export class OutputComponent {
        this.prevSelArticle.style.color = 'black';
        }
        event.target.style.background = '#b4302e';
-      event.target.style.color = 'white';
+       event.target.style.color = 'white';
        this.prevSelArticle = event.target;
 
 
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticlId].excerpt;
     }
+    if (event.target.classList.contains('wiki_plag')) {
+      console.info("Clicked on excerpt")
+      window.open('https://de.wikipedia.org')
+    }
+
   }
 
   newInput() {
-    if (confirm('Do you really want to analyse a new text?')) {
+    if (confirm('Do you really want to analyze a new text?')) {
       this.newInputEventEmitter.emit();
     }
   }
