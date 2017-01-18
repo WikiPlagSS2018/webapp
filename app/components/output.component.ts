@@ -51,7 +51,7 @@ export class OutputComponent {
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[0].excerpt;
 
     }
-    if (event.target.classList.contains('wiki_title')) {
+    if (event.target.classList.contains('article_box')) {
       this.clickedArticlId = event.target.id;
       console.info("Clicked on article with id " + this.clickedArticlId);
 

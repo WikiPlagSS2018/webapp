@@ -42,18 +42,23 @@ button {
   border-collapse: collapse;
 }
 
+
 th, td {
   vertical-align: top;
   padding: 5px;
 }
 
-.input_textbox, .excerpt_textbox {
-  height: 60vh;
+.article_box {
+  padding: 5px;
+  margin-bottom: 10px;
   overflow-y: auto;
-}
-.article_list {
-  padding-bottom: 5px;
-  overflow-y: auto;
+  background: white;
+  box-shadow: 0 0 5px 0 #333;
+  cursor: pointer;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .input_plag, .wiki_plag {
@@ -67,24 +72,9 @@ th, td {
   background: white;
   padding: 5px;
   box-shadow: 0 0 5px 0 black;
+  max-height: 60vh;
+  overflow-y: auto;
 }
-
-.article_list {
-  padding: 5px;
-}
-
-.wiki_title {
-  background: white;
-  box-shadow: 0 0 5px 0 #333;
-  padding: 5px;
-  cursor: pointer;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-
-}
-
 
 
 

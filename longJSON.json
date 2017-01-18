@@ -122,6 +122,13 @@
               "start": 11,
               "end": 12,
               "excerpt": "[...] Test Test Bla Test Blubb <span class=\"wiki_plag\">der Text</span> Hund Bla Test Gelb Blubb [...]"
+            },
+            {
+              "title": "Der Artikel!!!!",
+              "id": 201,
+              "start": 11,
+              "end": 12,
+              "excerpt": "[...] Test Test Bla Test Blubb <span class=\"wiki_plag\">Ein tolles Plagiat</span> Hund Bla Test Gelb Blubb [...]"
             }
           ]
         }
