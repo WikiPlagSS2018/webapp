@@ -13,6 +13,14 @@ h1 {
   font-size: 250%;
 }
 
+.slogan {
+  font-size: 150%;
+  color: #d7252e;
+  background: -webkit-linear-gradient(#d7252e, black);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
 .input-textarea {
   width: 99%;
   max-width: 800px;
