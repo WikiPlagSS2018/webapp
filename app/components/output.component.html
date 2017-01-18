@@ -1,22 +1,28 @@
 <h1>Result</h1>
 <div class="tbl_div">
-  <table class="tbl_output">
+  <table class="tbl-output">
     <tr>
-      <th>Input Text</th>
-      <th>Articles</th>
-      <th>Wikipedia Excerpt</th>
+      <th class="col-input">Input Text</th>
+      <th class="col-articles">Articles</th>
+      <th class="col-excerpt">Wikipedia Excerpt</th>
     </tr>
     <tr>
       <td>
-        <div class="input_textbox" [innerHTML]="_tagged_input_text | safeHtml"></div>
-      </td>
-      <td>
-        <div class="article_box" *ngFor="let plag of articleListOfSelectedPlag; let i=index" id="{{i}}">
-            {{plag.title}} ({{plag.start}}-{{plag.end}})
+        <div class="input-container">
+          <div class="input-textbox" [innerHTML]="_tagged_input_text | safeHtml"></div>
         </div>
       </td>
       <td>
-        <div class="excerpt_textbox" [innerHTML]="textOfSelectedArticle"></div>
+        <div class="articles-container">
+          <div class="article-box" *ngFor="let plag of articleListOfSelectedPlag; let i=index" id="{{i}}">
+              {{plag.title}} ({{plag.start}}-{{plag.end}})
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="excerpt-container">
+          <div class="excerpt-textbox" [innerHTML]="textOfSelectedArticle"></div>
+        </div>
       </td>
     </tr>
   </table>

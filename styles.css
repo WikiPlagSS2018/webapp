@@ -13,10 +13,10 @@ h1 {
   font-size: 250%;
 }
 
-.input_textarea {
+.input-textarea {
   width: 99%;
   max-width: 800px;
-  height: 400px;
+  height: 50vh;
   border-radius: 3px;
   box-shadow: none;
   outline: none;
@@ -35,7 +35,7 @@ button {
   text-transform: uppercase;
 }
 
-.tbl_output {
+.tbl-output {
   width: 100%;
   overflow: auto;
   table-layout: fixed;
@@ -45,10 +45,21 @@ button {
 
 th, td {
   vertical-align: top;
-  padding: 5px;
 }
 
-.article_box {
+.col-input {
+  width: 50%;
+}
+
+.col-articles {
+  width: 20%;
+}
+
+.col-excerpt {
+  width: 30%;
+}
+
+.article-box {
   padding: 5px;
   margin-bottom: 10px;
   overflow-y: auto;
@@ -61,14 +72,14 @@ th, td {
   hyphens: auto;
 }
 
-.input_plag, .wiki_plag {
+.input-plag, .wiki-plag {
   color: white;
   padding: 0px 2px;
   background-color: #b4302e;
   cursor: pointer;
 }
 
-.input_textbox, .excerpt_textbox {
+.input-textbox, .excerpt-textbox {
   background: white;
   padding: 5px;
   box-shadow: 0 0 5px 0 black;
@@ -76,6 +87,15 @@ th, td {
   overflow-y: auto;
 }
 
+.articles-container{
+  padding: 5px;
+  max-height: 60vh;
+  overflow: scroll;
+}
+
+.input-container, .excerpt-container{
+  padding: 5px;
+}
 
 
 
