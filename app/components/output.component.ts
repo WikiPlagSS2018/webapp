@@ -37,13 +37,15 @@ export class OutputComponent {
       console.info("Clicked on plag with id " + this.clickedPlagId);
 
       //Highlight selected plag
-      /*
+
       if(this.prevSelPlag){
         this.prevSelPlag.style.boxShadow = 'none';
+        this.prevSelPlag.style.backgroundColor = '#b4302e';
       }
-      event.target.style.boxShadow = '0 0 4px 1px black';
+      event.target.style.boxShadow = '0 0 4px 1px gray';
+      event.target.style.background = 'lightcoral';
       this.prevSelPlag = event.target;
-      */
+
 
       this.articleListOfSelectedPlag = this._plags[this.clickedPlagId].wiki_excerpts;
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[0].excerpt;
@@ -54,13 +56,16 @@ export class OutputComponent {
       console.info("Clicked on article with id " + this.clickedArticlId);
 
       //Highlight selected title
-      /*
+
        if(this.prevSelArticle){
        this.prevSelArticle.style.border = 'none';
+       this.prevSelArticle.style.background = 'white';
+       this.prevSelArticle.style.color = 'black';
        }
-       event.target.style.border = '2px solid black';
+       event.target.style.background = '#b4302e';
+      event.target.style.color = 'white';
        this.prevSelArticle = event.target;
-       */
+
 
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticlId].excerpt;
     }

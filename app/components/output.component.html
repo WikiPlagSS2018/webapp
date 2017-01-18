@@ -1,23 +1,25 @@
 <h1>Result</h1>
-<table class="tbl_output">
-  <tr>
-    <th>Input Text</th>
-    <th>Articles</th>
-    <th>Wikipedia Excerpt</th>
-  </tr>
-  <tr>
-    <td>
-      <div class="plag_textbox" [innerHTML]="_tagged_input_text | safeHtml"></div>
-    </td>
-    <td>
-      <div  class="article_list" *ngFor="let plag of articleListOfSelectedPlag; let i=index">
-          <span class="wiki_title" id="{{i}}">{{plag.title}} ({{plag.start}}-{{plag.end}})</span>
-      </div>
-    </td>
-    <td>
-      <div class="plag_textbox" [innerHTML]="textOfSelectedArticle"></div>
-    </td>
-  </tr>
-</table>
+<div class="tbl_div">
+  <table class="tbl_output">
+    <tr>
+      <th>Input Text</th>
+      <th>Articles</th>
+      <th>Wikipedia Excerpt</th>
+    </tr>
+    <tr>
+      <td>
+        <div class="input_textbox" [innerHTML]="_tagged_input_text | safeHtml"></div>
+      </td>
+      <td>
+        <div  class="article_list" *ngFor="let plag of articleListOfSelectedPlag; let i=index">
+            <div class="wiki_title" id="{{i}}">{{plag.title}} ({{plag.start}}-{{plag.end}})</div>
+        </div>
+      </td>
+      <td>
+        <div class="excerpt_textbox" [innerHTML]="textOfSelectedArticle"></div>
+      </td>
+    </tr>
+  </table>
+</div>
 <button (click)="newInput()">New Text</button>
 
