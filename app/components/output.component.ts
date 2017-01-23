@@ -1,4 +1,4 @@
-import {Component, HostListener, Output, EventEmitter, AfterViewChecked} from '@angular/core';
+import {Component, HostListener, Output, EventEmitter} from '@angular/core';
 import {PlagPositionsService} from '../services/plag-positions.service';
 
 @Component({
@@ -7,7 +7,7 @@ import {PlagPositionsService} from '../services/plag-positions.service';
   templateUrl: './app/components/output.component.html',
   providers: [PlagPositionsService],
 })
-export class OutputComponent implements AfterViewChecked{
+export class OutputComponent {
   @Output() newInputEventEmitter = new EventEmitter();
 
   plagPositions: PlagPositions[];
@@ -26,31 +26,7 @@ export class OutputComponent implements AfterViewChecked{
       this.plagPositions = plagPositions;
       this._tagged_input_text = this.plagPositions && this.plagPositions[0].tagged_input_text;
       this._plags = this.plagPositions && this.plagPositions[0].plags;
-      this.articleListOfSelectedPlag = this._plags[0].wiki_excerpts;
-      this.textOfSelectedArticle = this.articleListOfSelectedPlag[0].excerpt;
     });
-  }
-
-  ngAfterViewChecked(): void {
-    if(this.firstLoad){
-      var input_plag_elements = <HTMLElement[]><any>document.getElementsByClassName('input_plag');
-      if(input_plag_elements[0]){
-        // console.log(input_plag_elements[0]);
-        input_plag_elements[0].style.boxShadow = '0 0 4px 1px gray';
-        input_plag_elements[0].style.background = 'lightcoral';
-        this.prevSelPlag = input_plag_elements[0];
-        this.firstLoad = false;
-      }
-
-      var article_box_elements = <HTMLElement[]><any>document.getElementsByClassName('article_box');
-      // console.log(article_box_elements);
-      if(article_box_elements[0]){
-        // console.log(article_box_elements[0]);
-        article_box_elements[0].style.background = '#b4302e';
-        article_box_elements[0].style.color = 'white';
-        this.prevSelArticle = article_box_elements[0];
-      }
-    }
   }
 
   @HostListener('click', ['$event'])
@@ -60,7 +36,6 @@ export class OutputComponent implements AfterViewChecked{
       console.info("Clicked on plag with id " + this.clickedPlagId);
 
       //Highlight selected plag
-
       if(this.prevSelPlag){
         this.prevSelPlag.style.boxShadow = 'none';
         this.prevSelPlag.style.backgroundColor = '#b4302e';
@@ -70,23 +45,13 @@ export class OutputComponent implements AfterViewChecked{
       this.prevSelPlag = event.target;
 
       this.articleListOfSelectedPlag = this._plags[this.clickedPlagId].wiki_excerpts;
-      this.textOfSelectedArticle = this.articleListOfSelectedPlag[0].excerpt;
-
-      var article_box_elements = <HTMLElement[]><any>document.getElementsByClassName('article_box');
-      console.log(article_box_elements);
-      if(article_box_elements[0]){
-        console.log('colorized article_box');
-        article_box_elements[0].style.background = '#b4302e';
-        article_box_elements[0].style.color = 'white';
-        this.prevSelArticle = article_box_elements[0];
-      }
+      this.textOfSelectedArticle = null;
     }
     if (event.target.classList.contains('article_box')) {
       this.clickedArticlId = event.target.id;
       console.info("Clicked on article with id " + this.clickedArticlId);
 
       //Highlight selected title
-
        if(this.prevSelArticle){
        this.prevSelArticle.style.border = 'none';
        this.prevSelArticle.style.background = 'white';
@@ -107,7 +72,7 @@ export class OutputComponent implements AfterViewChecked{
   }
 
   newInput() {
-    if (confirm('Do you really want to analyze a new text?')) {
+    if (confirm('Wirklich neuen Text analysieren?')) {
       this.newInputEventEmitter.emit();
     }
   }

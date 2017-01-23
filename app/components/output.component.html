@@ -1,10 +1,10 @@
-<h1>Result</h1>
+<h1>Ergebnis</h1>
 <div class="tbl_div">
   <table class="tbl_output">
     <tr>
-      <th class="col_input">Input Text</th>
-      <th class="col_articles">Articles</th>
-      <th class="col_excerpt">Wikipedia Excerpt</th>
+      <th class="col_input">Eingabetext</th>
+      <th class="col_articles">Artikel</th>
+      <th class="col_excerpt">Wikipedia-Ausschnitt</th>
     </tr>
     <tr>
       <td>
@@ -17,15 +17,21 @@
           <div class="article_box" *ngFor="let plag of articleListOfSelectedPlag; let i=index" id="{{i}}">
               {{plag.title}} ({{plag.start}}-{{plag.end}})
           </div>
+          <div class="hint" *ngIf="!articleListOfSelectedPlag">
+            Bitte eine markierte Plagiatsstelle anklicken.
+          </div>
         </div>
       </td>
       <td>
         <div class="excerpt_container">
-          <div class="excerpt_textbox" [innerHTML]="textOfSelectedArticle"></div>
+          <div *ngIf="textOfSelectedArticle" class="excerpt_textbox" [innerHTML]="textOfSelectedArticle"></div>
+          <div class="hint" *ngIf="!textOfSelectedArticle && articleListOfSelectedPlag">
+            Bitte einen Artikel anklicken.
+          </div>
         </div>
       </td>
     </tr>
   </table>
 </div>
-<button (click)="newInput()">New Text</button>
+<button (click)="newInput()">Neuer Text</button>
 
