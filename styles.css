@@ -13,6 +13,11 @@ h1 {
   font-size: 250%;
 }
 
+.slogan {
+  font-family: "Times New Roman";
+  font-size: 22px;
+}
+
 .input_textarea {
   width: 99%;
   max-width: 800px;
@@ -90,13 +95,12 @@ th, td {
 .articles_container{
   padding: 5px;
   max-height: 60vh;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .input_container, .excerpt_container{
   padding: 5px;
 }
-
 
 
 
