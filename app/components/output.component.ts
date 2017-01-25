@@ -1,11 +1,12 @@
 import {Component, HostListener, Output, EventEmitter} from '@angular/core';
 import {PlagPositionsService} from '../services/plag-positions.service';
+import {WikiAPIService} from '../services/wiki-api.service';
 
 @Component({
   moduleId: 'module.id',
   selector: 'output-comp',
   templateUrl: './app/components/output.component.html',
-  providers: [PlagPositionsService],
+  providers: [PlagPositionsService, WikiAPIService],
 })
 export class OutputComponent {
   @Output() newInputEventEmitter = new EventEmitter();
@@ -16,12 +17,13 @@ export class OutputComponent {
   articleListOfSelectedPlag: any;
   textOfSelectedArticle: any;
   clickedPlagId: number;
-  clickedArticlId: number;
+  clickedArticleId: number;
   prevSelPlag: any;
   prevSelArticle: any;
-  firstLoad = true;
+  clickedArticleWikiId : number;
+  articleUrl: any;
 
-  constructor(private plagPositionsService: PlagPositionsService) {
+  constructor(private plagPositionsService: PlagPositionsService, private wikiAPIService: WikiAPIService) {
     this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {
       this.plagPositions = plagPositions;
       this._tagged_input_text = this.plagPositions && this.plagPositions[0].tagged_input_text;
@@ -48,8 +50,8 @@ export class OutputComponent {
       this.textOfSelectedArticle = null;
     }
     if (event.target.classList.contains('article_box')) {
-      this.clickedArticlId = event.target.id;
-      console.info("Clicked on article with id " + this.clickedArticlId);
+      this.clickedArticleId = event.target.id;
+      console.info("Clicked on article with id " + this.clickedArticleId);
 
       //Highlight selected title
        if(this.prevSelArticle){
@@ -62,11 +64,17 @@ export class OutputComponent {
        this.prevSelArticle = event.target;
 
 
-      this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticlId].excerpt;
+      this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
     }
+    // Open corresponding Wikipedia article in pop-up
     if (event.target.classList.contains('wiki_plag')) {
-      console.info("Clicked on excerpt");
-      window.open('https://de.wikipedia.org');
+      this.clickedArticleWikiId = this._plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
+      this.wikiAPIService.getArticleData(this.clickedArticleWikiId).subscribe(articleData => {
+      this.articleUrl = articleData.query.pages[this.clickedArticleWikiId].fullurl
+      window.open(this.articleUrl)
+      });
+
+
     }
 
   }
@@ -74,6 +82,7 @@ export class OutputComponent {
   newInput() {
     if (confirm('Wirklich neuen Text analysieren?')) {
       this.newInputEventEmitter.emit();
+
     }
   }
 }
