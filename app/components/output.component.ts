@@ -63,18 +63,17 @@ export class OutputComponent {
        event.target.style.color = 'white';
        this.prevSelArticle = event.target;
 
+       // Get article URL from Wikipedia API
+      this.clickedArticleWikiId = this._plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
+      this.wikiAPIService.getArticleData(this.clickedArticleWikiId).subscribe(articleData => {
+        this.articleUrl = articleData.query.pages[this.clickedArticleWikiId].fullurl
+      });
 
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
     }
     // Open corresponding Wikipedia article in pop-up
     if (event.target.classList.contains('wiki_plag')) {
-      this.clickedArticleWikiId = this._plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
-      this.wikiAPIService.getArticleData(this.clickedArticleWikiId).subscribe(articleData => {
-      this.articleUrl = articleData.query.pages[this.clickedArticleWikiId].fullurl
       window.open(this.articleUrl)
-      });
-
-
     }
 
   }
