@@ -58,17 +58,22 @@ th {
 
 .info {
   position: relative;
-  background: #b4302e;
-  border-radius: 0.5em;
-  -moz-border-radius: 0.5em;
-  -webkit-border-radius: 0.5em;
-  color: #ffffff;
+  /*background: #b4302e;*/
+  padding: 2px;
+  background: white;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  /*color: #ffffff;*/
+  color: black;
+  /*border: 1px solid black;*/
   display: inline-block;
   font-weight: bold;
-  line-height: 1em;
-  margin-right: 5px;
+  line-height: 0.7em;
+  /*margin-right: 5px;*/
   text-align: center;
-  width: 1em;
+  vertical-align: middle;
+  width: 0.7em;
 }
 
 .info .tooltiptext {
@@ -76,7 +81,7 @@ th {
   visibility: hidden;
   width: 150px;
   bottom: 120%;
-  left:  -55px;
+  left:  -70px;
   font-weight: normal;
   font-size: 13px;
   background-color: gray;

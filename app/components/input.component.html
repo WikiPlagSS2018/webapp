@@ -1,5 +1,5 @@
 <h1>Eingabe</h1>
-<form>
+<form >
   <textarea class="input_textarea" [(ngModel)]="inputText" placeholder="Text hier einfügen" [ngModelOptions]="{standalone: true}"></textarea><br />
-  <button (click)="send()">Analysieren</button>
+  <button [disabled]="!inputText" (click)="send()">Analysieren</button>
 </form>
