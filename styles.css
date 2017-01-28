@@ -40,6 +40,11 @@ button {
   text-transform: uppercase;
 }
 
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
 .tbl_output {
   width: 100%;
   overflow: auto;
@@ -58,19 +63,15 @@ th {
 
 .info {
   position: relative;
-  /*background: #b4302e;*/
   padding: 2px;
   background: white;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  /*color: #ffffff;*/
   color: black;
-  /*border: 1px solid black;*/
   display: inline-block;
   font-weight: bold;
   line-height: 0.7em;
-  /*margin-right: 5px;*/
   text-align: center;
   vertical-align: middle;
   width: 0.7em;
@@ -84,6 +85,7 @@ th {
   left:  -70px;
   font-weight: normal;
   font-size: 13px;
+  line-height: normal;
   background-color: gray;
   color: #fff;
   text-align: center;
@@ -110,6 +112,12 @@ th {
 
 .col_excerpt {
   width: 30%;
+}
+
+.articles_container{
+  padding: 5px;
+  max-height: calc(60vh + 5px);
+  overflow: auto;
 }
 
 .article_box {
@@ -140,11 +148,6 @@ th {
   overflow-y: auto;
 }
 
-.articles_container{
-  padding: 5px;
-  max-height: 60vh;
-  overflow: auto;
-}
 
 .input_container, .excerpt_container{
   padding: 5px;

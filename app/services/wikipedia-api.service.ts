@@ -4,9 +4,9 @@ import {Http} from "@angular/http"
 import 'rxjs/add/operator/map'
 
 @Injectable()
-export class WikiAPIService {
+export class WikipediaAPIService {
   constructor(private http: Http){
-    console.info("init WikiAPIService");
+    console.info("init WikipediaAPIService");
   }
 
   getArticleData(ArticleId:any){

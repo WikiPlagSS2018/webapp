@@ -1,12 +1,12 @@
 import {Component, HostListener, Output, EventEmitter} from '@angular/core';
 import {PlagPositionsService} from '../services/plag-positions.service';
-import {WikiAPIService} from '../services/wiki-api.service';
+import {WikipediaAPIService} from '../services/wikipedia-api.service';
 
 @Component({
   moduleId: 'module.id',
   selector: 'output-comp',
   templateUrl: './app/components/output.component.html',
-  providers: [PlagPositionsService, WikiAPIService],
+  providers: [PlagPositionsService, WikipediaAPIService],
 })
 export class OutputComponent {
   @Output() newInputEventEmitter = new EventEmitter();
@@ -23,7 +23,7 @@ export class OutputComponent {
   clickedArticleWikiId : number;
   articleUrl: any;
 
-  constructor(private plagPositionsService: PlagPositionsService, private wikiAPIService: WikiAPIService) {
+  constructor(private plagPositionsService: PlagPositionsService, private wikipediaAPIService: WikipediaAPIService) {
     this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {
       this.plagPositions = plagPositions;
       this._tagged_input_text = this.plagPositions && this.plagPositions[0].tagged_input_text;
@@ -65,7 +65,7 @@ export class OutputComponent {
 
        // Get article URL from Wikipedia API
       this.clickedArticleWikiId = this._plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
-      this.wikiAPIService.getArticleData(this.clickedArticleWikiId).subscribe(articleData => {
+      this.wikipediaAPIService.getArticleData(this.clickedArticleWikiId).subscribe(articleData => {
         this.articleUrl = articleData.query.pages[this.clickedArticleWikiId].fullurl
       });
 
