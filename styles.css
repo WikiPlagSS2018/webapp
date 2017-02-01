@@ -68,6 +68,7 @@ th {
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
+  border: 1px solid grey;
   color: black;
   display: inline-block;
   font-weight: bold;
