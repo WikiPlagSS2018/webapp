@@ -11,7 +11,7 @@ import {WikipediaAPIService} from '../services/wikipedia-api.service';
 export class OutputComponent {
   @Output() newInputEventEmitter = new EventEmitter();
 
-  plagPositions: PlagPositions[];
+  plagPositions: PlagPositions;
   _tagged_input_text: string;
   _plags: any[];
   articleListOfSelectedPlag: any;
@@ -25,9 +25,11 @@ export class OutputComponent {
 
   constructor(private plagPositionsService: PlagPositionsService, private wikipediaAPIService: WikipediaAPIService) {
     this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {
+      console.log(plagPositions);
+
       this.plagPositions = plagPositions;
-      this._tagged_input_text = this.plagPositions && this.plagPositions[0].tagged_input_text;
-      this._plags = this.plagPositions && this.plagPositions[0].plags;
+      this._tagged_input_text = this.plagPositions.tagged_input_text;
+      this._plags = this.plagPositions.plags;
     });
   }
 
