@@ -82,12 +82,7 @@ export class OutputComponent {
 
   newInput() {
     if (confirm('Wirklich neuen Text analysieren?')) {
-      this.articleListOfSelectedPlag = null;
-      this.textOfSelectedArticle = null;
-      this.prevSelPlag.style.boxShadow = 'none';
-      this.prevSelPlag.style.backgroundColor = '#b4302e';
       this.newInputEventEmitter.emit();
-
     }
   }
 }
