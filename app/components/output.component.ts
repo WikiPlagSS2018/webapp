@@ -9,71 +9,118 @@ import {WikipediaAPIService} from '../services/wikipedia-api.service';
   providers: [PlagPositionsService, WikipediaAPIService],
 })
 export class OutputComponent {
+  /**
+   * Used to toggle from output.component to input.component in app.component
+   */
   @Output() newInputEventEmitter = new EventEmitter();
 
+  /**
+   * object read from json
+   */
   plagPositions: PlagPositions;
-  _tagged_input_text: string;
-  _plags: any[];
+
+  /**
+   * input text with tags
+   */
+  tagged_input_text: string;
+
+  /**
+   * plagiarised articles and excerpts
+   */
+  plags: any[];
+
+  /**
+   * list of articles for currently selected plagiarised part
+   */
   articleListOfSelectedPlag: any;
+
+  /**
+   * text of selected article
+   */
   textOfSelectedArticle: any;
+
+  /**
+   * id of clicked plagiarised part
+   */
   clickedPlagId: number;
+
+  /**
+   * id of clicked article
+   */
   clickedArticleId: number;
+
+  /**
+   * previously selected plagiarised part. used to reset highlighting
+   */
   prevSelPlag: any;
+
+  /**
+   * previously selected article. used to reset highlighting
+   */
   prevSelArticle: any;
+
+  /**
+   * wikipedia-internal article id for clicked article
+   */
   clickedArticleWikiId : number;
+
+  /**
+   * wikipedia url of clicked article
+   */
   articleUrl: any;
 
+  /**
+   * Initialises objects and subscribes to service
+   * @param plagPositionsService service for getting mocked json
+   * @param wikipediaAPIService service for querying wikipedia api
+   */
   constructor(private plagPositionsService: PlagPositionsService, private wikipediaAPIService: WikipediaAPIService) {
-    this._tagged_input_text = "Lädt ..."
+    this.tagged_input_text = "Lädt ..." // displayed while service is loading
+
     this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {
       console.log(plagPositions);
 
+      // assigns plagPositions from json to local variable
       this.plagPositions = plagPositions;
-      this._tagged_input_text = this.plagPositions.tagged_input_text;
-      this._plags = this.plagPositions.plags;
+
+      // assigns tagged_input_text from json to local variable
+      this.tagged_input_text = this.plagPositions.tagged_input_text;
+
+      // assigns plags from json to local variable
+      this.plags = this.plagPositions.plags;
     });
   }
 
+  // listens for click events
   @HostListener('click', ['$event'])
   onClick(event: any) {
+    // clicked on input_plag
     if (event.target.classList.contains('input_plag')) {
       this.clickedPlagId = event.target.id;
       console.info("Clicked on plag with id " + this.clickedPlagId);
 
-      //Highlight selected plag
-      if(this.prevSelPlag){
-        this.prevSelPlag.style.boxShadow = 'none';
-        this.prevSelPlag.style.backgroundColor = '#b4302e';
-      }
-      event.target.style.boxShadow = '0 0 4px 1px gray';
-      event.target.style.background = 'lightcoral';
-      this.prevSelPlag = event.target;
+      this.highlightSelectedPlag(event);
 
-      this.articleListOfSelectedPlag = this._plags[this.clickedPlagId].wiki_excerpts;
+      // array of wiki_excerpts is assigned
+      this.articleListOfSelectedPlag = this.plags[this.clickedPlagId].wiki_excerpts;
+
+      // reset textOfSelectedArticle
       this.textOfSelectedArticle = null;
     }
+
+    // clicked on article
     if (event.target.classList.contains('article_box')) {
       this.clickedArticleId = event.target.id;
       console.info("Clicked on article with id " + this.clickedArticleId);
 
-      //Highlight selected title
-       if(this.prevSelArticle){
-       this.prevSelArticle.style.border = 'none';
-       this.prevSelArticle.style.background = 'white';
-       this.prevSelArticle.style.color = 'black';
-       }
-       event.target.style.background = '#b4302e';
-       event.target.style.color = 'white';
-       this.prevSelArticle = event.target;
+      this.highlightSelectedArticle(event);
 
-       // Get article URL from Wikipedia API
-      this.clickedArticleWikiId = this._plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
-      this.wikipediaAPIService.getArticleData(this.clickedArticleWikiId).subscribe(articleData => {
-        this.articleUrl = articleData.query.pages[this.clickedArticleWikiId].fullurl
-      });
+      this.getArticleURLFromWikipediaAPI();
 
+      // excerpt text is assigned
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
     }
+
     // Open corresponding Wikipedia article in pop-up
     if (event.target.classList.contains('wiki_plag')) {
       window.open(this.articleUrl)
@@ -81,13 +128,65 @@ export class OutputComponent {
 
   }
 
+  /**
+   * disables highlighting of previous selected plagiarised part and highlights selected plagiarised part
+   * @param event event of clicked element
+   */
+  highlightSelectedPlag(event: any) {
+    // disables highlighting
+    if(this.prevSelPlag){
+      this.prevSelPlag.style.boxShadow = 'none';
+      this.prevSelPlag.style.backgroundColor = '#b4302e';
+    }
+
+    // highlighting
+    event.target.style.boxShadow = '0 0 4px 1px gray';
+    event.target.style.background = 'lightcoral';
+    this.prevSelPlag = event.target;
+  }
+
+  /**
+   * disables highlighting of previous selected article and highlights selected article
+   * @param event event of clicked element
+   */
+  highlightSelectedArticle(event: any) {
+    // disables highlighting
+    if(this.prevSelArticle){
+      this.prevSelArticle.style.border = 'none';
+      this.prevSelArticle.style.background = 'white';
+      this.prevSelArticle.style.color = 'black';
+    }
+
+    // highlighting
+    event.target.style.background = '#b4302e';
+    event.target.style.color = 'white';
+    this.prevSelArticle = event.target;
+  }
+
+  /**
+   * get article url from wikipedia api
+   */
+  getArticleURLFromWikipediaAPI() {
+    this.clickedArticleWikiId = this.plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
+    this.wikipediaAPIService.getArticleData(this.clickedArticleWikiId).subscribe(articleData => {
+      this.articleUrl = articleData.query.pages[this.clickedArticleWikiId].fullurl
+    });
+  }
+
+  /**
+   * called when "Neuer Text" button was clicked
+   */
   newInput() {
+    // display confirm dialog
     if (confirm('Wirklich neuen Text analysieren?')) {
       this.newInputEventEmitter.emit();
     }
   }
 }
 
+/**
+ * interface for received json
+ */
 interface PlagPositions {
   tagged_input_text: string;
   plags: any[];
