@@ -24,6 +24,7 @@ export class OutputComponent {
   articleUrl: any;
 
   constructor(private plagPositionsService: PlagPositionsService, private wikipediaAPIService: WikipediaAPIService) {
+    this._tagged_input_text = "Lädt ..."
     this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {
       console.log(plagPositions);
 
