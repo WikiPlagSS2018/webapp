@@ -17,6 +17,5 @@ export class InputComponent  {
     this.wikiPlagApiService.postInputText(this.inputText).subscribe(res => {
       console.log(res);});
     this.sendEventEmitter.emit();
-    this.inputText = '';
   }
 }
