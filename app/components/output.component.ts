@@ -106,6 +106,13 @@ export class OutputComponent {
 
       // reset textOfSelectedArticle
       this.textOfSelectedArticle = null;
+
+      // reset highlighting of article
+      if(this.prevSelArticle){
+        this.prevSelArticle.style.border = 'none';
+        this.prevSelArticle.style.background = 'white';
+        this.prevSelArticle.style.color = 'black';
+      }
     }
 
     // clicked on article
