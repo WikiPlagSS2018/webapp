@@ -2,7 +2,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {Pipe, PipeTransform} from "@angular/core";
 
 /**
- * DomSanitizer is disabled because otherwise id attributes would not be accessible
+ * DomSanitizer HTML security is bypassed and the given value is trusted to be safe HTML.
+ * Otherwise, the id attributes of span tags in the received JSON data would not be accessible.
  */
 @Pipe({name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform {
