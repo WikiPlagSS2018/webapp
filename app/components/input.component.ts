@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {WikiPlagAPIService} from '../services/wikiplag-api.service';
 
 @Component({
   selector: 'input-comp',

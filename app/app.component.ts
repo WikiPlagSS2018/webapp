@@ -30,7 +30,7 @@ export class AppComponent  {
   }
 
   /**
-   * toggels displayed components when button is clicked
+   * toggles displayed components when button is clicked
    */
   toggleComponents() {
     this.showInput = !this.showInput;
