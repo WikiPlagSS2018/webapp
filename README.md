@@ -1,6 +1,7 @@
 # wikiplag new_webapp
 
 Please note:
+
 In order to run the webapp, node.js is required.
 
 How to install and run the webapp locally via console:
