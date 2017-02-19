@@ -10,3 +10,6 @@ How to install and run the webapp locally via console:
 2. cd webapp
 3. npm install
 4. npm start
+
+
+Live version is available here: http://wikiplag.f4.htw-berlin.de
