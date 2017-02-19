@@ -1,22 +1,25 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {WikiPlagAPIService} from '../services/wikiplag-api.service';
 
 @Component({
   selector: 'input-comp',
   templateUrl: './app/components/input.component.html',
-  providers: [WikiPlagAPIService],
 })
 export class InputComponent  {
+  /**
+   * Contains text entered by user
+   */
   inputText:string;
+
+  /**
+   * Used to toggle from input.component to output.component in app.component
+   */
   @Output() sendEventEmitter = new EventEmitter();
 
-  constructor(private wikiPlagApiService: WikiPlagAPIService) {}
-
+  /**
+   * Called when send button was clicked
+   * Emits event to toggle components
+   */
   send() {
-    console.log("Hier ist send()");
-    this.wikiPlagApiService.postInputText(this.inputText).subscribe(res => {
-      console.log(res);});
-    this.sendEventEmitter.emit();
-    this.inputText = '';
+       this.sendEventEmitter.emit();
   }
 }
