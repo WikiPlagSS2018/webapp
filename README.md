@@ -11,4 +11,4 @@
 3. npm install
 4. npm start
 
-Tested on Windows 10 with Node.js version 6.11.4
+21-10-2017 Tested on Windows 10 with Node.js version 6.11.4
