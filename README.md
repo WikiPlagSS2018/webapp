@@ -1,8 +1,8 @@
 # wikiplag new_webapp
 
-### Requires: Node.js and npm (installed automatically with Node.js)
-
-Node.js: https://nodejs.org/en/download/ LTS Version
+### Requires: 
+- Node.js (https://nodejs.org/en/download/ LTS Version)
+- npm (installed automatically with Node.js)
 
 ### Install and run locally via console:
 
