@@ -7,6 +7,9 @@ import 'rxjs/add/operator/map'
  */
 @Injectable()
 export class PlagPositionsService {
+  private text = new Subject<string>();
+  public text$ = this.text.asObservable();
+
   /**
    * constructor of PlagPositionsService
    * @param http http service
@@ -20,7 +23,11 @@ export class PlagPositionsService {
    * @returns {Observable<R>} observable with plagPositions
    */
   getPlagPositions(){
-    return this.http.get('../mock.json')
+    let headers = new Headers({'Content-Type':'application/json'});
+    let options = new RequestOptions({ headers: headers});
+    return this.http.post('../wikiplag/analyse', text, options)
       .map(res => res.json());
+    //return this.http.get('../mock.json')
+    //  .map(res => res.json());
   }
 }

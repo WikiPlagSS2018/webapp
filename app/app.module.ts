@@ -11,6 +11,7 @@ import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule, JsonpModule],
   declarations: [AppComponent, InputComponent, OutputComponent, SafeHtmlPipe],
+  providers: [PlagPositionsService],
   bootstrap: [AppComponent],
   entryComponents: [OutputComponent]
 })
