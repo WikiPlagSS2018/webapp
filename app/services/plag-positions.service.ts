@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core"
-import {Http} from "@angular/http"
+import {Http, Headers, RequestOptions} from "@angular/http"
 import 'rxjs/add/operator/map'
 
 /**
@@ -7,8 +7,8 @@ import 'rxjs/add/operator/map'
  */
 @Injectable()
 export class PlagPositionsService {
-  private text = new Subject<string>();
-  public text$ = this.text.asObservable();
+  private inputText = "";
+
 
   /**
    * constructor of PlagPositionsService
@@ -16,6 +16,9 @@ export class PlagPositionsService {
    */
   constructor(private http: Http){
     console.info("init PlagPositionsService");
+  }
+  updateInputText(text: string){
+    this.inputText = text;
   }
 
   /**
@@ -25,7 +28,7 @@ export class PlagPositionsService {
   getPlagPositions(){
     let headers = new Headers({'Content-Type':'application/json'});
     let options = new RequestOptions({ headers: headers});
-    return this.http.post('../wikiplag/analyse', text, options)
+    return this.http.post('../wikiplag/analyse', this.inputText, options)
       .map(res => res.json());
     //return this.http.get('../mock.json')
     //  .map(res => res.json());

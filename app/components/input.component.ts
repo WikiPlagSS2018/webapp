@@ -1,23 +1,17 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {PlagPositionsService} from "../services/plag-positions.service";
+
 
 @Component({
   selector: 'input-comp',
   templateUrl: './app/components/input.component.html',
 })
-export class InputComponent implements OnInit, OnDestroy{
+export class InputComponent{
   /**
    * Contains text entered by user
    */
   inputText:string;
-  service:Subscription;
-  constructor(private s: PlagPositionsService){
-
-  }
-
-  ngOnInit() {
-    //subscribe to text attribute of PlagPositionsService
-    this.service = this.s.text$.subscribe(data => this.inputText = data);
-  }
+  constructor(private s: PlagPositionsService){ }
 
   /**
    * Used to toggle from input.component to output.component in app.component
@@ -30,13 +24,9 @@ export class InputComponent implements OnInit, OnDestroy{
    */
   send() {
     //update PlagPosisitionService to current InputText
-    this.service = this.s.text$.subscribe(data => this.inputText = data);
+    this.s.updateInputText(this.inputText)
     //toggle OutputComponent
     this.sendEventEmitter.emit();
   }
-  ngOnDestroy(){
-    if(this.service){
-      this.service.unsubscribe();
-    }
-  }
+
 }
