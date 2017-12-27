@@ -28,6 +28,52 @@ h1 {
   border: 1px solid #b4302e;
 }
 
+
+.param1 {
+  position: fixed;
+  bottom: 75%;
+  right: 20%;
+  width: 100px;
+  height: 20px;
+  border: 3px solid #73AD21;
+}
+
+.param2 {
+  position: fixed;
+  bottom: 60%;
+  right: 20%;
+  width: 100px;
+  height: 20px;
+  border: 3px solid #73AD21;
+}
+
+.param3 {
+  position: fixed;
+  bottom: 45%;
+  right: 20%;
+  width: 100px;
+  height: 20px;
+  border: 3px solid #73AD21;
+}
+
+.param4 {
+  position: fixed;
+  bottom: 30%;
+  right: 20%;
+  width: 100px;
+  height: 20px;
+  border: 3px solid #73AD21;
+}
+
+.param5 {
+  position: fixed;
+  bottom: 15%;
+  right: 20%;
+  width: 100px;
+  height: 20px;
+  border: 3px solid #73AD21;
+}
+
 button {
   background-color: #b4302e;
   border-radius: 5px;
@@ -157,6 +203,3 @@ th {
 .hint {
   text-align: center;
 }
-
-
-

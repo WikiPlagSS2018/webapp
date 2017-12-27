@@ -7,6 +7,9 @@ import 'rxjs/add/operator/map'
  */
 @Injectable()
 export class PlagPositionsService {
+
+    url:string = ""
+
   /**
    * constructor of PlagPositionsService
    * @param http http service
@@ -23,4 +26,10 @@ export class PlagPositionsService {
     return this.http.get('../mock.json')
       .map(res => res.json());
   }
+
+  // server url
+  postPlagServer(jsonObject){
+    return this.http.post(this.url,jsonObject).map(res => res.json());
+  }
+
 }

@@ -8,6 +8,8 @@ import {InputComponent} from "./components/input.component";
 import {OutputComponent} from "./components/output.component";
 import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
 
+
+
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule, JsonpModule],
   declarations: [AppComponent, InputComponent, OutputComponent, SafeHtmlPipe],
