@@ -6,7 +6,7 @@ import {PlagPositionsService} from '../services/plag-positions.service';
   templateUrl: './app/components/input.component.html',
   providers: [PlagPositionsService],
 })
-export class InputComponent  {
+export class InputComponent{
   /**
    * Contains text entered by user
    */
@@ -55,6 +55,5 @@ export class InputComponent  {
 
     };
   }
-
 
 }
