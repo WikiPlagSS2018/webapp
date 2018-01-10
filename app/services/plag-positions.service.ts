@@ -7,8 +7,9 @@ import 'rxjs/add/operator/map'
  */
 @Injectable()
 export class PlagPositionsService {
-  
-    url:string = ""
+
+    //post url
+    url:string = "http://localhost:8080/wikiplag/rest/analyse"
 
   /**
    * constructor of PlagPositionsService
@@ -24,13 +25,17 @@ export class PlagPositionsService {
    * @returns {Observable<R>} observable with plagPositions
    */
   getPlagPositions(){
-    return this.http.get('../mock.json')
+    return this.http.get(this.url)
       .map(res => res.json());
   }
 
   // server url
   postPlagServer(jsonObject){
-    return this.http.post(this.url,jsonObject).map(res => res.json());
+    return this.http.post(this.url,jsonObject).map(res => console.log(res));
+  }
+
+  testGetRequest(){
+    return this.http.get(this.url).map(res => console.log(res));
   }
 
 }

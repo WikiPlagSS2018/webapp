@@ -35,9 +35,8 @@ export class InputComponent{
    */
   send() {
     // post these json file to server
-    var json = JSON.stringify({})
-    this.plagPositionsService.postPlagServer(json)
-
+    var json = JSON.stringify({"text": this.inputText })
+    this.plagPositionsService.postPlagServer(json).subscribe()
     this.sendEventEmitter.emit();
 
   }
