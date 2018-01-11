@@ -35,11 +35,14 @@ export class InputComponent{
    */
   send() {
     // post these json file to server
-    var json = JSON.stringify({"text": this.inputText })
-    this.plagPositionsService.postPlagServer(json).subscribe()
-    this.sendEventEmitter.emit();
+    var json = JSON.stringify({"text": this.inputText})
+    console.log(json)
+    this.plagPositionsService.postPlagServer(json);
+    setTimeout(()=>{ this.sendEventEmitter.emit()}, 10000)
 
+    //this.sendEventEmitter.emit();
   }
+
 
   openFile(event) {
     var input = event.target;

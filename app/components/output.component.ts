@@ -78,13 +78,14 @@ export class OutputComponent {
     this.tagged_input_text = "Lädt ..." // displayed while service is loading
 
     this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {
+      window.glres = plagPositions;
       console.log(plagPositions);
 
       // assigns plagPositions from json to local variable
-      this.plagPositions = plagPositions;
+      this.plagPositions = plagPositions[0];
 
       // assigns tagged_input_text from json to local variable
-      this.tagged_input_text = this.plagPositions.tagged_input_text;
+      this.tagged_input_text = this.plagPositions.excerpt; //tagged_input_text;
 
       // assigns plags from json to local variable
       this.plags = this.plagPositions.plags;
