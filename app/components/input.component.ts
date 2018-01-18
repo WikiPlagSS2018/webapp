@@ -38,6 +38,8 @@ export class InputComponent{
     var json = JSON.stringify({"text": this.inputText})
     console.log(json)
     this.plagPositionsService.postPlagServer(json);
+
+    // only for testing , should change it
     setTimeout(()=>{ this.sendEventEmitter.emit()}, 10000)
 
     //this.sendEventEmitter.emit();

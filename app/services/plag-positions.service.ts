@@ -42,12 +42,8 @@ getPlagPositions(){
     return this.http.post(this.url,jsonObject,this.headers).map(res => res.json()).subscribe(
      (response) => {
             /* this function is executed every time there's a new output */
-
            console.log("VALUE RECEIVED: "+response);
-
-
            //window.glres = response;
-
      },
      (err) => {
             /* this function is executed when there's an ERROR */
