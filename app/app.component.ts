@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { OutputComponent } from "./components/output.component";
-
+import {PlagPositionsService} from './services/plag-positions.service';
+import {WikipediaAPIService} from './services/wikipedia-api.service';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app/app.component.html',
+  providers: [PlagPositionsService, WikipediaAPIService],
 })
 
 /**

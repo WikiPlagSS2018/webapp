@@ -3,8 +3,7 @@ import {PlagPositionsService} from '../services/plag-positions.service';
 
 @Component({
   selector: 'input-comp',
-  templateUrl: './app/components/input.component.html',
-  providers: [PlagPositionsService],
+  templateUrl: './app/components/input.component.html'
 })
 export class InputComponent{
   /**
@@ -36,8 +35,13 @@ export class InputComponent{
   send() {
     // post these json file to server
     var json = JSON.stringify({"text": this.inputText })
-    this.plagPositionsService.postPlagServer(json).subscribe()
-    this.sendEventEmitter.emit();
+    this.plagPositionsService.postPlagServer(json).subscribe(res=>{
+        //set the data to the result
+        this.plagPositionsService.data=res
+        console.log("sent to output component")
+        //switch to other component
+        this.sendEventEmitter.emit();
+    })
 
   }
 

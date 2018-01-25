@@ -4,11 +4,3 @@
   <button [disabled]="!inputText" (click)="send()">Analysieren</button>
   <input type='file' accept=".txt" multiple (change)='openFile($event)'>
 </div>
-
-<div >
-<input class="param1" [(ngModel)]="minimumSentenceLength" title="The minimum length (number of words) in a sentence" type='text'>
-<input class="param2" [(ngModel)]="threshold" title="Articles which have an unique n-grams to input n-grams ratio, below this threshold are filtered out" type='text' >
-<input class="param3" [(ngModel)]="maxDistanceBetweenNgrams" title="The maximum distance between two n-grams" type='text' >
-<input class="param4" [(ngModel)]="maxAverageDistance" title="The maximum average distance between a potential plagiarism segment" type='text'  >
-<input class="param5" [(ngModel)]="secondaryThreshold" title="The secondary threshold - applied after building plagiarism segments" type='text'>
-</div>

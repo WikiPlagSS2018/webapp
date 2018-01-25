@@ -5,8 +5,7 @@ import {WikipediaAPIService} from '../services/wikipedia-api.service';
 @Component({
   moduleId: 'module.id',
   selector: 'output-comp',
-  templateUrl: './app/components/output.component.html',
-  providers: [PlagPositionsService, WikipediaAPIService],
+  templateUrl: './app/components/output.component.html'
 })
 export class OutputComponent {
   /**
@@ -75,20 +74,18 @@ export class OutputComponent {
    * @param wikipediaAPIService service for querying wikipedia api
    */
   constructor(private plagPositionsService: PlagPositionsService, private wikipediaAPIService: WikipediaAPIService) {
-    this.tagged_input_text = "Lädt ..." // displayed while service is loading
-
-    this.plagPositionsService.getPlagPositions().subscribe(plagPositions => {
-      console.log(plagPositions);
+      this.tagged_input_text = "Lädt ..." // displayed while service is loading
 
       // assigns plagPositions from json to local variable
-      this.plagPositions = plagPositions;
+      this.plagPositions=this.plagPositionsService.getPlagPositions()
+      console.log(this.plagPositions);
 
       // assigns tagged_input_text from json to local variable
       this.tagged_input_text = this.plagPositions.tagged_input_text;
 
       // assigns plags from json to local variable
       this.plags = this.plagPositions.plags;
-    });
+    
   }
 
   // listens for click events

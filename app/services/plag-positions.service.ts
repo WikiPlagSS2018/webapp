@@ -10,6 +10,10 @@ export class PlagPositionsService {
 
     //post url
     url:string = "http://localhost:8080/wikiplag/rest/analyse"
+    
+    //data
+    data: string;
+    
 
   /**
    * constructor of PlagPositionsService
@@ -25,13 +29,14 @@ export class PlagPositionsService {
    * @returns {Observable<R>} observable with plagPositions
    */
   getPlagPositions(){
-    return this.http.get(this.url)
-      .map(res => res.json());
+    return this.data.json());
   }
 
   // server url
   postPlagServer(jsonObject){
-    return this.http.post(this.url,jsonObject).map(res => console.log(res));
+    //  return this.http.get("../mock.json").map(res=>{return res;}); 
+    return this.http.post(this.url,jsonObject).map(res=>{
+        return res;});
   }
 
   testGetRequest(){
