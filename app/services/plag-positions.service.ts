@@ -9,11 +9,11 @@ import 'rxjs/add/operator/map'
 export class PlagPositionsService {
 
     //post url
-    url:string = "http://localhost:8080/wikiplag/rest/analyse"
-    
+    url:string = "http://hadoop05.f4.htw-berlin.de:8080/wikiplag/rest/analyse"
+
     //data
     data: string;
-    
+
 
   /**
    * constructor of PlagPositionsService
@@ -34,7 +34,7 @@ export class PlagPositionsService {
 
   // server url
   postPlagServer(jsonObject){
-    //  return this.http.get("../mock.json").map(res=>{return res;}); 
+    //  return this.http.get("../mock.json").map(res=>{return res;});
     return this.http.post(this.url,jsonObject).map(res=>{
         return res;});
   }

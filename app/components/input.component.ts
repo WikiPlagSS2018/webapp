@@ -21,6 +21,8 @@ export class InputComponent{
 
   secondaryThreshold = 0.80
 
+  buttonDisabled = false
+
   constructor(private plagPositionsService: PlagPositionsService) {}
 
   /**
@@ -34,6 +36,7 @@ export class InputComponent{
    */
   send() {
     // post these json file to server
+    this.buttonDisabled = true;
     var json = JSON.stringify({"text": this.inputText })
     this.plagPositionsService.postPlagServer(json).subscribe(res=>{
         //set the data to the result
