@@ -14,8 +14,8 @@
       </td>
       <td>
         <div class="articles_container">
-          <div class="article_box" *ngFor="let plag of articleListOfSelectedPlag; let i=index" id="{{i}}">
-              {{plag.title}} ({{plag.start}}-{{plag.end}})
+          <div class="article_box" style="text-align: center;" *ngFor="let plag of articleListOfSelectedPlag; let i=index" id="{{i}}">
+              {{plag.title}}
           </div>
           <div class="hint" *ngIf="!articleListOfSelectedPlag">
             Bitte eine markierte Plagiatsstelle anklicken.
