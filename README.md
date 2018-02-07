@@ -1,5 +1,6 @@
 # wikiplag new_webapp
 Based on old WikiPlag Webapp by GitHub users Jörg Holger and krie
+
 Developed With TypeScript and Angular JS 2
 
 Recieves user input text and displays plagiarisms detected by the WikiPlag cluster.
