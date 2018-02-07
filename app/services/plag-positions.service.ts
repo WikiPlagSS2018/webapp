@@ -3,12 +3,12 @@ import {Http, Headers, RequestOptions} from "@angular/http"
 import 'rxjs/add/operator/map'
 
 /**
- * gets mock json from file and provides it as service
+ * transmits input text to cluster rest api and retrieves json output
  */
 @Injectable()
 export class PlagPositionsService {
 
-    //post url
+    //post url cluster connection
     url:string = "http://hadoop05.f4.htw-berlin.de:8080/wikiplag/rest/analyse"
 
     //data
@@ -29,7 +29,7 @@ export class PlagPositionsService {
    * @returns {Observable<R>} observable with plagPositions
    */
   getPlagPositions(){
-    return this.data.json());
+    return this.data.json();
   }
 
   // server url

@@ -5,6 +5,10 @@ import {PlagPositionsService} from '../services/plag-positions.service';
   selector: 'input-comp',
   templateUrl: './app/components/input.component.html'
 })
+/**
+ * Transmits inputText to PlagPositionsService
+ * Capable of reading from .txt files
+ */
 export class InputComponent{
   /**
    * Contains text entered by user

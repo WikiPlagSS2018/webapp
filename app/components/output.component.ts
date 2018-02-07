@@ -7,6 +7,9 @@ import {WikipediaAPIService} from '../services/wikipedia-api.service';
   selector: 'output-comp',
   templateUrl: './app/components/output.component.html'
 })
+/**
+  * Displays json provided by PlagPositionsService
+  */
 export class OutputComponent {
   /**
    * Used to toggle from output.component to input.component in app.component
@@ -85,7 +88,7 @@ export class OutputComponent {
 
       // assigns plags from json to local variable
       this.plags = this.plagPositions.plags;
-    
+
   }
 
   // listens for click events
