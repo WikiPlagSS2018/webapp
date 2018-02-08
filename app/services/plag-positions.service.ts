@@ -8,8 +8,8 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class PlagPositionsService {
 
-    //post url cluster connection
-    url:string = "http://hadoop05.f4.htw-berlin.de:8080/wikiplag/rest/analyse"
+    //post url cluster or localhost connection
+    url:string = "http://localhost:8080/wikiplag/rest/analyse"
 
     //data
     data: string;

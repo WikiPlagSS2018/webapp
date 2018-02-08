@@ -10,21 +10,7 @@ import {PlagPositionsService} from '../services/plag-positions.service';
  * Capable of reading from .txt files
  */
 export class InputComponent{
-  /**
-   * Contains text entered by user
-   */
-  inputText:string;
-
-  minimumSentenceLength = 6
-
-  threshold = 0.85
-
-  maxDistanceBetweenNgrams = 6
-
-  maxAverageDistance = 3
-
-  secondaryThreshold = 0.80
-
+ 
   buttonDisabled = false
 
   constructor(private plagPositionsService: PlagPositionsService) {}
