@@ -1,18 +1,18 @@
 import {NgModule}      from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
-import {HttpModule, JsonpModule} from "@angular/http";
+import  {HttpClientModule, HttpClientJsonpModule} from "@angular/common/http";
+
 
 import {AppComponent}  from './app.component';
 import {InputComponent} from "./components/input.component";
 import {OutputComponent} from "./components/output.component";
+import {AboutComponent} from "./components/about.component";
 import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
-
-
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpModule, JsonpModule],
-  declarations: [AppComponent, InputComponent, OutputComponent, SafeHtmlPipe],
+  imports: [BrowserModule, FormsModule, HttpClientModule, HttpClientJsonpModule],
+  declarations: [AppComponent, InputComponent, OutputComponent, SafeHtmlPipe, AboutComponent],
   bootstrap: [AppComponent],
   entryComponents: [OutputComponent]
 })

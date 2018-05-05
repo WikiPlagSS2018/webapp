@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core"
-import {Http} from "@angular/http"
+import  {HttpClient} from "@angular/common/http";
 
 import 'rxjs/add/operator/map'
 
@@ -12,7 +12,7 @@ export class WikipediaAPIService {
    * constructor of PlagPositionsService
    * @param http http service
    */
-  constructor(private http: Http){
+  constructor(private http: HttpClient){
     console.info("init WikipediaAPIService");
   }
 
@@ -22,7 +22,6 @@ export class WikipediaAPIService {
    */
   getArticleData(ArticleId:any){
     return this.http.get('https://de.wikipedia.org/w/api.php?action=query&prop=info&pageids=' +ArticleId
-      +'&inprop=url&format=json&origin=*')
-      .map(res => res.json());
+      +'&inprop=url&format=json&origin=*');
   }
 }

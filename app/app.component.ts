@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { OutputComponent } from "./components/output.component";
+import {Component, EventEmitter, Output} from '@angular/core';
 import {PlagPositionsService} from './services/plag-positions.service';
 import {WikipediaAPIService} from './services/wikipedia-api.service';
 
@@ -13,6 +12,12 @@ import {WikipediaAPIService} from './services/wikipedia-api.service';
  * angular 2 root component
  */
 export class AppComponent  {
+
+  /**
+   * Used to toggle from output.component to input.component in app.component
+   */
+  @Output() newInputEventEmitter = new EventEmitter();
+
   /**
    * true when input.component is displayed
    */
@@ -24,19 +29,35 @@ export class AppComponent  {
   showOutput: boolean;
 
   /**
+   * True when about.component is displayed
+   */
+  showAbout: boolean;
+  /**
    * at launch input.component is displayed and output.component is not displayed
    */
   constructor() {
     this.showInput = true;
     this.showOutput = false;
+    this.showAbout = false;
   }
 
   /**
-   * toggles displayed components when button is clicked
+   * Toggles a certain component
+   * @param {string} name name of component
    */
-  toggleComponents() {
-    this.showInput = !this.showInput;
-    this.showOutput = !this.showOutput;
+  toggleComponent(name: string){
+    if(name == "input" && (!this.showOutput || confirm('Zurück zur Texteingabe?'))){
+      this.showInput = true;
+      this.showOutput = false;
+      this.showAbout = false;
+    } else if(name == "output"){
+      this.showInput = false;
+      this.showOutput = true;
+      this.showAbout = false;
+    } else if(name == "about"){
+      this.showInput = false;
+      this.showOutput = false;
+      this.showAbout = true;
+    }
   }
-
 }

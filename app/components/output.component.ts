@@ -82,6 +82,13 @@ export class OutputComponent {
       // assigns plagPositions from json to local variable
       this.plagPositions=this.plagPositionsService.getPlagPositions()
       console.log(this.plagPositions);
+      let potentialPlags = this.plagPositions.plags.length;
+      if(potentialPlags == 0){
+        swal("Keine Ergebnisse", "Keine Plagiate im Text gefunden.", "success");
+      } else{
+        swal("Potentielle Plagiate", potentialPlags + " potentielle Plagiate gefunden.", "warning");
+      }
+
 
       // assigns tagged_input_text from json to local variable
       this.tagged_input_text = this.plagPositions.tagged_input_text;
@@ -165,6 +172,7 @@ export class OutputComponent {
     }
 
     // highlighting
+    //TODO: Apply bootstrap classes
     event.target.style.background = '#b4302e';
     event.target.style.color = 'white';
     this.prevSelArticle = event.target;
@@ -184,10 +192,7 @@ export class OutputComponent {
    * called when "Neuer Text" button was clicked
    */
   newInput() {
-    // display confirm dialog
-    if (confirm('Wirklich neuen Text analysieren?')) {
-      this.newInputEventEmitter.emit();
-    }
+    this.newInputEventEmitter.emit();
   }
 }
 

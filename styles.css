@@ -14,7 +14,6 @@ h1 {
 }
 
 .slogan {
-  font-family: "Times New Roman";
   font-size: 22px;
 }
 
@@ -72,18 +71,6 @@ h1 {
   width: 100px;
   height: 20px;
   border: 3px solid #73AD21;
-}
-
-button {
-  background-color: #b4302e;
-  border-radius: 5px;
-  display: inline-block;
-  cursor: pointer;
-  color: white;
-  font-size: 14px;
-  padding: 6px;
-  text-decoration: none;
-  text-transform: uppercase;
 }
 
 button:disabled {
@@ -168,16 +155,12 @@ th {
 }
 
 .article_box {
-  padding: 5px;
-  margin-bottom: 10px;
-  overflow-y: auto;
-  background: white;
-  box-shadow: 0 0 5px 0 #333;
   cursor: pointer;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+  cursor: pointer;
 }
 
 .input_plag, .wiki_plag {
@@ -201,5 +184,81 @@ th {
 }
 
 .hint {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.headerImg{
+  height: 50%;
+  width: 80%;
+}
+
+.main-content{
+  padding-left:2%;
+  padding-right: 2%;
+}
+
+.loading-screen{
+  background: #E95420;
+  min-height: 100%;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.loading-bar-wrapper{
+  left: 50%;
+  transform: translateX(-50%);
+  vertical-align: middle;
+  min-height: 100%;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 43%;
+  margin-left: 33%;
+}
+
+@keyframes move {
+  0% {
+    width: 30%;
+  }
+  50% {
+    width: 15%;
+  }
+  100%{
+    width: 30%;
+  }
+}
+
+.loading-bar1{
+  animation: move 5s infinite ease-in-out;
+  width: 30%;
+  height: 3%;
+  border-radius: 25px;
+  background: gray;
+  display: block;
+}
+.loading-bar2{
+  margin-left: 5%;
+  width: 20%;
+  height: 3%;
+  border-radius: 25px;
+  background: gray;
+}
+.loading-bar3{
+  animation: move 5s infinite ease-in-out;
+  width: 30%;
+  height: 3%;
+  border-radius: 25px;
+  background: gray;
+}
+.loading-text{
+  width: 30%;
   text-align: center;
 }

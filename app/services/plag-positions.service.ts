@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core"
-import {Http, Headers, RequestOptions} from "@angular/http"
+import  {HttpClient} from "@angular/common/http";
 import 'rxjs/add/operator/map'
 
 /**
@@ -19,7 +19,7 @@ export class PlagPositionsService {
    * constructor of PlagPositionsService
    * @param http http service
    */
-  constructor(private http: Http){
+  constructor(private http: HttpClient){
     console.info("init PlagPositionsService");
   }
 
@@ -29,12 +29,12 @@ export class PlagPositionsService {
    * @returns {Observable<R>} observable with plagPositions
    */
   getPlagPositions(){
-    return this.data.json();
+    return this.data;
   }
 
   // server url
   postPlagServer(jsonObject){
-    //  return this.http.get("../mock.json").map(res=>{return res;});
+    return this.http.get("../mock.json").map(res=>{return res;});
     return this.http.post(this.url,jsonObject).map(res=>{
         return res;});
   }
