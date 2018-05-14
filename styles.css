@@ -131,6 +131,10 @@ th {
   z-index: 1;
 }
 
+.info{
+  cursor: pointer;
+}
+
 /* Show the tooltip text when you mouse over the tooltip container */
 .info:hover .tooltiptext {
   visibility: visible;
@@ -160,7 +164,6 @@ th {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-  cursor: pointer;
 }
 
 .input_plag, .wiki_plag {
