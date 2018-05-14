@@ -178,6 +178,10 @@ th {
   overflow-y: auto;
 }
 
+.output_shortened_text {
+  max-height: 55vh;
+  overflow-y: auto;
+}
 
 .input_container, .excerpt_container{
   padding: 5px;

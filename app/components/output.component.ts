@@ -27,6 +27,16 @@ export class OutputComponent {
   tagged_input_text: string;
 
   /**
+   * Show output text in shortened version of not
+   */
+  shortened_text : boolean;
+
+  /**
+   * Text splitted into normal text and plag pieces to make a shorter output version available
+   */
+  text_plags : any[];
+
+  /**
    * plagiarised articles and excerpts
    */
   plags: any[];
@@ -80,22 +90,106 @@ export class OutputComponent {
       this.tagged_input_text = "Lädt ..." // displayed while service is loading
 
       // assigns plagPositions from json to local variable
-      this.plagPositions=this.plagPositionsService.getPlagPositions()
-      console.log(this.plagPositions);
+      this.plagPositions=this.plagPositionsService.getPlagPositions();
       let potentialPlags = this.plagPositions.plags.length;
+
+    // assigns tagged_input_text from json to local variable
+    this.tagged_input_text = this.plagPositions.tagged_input_text;
+
+    this.shortened_text = true;
+    if(this.shortened_text){
+      this.prepareTextForShortOutput();
+    }
+    // assigns plags from json to local variable
+    this.plags = this.plagPositions.plags;
       if(potentialPlags == 0){
         swal("Keine Ergebnisse", "Keine Plagiate im Text gefunden.", "success");
       } else{
         swal("Potentielle Plagiate", potentialPlags + " potentielle Plagiate gefunden.", "warning");
       }
+  }
+
+  prepareTextForShortOutput(){
+    this.text_plags = [];
+
+    let charsBeforeAndAfterPlag = 100;
+    let text = this.tagged_input_text;
+    let nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
+    while(text != ""){
+      //Search for next plag elem, push to array and remove from original text
+      let nextEndTag = this.getNextEndPos(text, charsBeforeAndAfterPlag);
+
+      text = this.splitFirstPlanOccurrence(nextStartTag, nextEndTag, text);
+
+      nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
+    }
+  }
 
 
-      // assigns tagged_input_text from json to local variable
-      this.tagged_input_text = this.plagPositions.tagged_input_text;
+  getNextStartTag(text: string, charsBeforeAndAfterPlag: number){
+    let startPos = text.indexOf("<span");
+    //Adjust start tag position in case text is too short
+    if(startPos-charsBeforeAndAfterPlag > 0) {
+      return startPos - charsBeforeAndAfterPlag;
+    } else if(startPos === -1){
+      return -1;
+    }
+    return 0;
+  }
 
-      // assigns plags from json to local variable
-      this.plags = this.plagPositions.plags;
+  changeViewState(index: number){
+    this.text_plags[index][2] = !this.text_plags[index][2];
+  }
 
+  getNextEndPos(text: string, charsBeforeAndAfterPlag: number){
+    let nextEndTag = text.indexOf("</span>")+8;
+    //Adjust end tag position
+    if(nextEndTag+charsBeforeAndAfterPlag <= text.length-1) {
+      return nextEndTag + charsBeforeAndAfterPlag;
+    }
+    return text.length-1;
+  }
+
+  splitFirstPlanOccurrence(startPosOfPlag: number, endPosOfPlag: number, tagged_input_text: string){
+    if(startPosOfPlag !== -1){
+      let plagElem = tagged_input_text.substring(startPosOfPlag, endPosOfPlag);
+
+      //Cut text by space seperator
+      let firstSpacePos = plagElem.indexOf(" ");
+      let lastSpacePos = plagElem.lastIndexOf(" ");
+      startPosOfPlag += firstSpacePos;
+
+      //Search for rest of normal text, split at startPos position, push to text array and remove from original text
+      tagged_input_text = this.removeTextBeforeSpanTag(tagged_input_text, startPosOfPlag);
+
+      plagElem = plagElem.substring(firstSpacePos, lastSpacePos);
+
+      this.text_plags.push(["plag", plagElem, true]);
+
+      //Remove elem from original text
+      tagged_input_text = tagged_input_text.replace(plagElem, "");
+    } else{
+      //Search for rest of normal text, split at startPos position, push to text array and remove from original text
+      tagged_input_text = this.removeTextBeforeSpanTag(tagged_input_text, startPosOfPlag);
+    }
+
+
+    return tagged_input_text;
+  }
+
+  removeTextBeforeSpanTag(tagged_input_text: string, nextStartTag: number){
+    let textBeforeSpanTag = "";
+    if(tagged_input_text.indexOf("<span") !== -1){
+      textBeforeSpanTag = tagged_input_text.substring(0, nextStartTag);
+      //Add last part of text
+      this.text_plags.push(["text", textBeforeSpanTag, false]);
+    } else {
+      //Add last part of text
+      this.text_plags.push(["text", tagged_input_text, false]);
+
+      textBeforeSpanTag = tagged_input_text;
+    }
+    return tagged_input_text.replace(textBeforeSpanTag, "");
   }
 
   // listens for click events
