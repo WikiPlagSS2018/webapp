@@ -17,6 +17,7 @@ export class InputComponent{
   };
 
   minimumTextLength = 100;
+  loading = false;
 
   constructor(private plagPositionsService: PlagPositionsService) {}
 
@@ -32,18 +33,16 @@ export class InputComponent{
   send() {
     //TODO: Do some other validations like length validation
     if(this.inputText != "" && this.inputText != undefined && this.minimumTextLength <= this.inputText.length){
-      //Animation handling
-      this.myAnimationClasses = {
-        bounceInLeft: false,
-        bounceOutRight: true
-      };
       // post these json file to server
       var json = JSON.stringify({"text": this.inputText })
+      this.loading = true;
       this.plagPositionsService.postPlagServer(json).subscribe(res=>{
         //set the data to the result
-        this.plagPositionsService.data=res
+        this.plagPositionsService.data=res;
+        this.loading = false;
         console.log("sent to output component")
         //switch to other component
+        this.applyAnimationClasses();
         this.sendEventEmitter.emit();
       })
     } else if(this.inputText == "" || this.inputText == undefined){
@@ -52,6 +51,14 @@ export class InputComponent{
     } else{
       swal("Bitte mehr Text eingeben", "Bitte geben Sie mindestes " + this.minimumTextLength + " Zeichen zum analysieren ein!", "warning");
     }
+  }
+
+  applyAnimationClasses(){
+    //Animation handling
+    this.myAnimationClasses = {
+      bounceInLeft: false,
+      bounceOutRight: true
+    };
   }
 
   /**
