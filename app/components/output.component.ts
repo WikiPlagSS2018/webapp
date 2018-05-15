@@ -91,7 +91,6 @@ export class OutputComponent {
 
       // assigns plagPositions from json to local variable
       this.plagPositions=this.plagPositionsService.getPlagPositions();
-      let potentialPlags = this.plagPositions.plags.length;
 
     // assigns tagged_input_text from json to local variable
     this.tagged_input_text = this.plagPositions.tagged_input_text;
@@ -102,11 +101,8 @@ export class OutputComponent {
     }
     // assigns plags from json to local variable
     this.plags = this.plagPositions.plags;
-      if(potentialPlags == 0){
-        swal("Keine Ergebnisse", "Keine Plagiate im Text gefunden.", "success");
-      } else{
-        swal("Potentielle Plagiate", potentialPlags + " potentielle Plagiate gefunden.", "warning");
-      }
+
+    this.alertNumberOfPlags(this.plagPositions.plags.length);
   }
 
   prepareTextForShortOutput(){
@@ -122,6 +118,14 @@ export class OutputComponent {
       text = this.splitFirstPlanOccurrence(nextStartTag, nextEndTag, text);
 
       nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
+    }
+  }
+
+  alertNumberOfPlags(plagCount: number){
+    if(plagCount == 0){
+      swal("Keine Ergebnisse", "Keine Plagiate im Text gefunden.", "success");
+    } else{
+      swal("Potentielle Plagiate", plagCount + " potentielle Plagiate gefunden.", "warning");
     }
   }
 
@@ -168,11 +172,10 @@ export class OutputComponent {
 
       //Remove elem from original text
       tagged_input_text = tagged_input_text.replace(plagElem, "");
-    } else{
+    } else {
       //Search for rest of normal text, split at startPos position, push to text array and remove from original text
       tagged_input_text = this.removeTextBeforeSpanTag(tagged_input_text, startPosOfPlag);
     }
-
 
     return tagged_input_text;
   }
@@ -195,8 +198,8 @@ export class OutputComponent {
   // listens for click events
   @HostListener('click', ['$event'])
   onClick(event: any) {
-    // clicked on input_plag
     if (event.target.classList.contains('input_plag')) {
+      // clicked on input_plag
       this.clickedPlagId = event.target.id;
       console.info("Clicked on plag with id " + this.clickedPlagId);
 
@@ -207,17 +210,9 @@ export class OutputComponent {
 
       // reset textOfSelectedArticle
       this.textOfSelectedArticle = null;
-
-      // reset highlighting of article
-      if(this.prevSelArticle){
-        this.prevSelArticle.style.border = 'none';
-        this.prevSelArticle.style.background = 'white';
-        this.prevSelArticle.style.color = 'black';
-      }
     }
-
-    // clicked on article
-    if (event.target.classList.contains('article_box')) {
+    else if (event.target.classList.contains('article_box')) {
+      // clicked on article
       this.clickedArticleId = event.target.id;
       console.info("Clicked on article with id " + this.clickedArticleId);
 
@@ -228,9 +223,8 @@ export class OutputComponent {
       // excerpt text is assigned
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
     }
-
-    // Open corresponding Wikipedia article in pop-up
-    if (event.target.classList.contains('wiki_plag')) {
+    else if (event.target.classList.contains('wiki_plag')) {
+      // Open corresponding Wikipedia article in pop-up
       window.open(this.articleUrl)
     }
 
@@ -260,15 +254,13 @@ export class OutputComponent {
   highlightSelectedArticle(event: any) {
     // disables highlighting
     if(this.prevSelArticle){
-      this.prevSelArticle.style.border = 'none';
-      this.prevSelArticle.style.background = 'white';
-      this.prevSelArticle.style.color = 'black';
+      this.prevSelArticle.classList.add("alert-info");
+      this.prevSelArticle.classList.remove("alert-danger");
     }
 
     // highlighting
-    //TODO: Apply bootstrap classes
-    event.target.style.background = '#b4302e';
-    event.target.style.color = 'white';
+    event.target.classList.add("alert-danger");
+    event.target.classList.remove("alert-info");
     this.prevSelArticle = event.target;
   }
 
