@@ -6,7 +6,7 @@
     <div class="col-sm-12 col-md-6 col-lg-6">
       <h1>Eingabe</h1>
       <textarea class="input_textarea" width="100%"[(ngModel)]="inputText" placeholder="Text hier einfügen" [ngModelOptions]="{standalone: true}"></textarea><br />
-      <button class="btn btn-primary" [disabled]="buttonDisabled" (click)="send()" >Analysieren</button>
+      <button class="btn btn-primary" (click)="send()" >Analysieren</button>
       <input type='file' class="btn" accept=".txt" multiple (change)='openFile($event)'>
     </div>
   </div>

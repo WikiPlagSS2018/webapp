@@ -16,7 +16,7 @@ export class InputComponent{
     bounceOutRight: false
   };
 
-  buttonDisabled = false
+  minimumTextLength = 100;
 
   constructor(private plagPositionsService: PlagPositionsService) {}
 
@@ -30,24 +30,28 @@ export class InputComponent{
    * Emits event to toggle components
    */
   send() {
-
-    this.buttonDisabled = true;
-
-    //Animation handling
-    this.myAnimationClasses = {
-      bounceInLeft: false,
-      bounceOutRight: true
-    };
-    // post these json file to server
-    var json = JSON.stringify({"text": this.inputText })
-    this.plagPositionsService.postPlagServer(json).subscribe(res=>{
+    //TODO: Do some other validations like length validation
+    if(this.inputText != "" && this.inputText != undefined && this.minimumTextLength <= this.inputText.length){
+      //Animation handling
+      this.myAnimationClasses = {
+        bounceInLeft: false,
+        bounceOutRight: true
+      };
+      // post these json file to server
+      var json = JSON.stringify({"text": this.inputText })
+      this.plagPositionsService.postPlagServer(json).subscribe(res=>{
         //set the data to the result
         this.plagPositionsService.data=res
         console.log("sent to output component")
         //switch to other component
         this.sendEventEmitter.emit();
-    })
-
+      })
+    } else if(this.inputText == "" || this.inputText == undefined){
+      //Empty textarea
+      swal("Bitte Text eingeben", "Bitte geben Sie einen Text zum analysieren ein!", "warning");
+    } else{
+      swal("Bitte mehr Text eingeben", "Bitte geben Sie mindestes " + this.minimumTextLength + " Zeichen zum analysieren ein!", "warning");
+    }
   }
 
   /**
