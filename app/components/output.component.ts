@@ -119,6 +119,7 @@ export class OutputComponent {
 
       nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
     }
+
   }
 
   alertNumberOfPlags(plagCount: number){
@@ -151,16 +152,23 @@ export class OutputComponent {
     if(nextEndTag+charsBeforeAndAfterPlag <= text.length-1) {
       return nextEndTag + charsBeforeAndAfterPlag;
     }
-    return text.length-1;
+    return nextEndTag;
   }
 
   splitFirstPlanOccurrence(startPosOfPlag: number, endPosOfPlag: number, tagged_input_text: string){
     if(startPosOfPlag !== -1){
       let plagElem = tagged_input_text.substring(startPosOfPlag, endPosOfPlag);
-
       //Cut text by space seperator
-      let firstSpacePos = plagElem.indexOf(" ");
-      let lastSpacePos = plagElem.lastIndexOf(" ");
+      let firstSpacePos = 0;
+      if(plagElem.substring(0, plagElem.indexOf(" ")).indexOf("<span") == -1){
+        firstSpacePos = plagElem.indexOf(" ");
+      }
+
+      let lastSpacePos = plagElem.length-1;
+      if(plagElem.substring(plagElem.lastIndexOf(" "), plagElem.length-1).indexOf("</span") == -1){
+        lastSpacePos = plagElem.lastIndexOf(" ");
+      }
+
       startPosOfPlag += firstSpacePos;
 
       //Search for rest of normal text, split at startPos position, push to text array and remove from original text
@@ -184,11 +192,17 @@ export class OutputComponent {
     let textBeforeSpanTag = "";
     if(tagged_input_text.indexOf("<span") !== -1){
       textBeforeSpanTag = tagged_input_text.substring(0, nextStartTag);
-      //Add last part of text
-      this.text_plags.push(["text", textBeforeSpanTag, false]);
+
+      if(textBeforeSpanTag != ""){
+        //Add last part of text
+        this.text_plags.push(["text", textBeforeSpanTag, false]);
+      }
     } else {
-      //Add last part of text
-      this.text_plags.push(["text", tagged_input_text, false]);
+      if(tagged_input_text != ""){
+        //Add last part of text
+        this.text_plags.push(["text", tagged_input_text, false]);
+      }
+
 
       textBeforeSpanTag = tagged_input_text;
     }
