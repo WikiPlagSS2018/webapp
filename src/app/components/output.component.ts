@@ -1,4 +1,4 @@
-import { Component, HostListener, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, HostListener} from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
 import { WikipediaAPIService } from '../services/wikipedia-api.service';
 import { AlertService } from '../services/alert.service';

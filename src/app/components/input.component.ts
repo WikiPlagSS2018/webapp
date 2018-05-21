@@ -30,11 +30,6 @@ export class InputComponent {
   }
 
   /**
-   * Used to toggle from input.component to output.component in app.component
-   */
-  @Output() sendEventEmitter = new EventEmitter();
-
-  /**
    * Called when send button was clicked
    * Emits event to toggle components
    */
@@ -48,9 +43,8 @@ export class InputComponent {
         //set the data to the result
         this.loading = false;
         console.log('sent to output component');
-        //switch to other component
+        //Wait before switching to other component to make a smooth fadeout animation
         this.applyAnimationClasses();
-        // this.sendEventEmitter.emit();
         setTimeout(() => this.router.navigate(['/output']), 500);
 
 
