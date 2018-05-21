@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
 import { AlertService } from '../services/alert.service';
-import { PlagResponse } from '../models/responses/plag-response';
+import { Router } from '@angular/router';
 
 
 
@@ -24,7 +24,9 @@ export class InputComponent {
   minimumTextLength = 100;
   loading = false;
 
-  constructor(private plagPositionsService: PlagPositionsService, private alertService: AlertService) {
+  constructor(private plagPositionsService: PlagPositionsService,
+              private alertService: AlertService,
+              private router: Router) {
   }
 
   /**
@@ -48,7 +50,10 @@ export class InputComponent {
         console.log('sent to output component');
         //switch to other component
         this.applyAnimationClasses();
-        this.sendEventEmitter.emit();
+        // this.sendEventEmitter.emit();
+        setTimeout(() => this.router.navigate(['/output']), 500);
+
+
       })
     } else if (this.inputText === '' || this.inputText === undefined) {
       //Empty textarea

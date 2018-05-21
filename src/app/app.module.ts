@@ -12,6 +12,8 @@ import { PlagPositionsService } from './services/plag-positions.service';
 import { HttpClientModule } from '@angular/common/http';
 import { WikipediaAPIService } from './services/wikipedia-api.service';
 import { TextShorteningService } from './services/text-shortening.service';
+import { AppRoutingModule } from './app-routing.module';
+import { NavigationComponent } from './components/navigation.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { TextShorteningService } from './services/text-shortening.service';
     InputComponent,
     OutputComponent,
     SafeHtmlPipe,
-    AboutComponent
+    AboutComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService],
   bootstrap: [AppComponent]

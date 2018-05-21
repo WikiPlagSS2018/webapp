@@ -1,4 +1,4 @@
-import { Component, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, HostListener, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
 import { WikipediaAPIService } from '../services/wikipedia-api.service';
 import { AlertService } from '../services/alert.service';
@@ -6,6 +6,7 @@ import { PlagResponse } from '../models/responses/plag-response';
 import { Plagarism } from '../models/plagarism';
 import { TextShorteningService } from '../services/text-shortening.service';
 import { SummarizedOutputTextPiece } from '../models/summarized-output-text-piece';
+import { Router } from '@angular/router';
 
 /**
  * Displays json provided by PlagPositionsService
@@ -14,11 +15,7 @@ import { SummarizedOutputTextPiece } from '../models/summarized-output-text-piec
   selector: 'app-output',
   templateUrl: './output.component.html'
 })
-export class OutputComponent {
-  /**
-   * Used to toggle from output.component to input.component in app.component
-   */
-  @Output() newInputEventEmitter = new EventEmitter();
+export class OutputComponent  {
 
   /**
    * object read from json
@@ -95,25 +92,30 @@ export class OutputComponent {
   constructor(private plagPositionsService: PlagPositionsService,
               private wikipediaAPIService: WikipediaAPIService,
               private alertService: AlertService,
-              private textShorteningService: TextShorteningService) {
+              private textShorteningService: TextShorteningService,
+              private router: Router) {
     this.tagged_input_text = 'Lädt ...'; // displayed while service is loading
 
     // assigns plagResponse from json to local variable
     this.plagResponse = this.plagPositionsService.getPlagData();
 
-    // assigns tagged_input_text from json to local variable
-    this.tagged_input_text = this.plagResponse.tagged_input_text;
+    //In case user reload site in output route
+    if(!this.plagResponse){
+      router.navigate(['/']);
+    } else{
+      // assigns tagged_input_text from json to local variable
+      this.tagged_input_text = this.plagResponse.tagged_input_text;
 
-    this.shortened_text = true;
-    if (this.shortened_text) {
-      this.textPieces = this.textShorteningService.shorteningText(this.tagged_input_text);
+      this.shortened_text = true;
+      if (this.shortened_text) {
+        this.textPieces = this.textShorteningService.shorteningText(this.tagged_input_text);
+      }
+      // assigns plags from json to local variable
+      this.plags = this.plagResponse.plags;
+
+      this.alertNumberOfPlags(this.plagResponse.plags.length);
     }
-    // assigns plags from json to local variable
-    this.plags = this.plagResponse.plags;
-
-    this.alertNumberOfPlags(this.plagResponse.plags.length);
   }
-
 
   alertNumberOfPlags(plagCount: number) {
     if (plagCount == 0) {
@@ -212,6 +214,8 @@ export class OutputComponent {
    * called when 'Neuer Text' button was clicked
    */
   newInput() {
-    this.newInputEventEmitter.emit();
+    if(confirm("Wirklich neuen Text eingeben?")){
+      this.router.navigate(['/']);
+    }
   }
 }
