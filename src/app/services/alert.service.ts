@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import swal from 'sweetalert';
 
+/**
+ * Small service / wrapper for sweetalerts
+ */
 @Injectable()
 export class AlertService {
 
-  constructor() {
-  }
-
+  /**
+   * Shows a sweet alert
+   * @param {string} title
+   * @param {string} text
+   * @param {string} icon
+   * @returns {Promise<any>}
+   */
   showAlert(title: string, text: string, icon: string): Promise<any> {
     const params: any = {
       title: title,
