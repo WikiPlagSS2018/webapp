@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { SummarizedOutputTextPiece } from '../models/summarized-output-text-piece';
 
+/**
+ * Service which provides an option to short a given output text and split into "text" and "plagarism" pieces
+ * for better visualizing in html output component
+ */
 @Injectable()
 export class TextShorteningService {
 
   shortenedPlagarismText: SummarizedOutputTextPiece[];
   constructor() { }
 
-
-  getNextEndPos(text: string, charsBeforeAndAfterPlag: number) {
+  /**
+   * Get the next end position for a plag ...
+   * @param {string} text the text which should contain a marked plag, ... <span id="2">My Plag </span> ...
+   * @param {number} charsBeforeAndAfterPlag the number of chars which should be in front of the plag and behind
+   * @returns {number} the end position + charsBeforeAndAfterPlag
+   */
+  private getNextEndPos(text: string, charsBeforeAndAfterPlag: number): number {
     let nextEndTag = text.indexOf('</span>') + 8;
     //Adjust end tag position
     if (nextEndTag + charsBeforeAndAfterPlag <= text.length - 1) {
@@ -17,7 +26,31 @@ export class TextShorteningService {
     return nextEndTag;
   }
 
-  splitFirstPlanOccurrence(startPosOfPlag: number, endPosOfPlag: number, tagged_input_text: string) {
+  /**
+   * Get the next start position for a plagarism
+   * @param {string} text the text which should contain a marked plag, ... <span id="2">My Plag </span> ...
+   * @param {number} charsBeforeAndAfterPlag the number of chars which should be in front of the plag and behind
+   * @returns {number} the end position + charsBeforeAndAfterPlag
+   */
+  private getNextStartTag(text: string, charsBeforeAndAfterPlag: number): number {
+    let startPos = text.indexOf('<span');
+    //Adjust start tag position in case text is too short
+    if (startPos - charsBeforeAndAfterPlag > 0) {
+      return startPos - charsBeforeAndAfterPlag;
+    } else if (startPos === -1) {
+      return -1;
+    }
+    return 0;
+  }
+
+  /**
+   * remove the first detected plag from tagged_input_text and add to shortenedPlagarismText
+   * @param {number} startPosOfPlag
+   * @param {number} endPosOfPlag
+   * @param {string} tagged_input_text the current text
+   * @returns {string} text without the detected plag
+   */
+  private splitFirstPlanOccurrence(startPosOfPlag: number, endPosOfPlag: number, tagged_input_text: string): string {
     if (startPosOfPlag !== -1) {
       let plagElem = tagged_input_text.substring(startPosOfPlag, endPosOfPlag);
       //Cut text by space seperator
@@ -34,7 +67,7 @@ export class TextShorteningService {
       startPosOfPlag += firstSpacePos;
 
       //Search for rest of normal text, split at startPos position, push to text array and remove from original text
-      tagged_input_text = this.removeTextBeforeSpanTag(tagged_input_text, startPosOfPlag);
+      tagged_input_text = this.removeTextBeforeFirstPlagarism(tagged_input_text, startPosOfPlag);
 
       plagElem = plagElem.substring(firstSpacePos, lastSpacePos);
 
@@ -44,13 +77,19 @@ export class TextShorteningService {
       tagged_input_text = tagged_input_text.replace(plagElem, '');
     } else {
       //Search for rest of normal text, split at startPos position, push to text array and remove from original text
-      tagged_input_text = this.removeTextBeforeSpanTag(tagged_input_text, startPosOfPlag);
+      tagged_input_text = this.removeTextBeforeFirstPlagarism(tagged_input_text, startPosOfPlag);
     }
 
     return tagged_input_text;
   }
 
-  removeTextBeforeSpanTag(tagged_input_text: string, nextStartTag: number) {
+  /**
+   * Filters the text before a plagiarism, add it to shortenedPlagarismText
+   * @param {string} tagged_input_text
+   * @param {number} nextStartTag the start position of the plagiarism
+   * @returns {string} text without the text before a plagiarism
+   */
+  private removeTextBeforeFirstPlagarism(tagged_input_text: string, nextStartTag: number): string {
     let textBeforeSpanTag = '';
     if (tagged_input_text.indexOf('<span') !== -1) {
       textBeforeSpanTag = tagged_input_text.substring(0, nextStartTag);
@@ -71,18 +110,11 @@ export class TextShorteningService {
     return tagged_input_text.replace(textBeforeSpanTag, '');
   }
 
-
-  getNextStartTag(text: string, charsBeforeAndAfterPlag: number) {
-    let startPos = text.indexOf('<span');
-    //Adjust start tag position in case text is too short
-    if (startPos - charsBeforeAndAfterPlag > 0) {
-      return startPos - charsBeforeAndAfterPlag;
-    } else if (startPos === -1) {
-      return -1;
-    }
-    return 0;
-  }
-
+  /**
+   * Split a given text with plagiarisms into parts of text and plagiarisms
+   * @param {string} text
+   * @returns {SummarizedOutputTextPiece[]}
+   */
   shorteningText(text: string) {
     this.shortenedPlagarismText = [];
 
