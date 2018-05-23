@@ -14,6 +14,7 @@ import { WikipediaAPIService } from './services/wikipedia-api.service';
 import { TextShorteningService } from './services/text-shortening.service';
 import { AppRoutingModule } from './app-routing.module';
 import { NavigationComponent } from './components/navigation.component';
+import { ChangeToInputComponentGuardService } from './services/change-to-input-component-guard.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { NavigationComponent } from './components/navigation.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService],
+  providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService, ChangeToInputComponentGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -214,8 +214,6 @@ export class OutputComponent  {
    * called when 'Neuer Text' button was clicked
    */
   newInput() {
-    if(confirm("Wirklich neuen Text eingeben?")){
-      this.router.navigate(['/']);
-    }
+    this.router.navigate(['/']);
   }
 }

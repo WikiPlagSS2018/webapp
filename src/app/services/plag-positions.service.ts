@@ -40,9 +40,11 @@ export class PlagPositionsService {
    * @returns {Observable<Object>}
    */
   checkForPlag(inputText: string) {
-    return this.http.post<PlagResponse>(this.url, JSON.stringify({'text': inputText})).pipe(
+    /*return this.http.post<PlagResponse>(this.url, JSON.stringify({'text': inputText})).pipe(
+      tap((result) => this.data = result)
+    );*/
+    return this.http.get<PlagResponse>('assets/mock2.json').pipe(
       tap((result) => this.data = result)
     );
-    //return this.http.get('../mock2.json').map(res=>{return res;});
   }
 }
