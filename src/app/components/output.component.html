@@ -19,6 +19,7 @@
                 </div>
                 <div class="col-sm-11 col-md-11 col-lg-11">
                   <div [innerHTML]="plag.text | safeHtml" *ngIf="plag.active"></div>
+                  <div class="badge badge-info pointer-cursor" *ngIf="plag.type === 'text' && !plag.active" (click)="changeViewState(i)"> ... </div>
                 </div>
               </div>
             </div>
