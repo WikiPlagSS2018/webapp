@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
 import { AlertService } from '../services/alert.service';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ import { PlagResponse } from '../models/responses/plag-response';
 })
 export class InputComponent {
   private inputText: string = 'Die Verwendung dieses oder eines anderen Pseudonyms ist für Mitglieder der DGA streng reglementiert. Ein Regisseur, der für einen von ihm gedrehten Film seinen Namen nicht hergeben möchte, hat nach Sichtung des fertigen Films drei Tage Zeit, anzuzeigen, dass er ein Pseudonym verwenden möchte. Der Rat der DGA entscheidet binnen zwei Tagen über das Anliegen. Erhebt die Produktionsfirma Einspruch, entscheidet ein Komitee aus Mitgliedern der DGA und der Vereinigung der Film- und Fernsehproduzenten, ob der Regisseur ein Pseudonym angeben darf. Über die Beantragung muss der Regisseur Stillschweigen halten, ebenso darf er den fertigen Film nicht öffentlich kritisieren, wenn die DGA ihm die Verwendung eines Pseudonyms zugesteht. Ein Antrag des Regisseurs auf Pseudonymisierung kann abgelehnt werden, so durfte Tony Kaye den Namen Smithee bei dem Film American History X nicht einsetzen, obwohl er den Antrag stellte.';
+  private plagName: string = "Mein Text";
 
   private storedRequests: PlagResponse[];
   myAnimationClasses = {
@@ -31,7 +32,6 @@ export class InputComponent {
               private router: Router,
               private localStorageManager: LocalStorageManagerService) {
     this.storedRequests = this.localStorageManager.getRecentlyStoredRequests();
-
   }
 
   /**
@@ -41,29 +41,12 @@ export class InputComponent {
   send() {
     if(this.inputText != '' && this.inputText != undefined && this.minimumTextLength <= this.inputText.length){
 
+      //Check if the give input is already stored in cache
       if(!this.localStorageManager.checkIfRequestIsAlreadyInLocalStorage(this.inputText)){
-        // post these json file to server
-        this.loading = true;
-        this.plagPositionsService.checkForPlag(this.inputText).subscribe(result => {
-          this.localStorageManager.saveResponseToLocalStorage(this.inputText.toString(), JSON.stringify(result));
-          console.log("Request is sent to server / mock file is loading ...");
-          //set the data to the result
-          this.loading = false;
-          console.log('sent to output component');
-          //Wait before switching to other component to make a smooth fadeout animation
-          this.applyAnimationClasses();
-          setTimeout(() => this.router.navigate(['/output']), 500);
-        })
+        this.loadResponseFromServer();
       } else{
-        console.log("Loading data from local storage");
-        this.plagPositionsService.data = <PlagResponse>JSON.parse(this.localStorageManager.getResponseFromLocalStorage(this.inputText));
-        console.log('sent to output component');
-        //Wait before switching to other component to make a smooth fadeout animation
-        this.applyAnimationClasses();
-        setTimeout(() => this.router.navigate(['/output']), 500);
+        this.loadResponseFromLocalStorage();
       }
-
-
 
     } else if (this.inputText === '' || this.inputText === undefined) {
       //Empty textarea
@@ -73,6 +56,50 @@ export class InputComponent {
     }
   }
 
+  /**
+   * Delete all in local storage saved plagiarisms
+   */
+  deleteLocalStorage(){
+    this.storedRequests = null;
+    this.localStorageManager.clean();
+  }
+
+  /**
+   * Send a request for a certain input text to server and handle changing to output component
+   */
+  loadResponseFromServer(){
+    // post these json file to server
+    this.loading = true;
+    this.plagPositionsService.checkForPlag(this.inputText).subscribe(result => {
+      (<PlagResponse>result).name = this.plagName;
+      (<PlagResponse>result).created_at = Date.now();
+      this.localStorageManager.saveResponseToLocalStorage(this.inputText.toString(), JSON.stringify(result));
+      console.log("Request is sent to server / mock file is loading ...");
+      //set the data to the result
+      this.loading = false;
+      console.log('sent to output component');
+      //Wait before switching to other component to make a smooth fadeout animation
+      this.applyAnimationClasses();
+      setTimeout(() => this.router.navigate(['/output']), 500);
+    })
+  }
+
+  /**
+   * Load a already performed request from local storage with a given input text
+   */
+  loadResponseFromLocalStorage(){
+    console.log("Loading data from local storage");
+    this.plagPositionsService.data = <PlagResponse>JSON.parse(this.localStorageManager.getResponseFromLocalStorage(this.inputText));
+    console.log('sent to output component');
+    //Wait before switching to other component to make a smooth fadeout animation
+    this.applyAnimationClasses();
+    setTimeout(() => this.router.navigate(['/output']), 500);
+  }
+
+  /**
+   * Load a plag which is already stored in local stored
+   * @param {number} id the id of the plagiarism
+   */
   loadStoredPlagDataWithId(id: number){
     console.log("Loading data from local storage");
     this.plagPositionsService.data = this.storedRequests[id];

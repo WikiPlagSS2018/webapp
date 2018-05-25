@@ -7,6 +7,7 @@ import { Plagarism } from '../models/plagarism';
 import { TextShorteningService } from '../services/text-shortening.service';
 import { SummarizedOutputTextPiece } from '../models/summarized-output-text-piece';
 import { Router } from '@angular/router';
+import { PdfGeneratorService } from '../services/pdf-generator.service';
 
 /**
  * Displays json provided by PlagPositionsService
@@ -93,7 +94,8 @@ export class OutputComponent  {
               private wikipediaAPIService: WikipediaAPIService,
               private alertService: AlertService,
               private textShorteningService: TextShorteningService,
-              private router: Router) {
+              private router: Router,
+              private pdfGenerator: PdfGeneratorService) {
     this.tagged_input_text = 'Lädt ...'; // displayed while service is loading
 
     // assigns plagResponse from json to local variable
@@ -128,6 +130,10 @@ export class OutputComponent  {
 
   changeViewState(index: number) {
     this.textPieces[index].active = !this.textPieces[index].active;
+  }
+
+  pdfExport(){
+    this.pdfGenerator.generatePDF(this.plagResponse);
   }
 
 

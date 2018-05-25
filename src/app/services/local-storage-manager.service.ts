@@ -12,6 +12,11 @@ import { PlagResponse } from '../models/responses/plag-response';
 @Injectable()
 export class LocalStorageManagerService {
 
+  /**
+   * Check if a given input text + response is already stored in local storage
+   * @param {string} inputText the given input text
+   * @returns {boolean} true in case the input text already exists
+   */
   checkIfRequestIsAlreadyInLocalStorage(inputText: string) : boolean{
     if (localStorage.getItem("plag" + Md5.hashStr(inputText).toString()) === null) {
       //Request isn't cached in local storage
@@ -20,14 +25,27 @@ export class LocalStorageManagerService {
     return true;
   }
 
+  clean(){
+    window.localStorage.clear();
+  }
+
+  /**
+   * Get all requests from local storage
+   * @returns {PlagResponse[]} an array with all stored PlagResponses
+   */
   getRecentlyStoredRequests(): PlagResponse[]{
     let keys = Object.keys(localStorage);
     let storedPlags = []
+    //Iterate through each key in localStorage and check if its a plag
     for(let i = 0; i < keys.length; i++){
       if(keys[i].indexOf("plag") !== -1){
         storedPlags.push(<PlagResponse>JSON.parse(this.a2b(localStorage.getItem(keys[i]))));
       }
     }
+
+    //Sort by date of creation
+    storedPlags.sort((a, b) => ((<PlagResponse>b).created_at - (<PlagResponse>a).created_at));
+
     return storedPlags;
   }
 
@@ -40,7 +58,7 @@ export class LocalStorageManagerService {
     //Remove non printable ascii chars -->  https://www.w3resource.com/javascript-exercises/javascript-string-exercise-32.php
     let valueBase64 = this.b2a(response.replace(/[^\x20-\x7E]/g, ''));
     let keyChecksum = Md5.hashStr(inputText).toString();
-    localStorage.setItem("plag" + keyChecksum, valueBase64);
+    localStorage.setItem("plag:" + keyChecksum, valueBase64);
   }
 
   /**

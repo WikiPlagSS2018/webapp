@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavigationComponent } from './components/navigation.component';
 import { ChangeToInputComponentGuardService } from './services/change-to-input-component-guard.service';
 import { LocalStorageManagerService } from './services/local-storage-manager.service';
+import { PdfGeneratorService } from './services/pdf-generator.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { LocalStorageManagerService } from './services/local-storage-manager.ser
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService, ChangeToInputComponentGuardService, LocalStorageManagerService],
+  providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService, ChangeToInputComponentGuardService, LocalStorageManagerService, PdfGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
