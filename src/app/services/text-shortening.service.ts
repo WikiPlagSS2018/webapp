@@ -18,7 +18,7 @@ export class TextShorteningService {
    * @returns {number} the end position + charsBeforeAndAfterPlag
    */
   private getNextEndPos(text: string, charsBeforeAndAfterPlag: number): number {
-    let nextEndTag = text.indexOf('</span>') + 8;
+    let nextEndTag = text.indexOf('</span>') + 7;
     //Adjust end tag position
     if (nextEndTag + charsBeforeAndAfterPlag <= text.length - 1) {
       return nextEndTag + charsBeforeAndAfterPlag;
@@ -59,7 +59,7 @@ export class TextShorteningService {
         firstSpacePos = plagElem.indexOf(' ');
       }
 
-      let lastSpacePos = plagElem.length - 1;
+      let lastSpacePos = plagElem.length;
       if (plagElem.substring(plagElem.lastIndexOf(' '), plagElem.length - 1).indexOf('</span') == -1) {
         lastSpacePos = plagElem.lastIndexOf(' ');
       }

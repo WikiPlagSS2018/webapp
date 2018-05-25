@@ -98,7 +98,7 @@ export class OutputComponent  {
 
     // assigns plagResponse from json to local variable
     this.plagResponse = this.plagPositionsService.getPlagData();
-
+    console.log(this.plagResponse);
     //In case user reload site in output route
     if(!this.plagResponse){
       router.navigate(['/']);

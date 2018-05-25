@@ -12,5 +12,14 @@
       <span *ngIf="loading">Laden ...</span>
       <input type='file' class="btn" accept=".txt" multiple (change)='openFile($event)'>
     </div>
+    <div class="col-sm-0 col-md-3 col-lg-3 scrollview">
+      <h1>Letzte Anfragen</h1> <hr>
+      <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
+        <!-- TODO: Implement a pipe for truncat the text until a span element appears
+        https://stackoverflow.com/questions/44669340/how-to-truncate-text-in-angular2
+        -->
+        <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml " (click)="loadStoredPlagDataWithId(i)"></div>...<hr>
+      </div>
+    </div>
   </div>
 </div>

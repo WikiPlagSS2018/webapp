@@ -15,6 +15,7 @@ import { TextShorteningService } from './services/text-shortening.service';
 import { AppRoutingModule } from './app-routing.module';
 import { NavigationComponent } from './components/navigation.component';
 import { ChangeToInputComponentGuardService } from './services/change-to-input-component-guard.service';
+import { LocalStorageManagerService } from './services/local-storage-manager.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { ChangeToInputComponentGuardService } from './services/change-to-input-c
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService, ChangeToInputComponentGuardService],
+  providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService, ChangeToInputComponentGuardService, LocalStorageManagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
