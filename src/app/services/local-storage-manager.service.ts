@@ -56,7 +56,7 @@ export class LocalStorageManagerService {
    */
   saveResponseToLocalStorage(inputText: string, response: string){
     //Remove non printable ascii chars -->  https://www.w3resource.com/javascript-exercises/javascript-string-exercise-32.php
-    let valueBase64 = this.b2a(response.replace(/[^\x20-\x7E]/g, ''));
+    let valueBase64 = this.b2a(response.replace(/[^ -~äöüÖÄÜ]+/g, ""));
     let keyChecksum = Md5.hashStr(inputText).toString();
     localStorage.setItem("plag:" + keyChecksum, valueBase64);
   }

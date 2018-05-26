@@ -115,10 +115,27 @@ export class TextShorteningService {
    * @param {string} text
    * @returns {SummarizedOutputTextPiece[]}
    */
-  shorteningText(text: string) {
+  shorteningText(text: string): SummarizedOutputTextPiece[] {
     this.shortenedPlagarismText = [];
 
     let charsBeforeAndAfterPlag = 100;
+    let nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
+    while (text != '') {
+      //Search for next plag elem, push to array and remove from original text
+      let nextEndTag = this.getNextEndPos(text, charsBeforeAndAfterPlag);
+
+      text = this.splitFirstPlanOccurrence(nextStartTag, nextEndTag, text);
+
+      nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
+    }
+
+    return this.shortenedPlagarismText;
+  }
+
+  splittText(text: string): SummarizedOutputTextPiece[]{
+    this.shortenedPlagarismText = [];
+
+    let charsBeforeAndAfterPlag = 0;
     let nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
     while (text != '') {
       //Search for next plag elem, push to array and remove from original text
