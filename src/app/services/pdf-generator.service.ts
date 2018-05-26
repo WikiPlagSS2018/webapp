@@ -12,11 +12,13 @@ export class PdfGeneratorService {
   constructor(private textShorteningService: TextShorteningService) { }
 
   generatePDF(plagResponse: PlagResponse){
-    console.log("Generating a pdf is coming soon ..." + plagResponse);
+    console.log('Generating a pdf');
     this.splittedText = this.textShorteningService.splittText(plagResponse.tagged_input_text);
+
 
     // Default export is a4 paper, portrait, using milimeters for units
     var doc = new jsPDF();
+    let pageHeight= doc.internal.pageSize.getHeight();
 
     //Print headline
     doc.setFontSize(22);
@@ -26,29 +28,35 @@ export class PdfGeneratorService {
     doc.setFontSize(18);
     upperCorner += 9;
     let plagCounter = 0;
+
+    //Go through each piece of text
     for(let i = 0; i < this.splittedText.length; i++){
       if(this.splittedText[i].type == 'plag'){
-        this.splittedText[i].text = this.splittedText[i].text.replace( /(<([^>]+)>)/ig, '');
+        this.splittedText[i].text = this.removeHTML(this.splittedText[i].text);
+        //Plagiarisms will be in red color
         doc.setTextColor(255,0,0);
         plagCounter ++;
       } else{
         doc.setTextColor(0,0,0);
       }
 
+      //Split the text into lines with length of 180mm
       var splitTitle = doc.splitTextToSize(this.splittedText[i].text, 180);
-      let pageHeight= doc.internal.pageSize.getHeight();
+
 
       for(let j = 0; j < splitTitle.length; j++){
-        //Print each row
+        //Print each row to pdf
         doc.text(15, upperCorner, splitTitle[j]);
         upperCorner += 9;
+
+        //Create a new page in case the old is to short for given text
         if(upperCorner > pageHeight){
           doc.addPage();
           upperCorner = 20;
         }
       }
 
-      //Print each link
+      //Print each link of an plagiarism
       if(this.splittedText[i].type == 'plag'){
         for(let j = 0; j < plagResponse.plags[plagCounter-1].wiki_excerpts.length; j++){
           let link = '--> https://de.wikipedia.org/?curid=' + plagResponse.plags[plagCounter-1].wiki_excerpts[j].id;
@@ -63,5 +71,9 @@ export class PdfGeneratorService {
     }
 
     doc.save(plagResponse.name + '.pdf');
+  }
+
+  removeHTML(textWithHTML: string): string{
+    return textWithHTML.replace( /(<([^>]+)>)/ig, '');
   }
 }
