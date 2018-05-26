@@ -211,9 +211,7 @@ export class OutputComponent  {
    */
   getArticleURLFromWikipediaAPI() {
     this.clickedArticleWikiId = this.plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
-    this.wikipediaAPIService.getArticleData(this.clickedArticleWikiId).subscribe((articleData: any) => {
-      this.articleUrl = articleData.query.pages[this.clickedArticleWikiId].fullurl;
-    });
+    this.articleUrl = 'https://de.wikipedia.org/?curid=' + this.plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
   }
 
   /**
