@@ -27,14 +27,16 @@ export class PdfGeneratorService {
     upperCorner += 9;
     let plagCounter = 0;
     for(let i = 0; i < this.splittedText.length; i++){
-      var splitTitle = doc.splitTextToSize(this.splittedText[i].text, 180);
-      let pageHeight= doc.internal.pageSize.getHeight();
       if(this.splittedText[i].type == 'plag'){
+        this.splittedText[i].text = this.splittedText[i].text.replace( /(<([^>]+)>)/ig, '');
         doc.setTextColor(255,0,0);
         plagCounter ++;
       } else{
         doc.setTextColor(0,0,0);
       }
+
+      var splitTitle = doc.splitTextToSize(this.splittedText[i].text, 180);
+      let pageHeight= doc.internal.pageSize.getHeight();
 
       for(let j = 0; j < splitTitle.length; j++){
         //Print each row
