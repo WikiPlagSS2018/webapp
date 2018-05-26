@@ -2,6 +2,7 @@
   "name": "wikiplag-frontend",
   "version": "0.0.0",
   "scripts": {
+    "postinstall": "node patch.js",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -22,6 +23,8 @@
     "@angular/router": "^6.0.2",
     "animate.css": "^3.6.1",
     "core-js": "^2.5.4",
+    "jspdf": "^1.4.0",
+    "pdfmake": "^0.1.36",
     "rxjs": "^6.0.0",
     "sweetalert": "^2.1.0",
     "ts-md5": "^1.2.4",
