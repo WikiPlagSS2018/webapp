@@ -18,7 +18,7 @@ export class LocalStorageManagerService {
    * @returns {boolean} true in case the input text already exists
    */
   checkIfRequestIsAlreadyInLocalStorage(inputText: string) : boolean{
-    if (localStorage.getItem("plag" + Md5.hashStr(inputText).toString()) === null) {
+    if (localStorage.getItem("plag:" + Md5.hashStr(inputText).toString()) === null) {
       //Request isn't cached in local storage
       return false;
     }
@@ -68,7 +68,7 @@ export class LocalStorageManagerService {
    * @returns {string} the response which was given from server as a json string
    */
   getResponseFromLocalStorage(inputText: string) : string{
-    return this.a2b(localStorage.getItem("plag" + Md5.hashStr(inputText).toString()));
+    return this.a2b(localStorage.getItem("plag:" + Md5.hashStr(inputText).toString()));
   }
 
   /**
