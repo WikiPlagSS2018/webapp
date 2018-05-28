@@ -1,4 +1,4 @@
-import {WikiExcerpt} from "./wiki-excerpt";
+import {WikiExcerpt} from './wiki-excerpt';
 
 export class Plagarism {
   id: number;

@@ -33,7 +33,15 @@ import { PdfGeneratorService } from './services/pdf-generator.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [AlertService, PlagPositionsService, WikipediaAPIService, TextShorteningService, ChangeToInputComponentGuardService, LocalStorageManagerService, PdfGeneratorService],
+  providers: [
+    AlertService,
+    PlagPositionsService,
+    WikipediaAPIService,
+    TextShorteningService,
+    ChangeToInputComponentGuardService,
+    LocalStorageManagerService,
+    PdfGeneratorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

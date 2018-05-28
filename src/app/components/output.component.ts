@@ -101,10 +101,10 @@ export class OutputComponent  {
     // assigns plagResponse from json to local variable
     this.plagResponse = this.plagPositionsService.getPlagData();
     console.log(this.plagResponse);
-    //In case user reload site in output route
-    if(!this.plagResponse){
+    // In case user reload site in output route
+    if (!this.plagResponse) {
       router.navigate(['/']);
-    } else{
+    } else {
       // assigns tagged_input_text from json to local variable
       this.tagged_input_text = this.plagResponse.tagged_input_text;
 
@@ -120,7 +120,7 @@ export class OutputComponent  {
   }
 
   alertNumberOfPlags(plagCount: number) {
-    if (plagCount == 0) {
+    if (plagCount === 0) {
       this.alertService.showAlert('Keine Ergebnisse', 'Keine Plagiate im Text gefunden.', 'success');
     } else {
       this.alertService.showAlert('Potentielle Plagiate', plagCount + ' potentielle Plagiate gefunden.', 'warning');
@@ -132,7 +132,7 @@ export class OutputComponent  {
     this.textPieces[index].active = !this.textPieces[index].active;
   }
 
-  pdfExport(){
+  pdfExport() {
     this.pdfGenerator.generatePDF(this.plagResponse);
   }
 
@@ -143,7 +143,7 @@ export class OutputComponent  {
     if (event.target.classList.contains('input_plag')) {
       // clicked on input_plag
       this.clickedPlagId = event.target.id;
-      console.info('Clicked on plag with id ' + this.clickedPlagId);
+      // console.info('Clicked on plag with id ' + this.clickedPlagId);
 
       this.highlightSelectedPlag(event);
 
@@ -152,11 +152,10 @@ export class OutputComponent  {
 
       // reset textOfSelectedArticle
       this.textOfSelectedArticle = null;
-    }
-    else if (event.target.classList.contains('article_box')) {
+    } else if (event.target.classList.contains('article_box')) {
       // clicked on article
       this.clickedArticleId = event.target.id;
-      console.info('Clicked on article with id ' + this.clickedArticleId);
+      // console.info('Clicked on article with id ' + this.clickedArticleId);
 
       this.highlightSelectedArticle(event);
 
@@ -164,10 +163,9 @@ export class OutputComponent  {
 
       // excerpt text is assigned
       this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
-    }
-    else if (event.target.classList.contains('wiki_plag')) {
+    } else if (event.target.classList.contains('wiki_plag')) {
       // Open corresponding Wikipedia article in pop-up
-      window.open(this.articleUrl)
+      window.open(this.articleUrl);
     }
 
   }

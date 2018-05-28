@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 /**
@@ -11,7 +11,7 @@ export class WikipediaAPIService {
    * @param http http service
    */
   constructor(private http: HttpClient) {
-    console.info('init WikipediaAPIService');
+    // console.info('init WikipediaAPIService');
   }
 
   /**
