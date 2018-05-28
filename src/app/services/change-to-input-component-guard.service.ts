@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from "@angular/router";
+import { CanActivate, Router } from '@angular/router';
 
 /**
  * A small services to decide if the router should redirect from output component to another component
@@ -12,7 +12,7 @@ export class ChangeToInputComponentGuardService implements CanActivate {
    * Import a router
    * @param {Router} router dependency injection
    */
-  constructor(private router: Router){
+  constructor(private router: Router) {
   }
 
   /**
@@ -20,7 +20,7 @@ export class ChangeToInputComponentGuardService implements CanActivate {
    * @returns {boolean}
    */
   canActivate() {
-    if(this.router.url != "/output" || confirm("Wirklich wechseln?")){
+    if (this.router.url !== '/output' || confirm('Wirklich wechseln?')) {
       return true;
     }
     return false;

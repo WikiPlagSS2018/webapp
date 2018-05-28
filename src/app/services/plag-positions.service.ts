@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { PlagResponse } from '../models/responses/plag-response';
@@ -9,11 +9,11 @@ import { PlagResponse } from '../models/responses/plag-response';
 @Injectable()
 export class PlagPositionsService {
 
-  //post url cluster or localhost connection
-  url: string = 'http://localhost:8080/wikiplag/rest/analyse';
-  //url:string = 'http://hadoop05.f4.htw-berlin.de:8080/wikiplag/rest/analyse';
+  // post url cluster or localhost connection
+  url = 'http://localhost:8080/wikiplag/rest/analyse';
+  // url:string = 'http://wikiplag.f4.htw-berlin.de:8080/wikiplag/rest/analyse';
 
-  //data
+  // data
   data: PlagResponse;
 
 
@@ -22,7 +22,7 @@ export class PlagPositionsService {
    * @param http http service
    */
   constructor(private http: HttpClient) {
-    console.info('init PlagPositionsService');
+    // console.info('init PlagPositionsService');
   }
 
 
