@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 
-
 /**
  * About page
  */
@@ -13,6 +12,5 @@ export class AboutComponent {
 
   constructor() {
   }
-
 
 }
