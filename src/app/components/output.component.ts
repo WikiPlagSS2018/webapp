@@ -1,4 +1,4 @@
-import { Component, HostListener} from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
 import { WikipediaAPIService } from '../services/wikipedia-api.service';
 import { AlertService } from '../services/alert.service';
@@ -16,7 +16,7 @@ import { PdfGeneratorService } from '../services/pdf-generator.service';
   selector: 'app-output',
   templateUrl: './output.component.html'
 })
-export class OutputComponent  {
+export class OutputComponent {
 
   /**
    * object read from json
@@ -89,6 +89,8 @@ export class OutputComponent  {
    * @param wikipediaAPIService service for querying wikipedia api
    * @param alertService service to show messageboxes
    * @param textShorteningService for shortening a given output text
+   * @param router
+   * @param pdfGenerator
    */
   constructor(private plagPositionsService: PlagPositionsService,
               private wikipediaAPIService: WikipediaAPIService,
@@ -100,25 +102,40 @@ export class OutputComponent  {
 
     // assigns plagResponse from json to local variable
     this.plagResponse = this.plagPositionsService.getPlagData();
-    console.log(this.plagResponse);
     // In case user reload site in output route
     if (!this.plagResponse) {
-      router.navigate(['/']);
+      this.navigateToIndexRoute();
     } else {
-      // assigns tagged_input_text from json to local variable
-      this.tagged_input_text = this.plagResponse.tagged_input_text;
-
-      this.shortened_text = true;
-      if (this.shortened_text) {
-        this.textPieces = this.textShorteningService.shorteningText(this.tagged_input_text);
-      }
-      // assigns plags from json to local variable
-      this.plags = this.plagResponse.plags;
-
+      this.preparePlagiarismResponse();
       this.alertNumberOfPlags(this.plagResponse.plags.length);
     }
   }
 
+  /**
+   * Navigate back to index route
+   */
+  navigateToIndexRoute() {
+    this.router.navigate(['/']);
+  }
+
+  /**
+   * Extract import information from plagResponse object to several variables
+   */
+  preparePlagiarismResponse() {
+    // assigns tagged_input_text from json to local variable
+    this.tagged_input_text = this.plagResponse.tagged_input_text;
+
+    this.shortened_text = true;
+    if (this.shortened_text) {
+      this.textPieces = this.textShorteningService.shorteningText(this.tagged_input_text, 100);
+    }
+    // assigns plags from json to local variable
+    this.plags = this.plagResponse.plags;
+  }
+  /**
+   * Alert the number of detected plagiarisms via alert servie
+   * @param {number} plagCount
+   */
   alertNumberOfPlags(plagCount: number) {
     if (plagCount === 0) {
       this.alertService.showAlert('Keine Ergebnisse', 'Keine Plagiate im Text gefunden.', 'success');
@@ -132,42 +149,71 @@ export class OutputComponent  {
     this.textPieces[index].active = !this.textPieces[index].active;
   }
 
+  /**
+   * Redirect request to pdf generator service
+   */
   pdfExport() {
     this.pdfGenerator.generatePDF(this.plagResponse);
   }
 
 
-  // listens for click events
+  /**
+   * Listen for click events in output component
+   * @param event
+   */
   @HostListener('click', ['$event'])
   onClick(event: any) {
     if (event.target.classList.contains('input_plag')) {
-      // clicked on input_plag
-      this.clickedPlagId = event.target.id;
-      // console.info('Clicked on plag with id ' + this.clickedPlagId);
-
-      this.highlightSelectedPlag(event);
-
-      // array of wiki_excerpts is assigned
-      this.articleListOfSelectedPlag = this.plags[this.clickedPlagId].wiki_excerpts;
-
-      // reset textOfSelectedArticle
-      this.textOfSelectedArticle = null;
+      this.clickedOnPlagiarism(event);
     } else if (event.target.classList.contains('article_box')) {
-      // clicked on article
-      this.clickedArticleId = event.target.id;
-      // console.info('Clicked on article with id ' + this.clickedArticleId);
-
-      this.highlightSelectedArticle(event);
-
-      this.getArticleURLFromWikipediaAPI();
-
-      // excerpt text is assigned
-      this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
+      this.clickedOnArticle(event);
     } else if (event.target.classList.contains('wiki_plag')) {
-      // Open corresponding Wikipedia article in pop-up
-      window.open(this.articleUrl);
+      this.clickedOnWikipediaArticle(event);
     }
+  }
 
+  /**
+   * Click event fired on a wikipedia excerpt
+   * @param event
+   */
+  clickedOnWikipediaArticle(event: any) {
+    // Open corresponding Wikipedia article in pop-up
+    window.open(this.articleUrl);
+  }
+
+  /**
+   * Click event fired on a plagiarism
+   * @param event
+   */
+  clickedOnPlagiarism(event: any) {
+    // clicked on input_plag
+    this.clickedPlagId = event.target.id;
+    // console.info('Clicked on plag with id ' + this.clickedPlagId);
+
+    this.highlightSelectedPlag(event);
+
+    // array of wiki_excerpts is assigned
+    this.articleListOfSelectedPlag = this.plags[this.clickedPlagId].wiki_excerpts;
+
+    // reset textOfSelectedArticle
+    this.textOfSelectedArticle = null;
+  }
+
+  /**
+   * Click event fired on a article box
+   * @param event
+   */
+  clickedOnArticle(event: any) {
+    // clicked on article
+    this.clickedArticleId = event.target.id;
+    // console.info('Clicked on article with id ' + this.clickedArticleId);
+
+    this.highlightSelectedArticle(event);
+
+    this.getArticleURLFromWikipediaAPI();
+
+    // excerpt text is assigned
+    this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
   }
 
   /**

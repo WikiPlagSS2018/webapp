@@ -17,7 +17,7 @@ export class LocalStorageManagerService {
    * @param {string} inputText the given input text
    * @returns {boolean} true in case the input text already exists
    */
-  checkIfRequestIsAlreadyInLocalStorage(inputText: string): boolean {
+  requestAlreadyInLocalStorage(inputText: string): boolean {
     if (localStorage.getItem('plag:' + Md5.hashStr(inputText).toString()) === null) {
       // Request isn't cached in local storage
       return false;
@@ -25,6 +25,9 @@ export class LocalStorageManagerService {
     return true;
   }
 
+  /**
+   * Clean the local storage of this page
+   */
   clean() {
     window.localStorage.clear();
   }

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { PlagPositionsService } from '../services/plag-positions.service';
 import { AlertService } from '../services/alert.service';
 import { Router } from '@angular/router';
@@ -50,19 +50,32 @@ export class InputComponent {
     if (this.inputText !== '' && this.inputText !== undefined && this.minimumTextLength <= this.inputText.length) {
 
       // Check if the give input is already stored in cache
-      if (!this.localStorageManager.checkIfRequestIsAlreadyInLocalStorage(this.inputText)) {
+      if (!this.localStorageManager.requestAlreadyInLocalStorage(this.inputText)) {
         this.loadResponseFromServer();
       } else {
         this.loadResponseFromLocalStorage();
       }
 
     } else if (this.inputText === '' || this.inputText === undefined) {
-      // Empty textarea
-      this.alertService.showAlert('Bitte Text eingeben', 'Bitte geben Sie einen Text zum analysieren ein!', 'warning');
+      this.alertEmptyTextArea();
     } else {
-      this.alertService.showAlert('Bitte mehr Text eingeben', 'Bitte geben ' +
-        'Sie mindestes ' + this.minimumTextLength + ' Zeichen zum analysieren ein!', 'warning');
+      this.alertNotEnoughtCharsInTextArea();
     }
+  }
+
+  /**
+   * Alert an empty text area to alert service
+   */
+  alertEmptyTextArea() {
+    this.alertService.showAlert('Bitte Text eingeben', 'Bitte geben Sie einen Text zum analysieren ein!', 'warning');
+  }
+
+  /**
+   * Send alert to alert service in case not enought chars are entered from user
+   */
+  alertNotEnoughtCharsInTextArea() {
+    this.alertService.showAlert('Bitte mehr Text eingeben', 'Bitte geben ' +
+      'Sie mindestes ' + this.minimumTextLength + ' Zeichen zum analysieren ein!', 'warning');
   }
 
   /**
@@ -80,8 +93,11 @@ export class InputComponent {
     // post these json file to server
     this.loading = true;
     this.plagPositionsService.checkForPlag(this.inputText).subscribe(result => {
+
+      // Apply plagiarism name and actual date to response object
       (<PlagResponse>result).name = this.plagName;
       (<PlagResponse>result).created_at = Date.now();
+
       this.localStorageManager.saveResponseToLocalStorage(this.inputText.toString(), JSON.stringify(result));
       console.log('Request is sent to server / mock file is loading ...');
       // set the data to the result
@@ -118,6 +134,9 @@ export class InputComponent {
     setTimeout(() => this.router.navigate(['/output']), 500);
   }
 
+  /**
+   * Apply animation classes for fading out the input component
+   */
   applyAnimationClasses() {
     // Animation handling
     this.myAnimationClasses = {
@@ -127,7 +146,7 @@ export class InputComponent {
   }
 
   /**
-   * open a given txt file and read using FileReader
+   * open a given txt file and read into textarea using FileReader
    * @param event
    */
   openFile(event: Event) {

@@ -22,7 +22,6 @@ export class PlagPositionsService {
    * @param http http service
    */
   constructor(private http: HttpClient) {
-    // console.info('init PlagPositionsService');
   }
 
 
