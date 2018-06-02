@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 /**
+ * Obsolete
  * gets wikipedia URL and provides it as service
  */
 @Injectable()

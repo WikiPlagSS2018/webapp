@@ -113,29 +113,12 @@ export class TextShorteningService {
   /**
    * Split a given text with plagiarisms into parts of text and plagiarisms
    * @param {string} text
+   * @param charsBeforeAndAfterPlag
    * @returns {SummarizedOutputTextPiece[]}
    */
-  shorteningText(text: string): SummarizedOutputTextPiece[] {
+  shorteningText(text: string, charsBeforeAndAfterPlag: number): SummarizedOutputTextPiece[] {
     this.shortenedPlagarismText = [];
 
-    const charsBeforeAndAfterPlag = 100;
-    let nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
-    while (text !== '') {
-      // Search for next plag elem, push to array and remove from original text
-      const nextEndTag = this.getNextEndPos(text, charsBeforeAndAfterPlag);
-
-      text = this.splitFirstPlanOccurrence(nextStartTag, nextEndTag, text);
-
-      nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
-    }
-
-    return this.shortenedPlagarismText;
-  }
-
-  splittText(text: string): SummarizedOutputTextPiece[] {
-    this.shortenedPlagarismText = [];
-
-    const charsBeforeAndAfterPlag = 0;
     let nextStartTag = this.getNextStartTag(text, charsBeforeAndAfterPlag);
     while (text !== '') {
       // Search for next plag elem, push to array and remove from original text
