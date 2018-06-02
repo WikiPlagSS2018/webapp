@@ -18,9 +18,6 @@
       <button class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button>
       <hr>
       <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
-        <!-- TODO: Implement a pipe for truncat the text until a span element appears
-        https://stackoverflow.com/questions/44669340/how-to-truncate-text-in-angular2
-        -->
         <div [innerHTML]="storedPlag.name | slice:0:200"></div>
         <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml "
              (click)="loadStoredPlagDataWithId(i)"></div>
