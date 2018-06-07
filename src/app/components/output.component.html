@@ -1,5 +1,5 @@
 <div class="animated bounceInLeft">
-  <h1>Ergebnis</h1>
+  <h1 class="output_header">Ergebnis</h1>
   <div class="tbl_div">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6">
@@ -26,6 +26,7 @@
           </div>
         </div>
 
+
       </div>
       <div class="col-sm-12 col-md-3 col-lg-3">
         Artikel&nbsp;<span class="info">i<span class="tooltiptext">Artikel, aus denen die ausgewählte Plagiatsstelle stammen könnte</span></span>
@@ -50,11 +51,19 @@
             Bitte einen Artikel anklicken.
           </div>
         </div>
+
+
       </div>
 
     </div>
+    <div class="icons_output">
+      <!-- <button id="btn_new" class="btn btn-primary" (click)="newInput()">Neuer Text</button>-->
+      <div id="new_div" class="icon_div"> <input class="icon" type="image" src="/assets/Icons/document.png" id="btn_delete"  (click)="newInput()"><p>Neue Eingabe</p> </div>
+      <!-- <button id="btn_pdf" class="btn btn-info" (click)="pdfExport()">PDF generieren</button>-->
 
-    <button class="btn btn-primary" (click)="newInput()">Neuer Text</button>
-    <button class="btn btn-info" (click)="pdfExport()">PDF generieren</button>
+      <div id="pdf_div" class="icon_div">  <input class="icon" type="image" src="/assets/Icons/pdf.png" id="btn_pdf"  (click)="pdfExport()"><p>PDF generieren</p> </div>
+
+    </div>
+
   </div>
 </div>

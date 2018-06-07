@@ -3,25 +3,28 @@
     <div class="col-sm-0 col-md-3 col-lg-3">
     </div>
     <div class="col-sm-12 col-md-6 col-lg-6">
-      <h1>Eingabe</h1>
+      <h1 class="input_header">Eingabe</h1>
       <textarea class="input_textarea" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
                 [ngModelOptions]="{standalone: true}">
 
       </textarea><br/>
       Beschreibung: <input placeholder="Mein Plagiat" [(ngModel)]="plagName"><br>
-      <button class="btn btn-primary" (click)="send()" *ngIf="!loading">Analysieren</button>
+     <!-- <button id="btn_analyse" class="btn btn-primary" (click)="send()" *ngIf="!loading">Analysieren</button>-->
+      <div class="icon_div"> <input class="icon" type="image" src="/assets/Icons/analyse.png" (click)="send()" *ngIf="!loading" > <p>Analysieren </p></div>
       <span *ngIf="loading">Laden ...</span>
       <input type='file' class="btn" accept=".txt" multiple (change)='openFile($event)'>
     </div>
-    <div class="col-sm-0 col-md-3 col-lg-3 scrollview" *ngIf="storedRequests != null && storedRequests.length > 0">
-      <h1>Letzte Anfragen</h1>
-      <button class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button><hr>
+    <div id="scrollview_input"class="col-sm-0 col-md-3 col-lg-3 scrollview" *ngIf="storedRequests != null && storedRequests.length > 0">
+      <h1 class="input_header" >Letzte Anfragen</h1>
+     <!-- <button id="btn_delete" class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button><hr> -->
+
       <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
         <!-- TODO: Implement a pipe for truncat the text until a span element appears
         https://stackoverflow.com/questions/44669340/how-to-truncate-text-in-angular2
         -->
         <div [innerHTML]="storedPlag.name | slice:0:200"></div>
         <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml " (click)="loadStoredPlagDataWithId(i)"></div>...<hr>
+        <div class="icon_div"> <input class="icon" type="image" src="/assets/Icons/delete.png" id="btn_delete"  (click)="deleteLocalStorage()"><p>Alle löschen </p> </div>
       </div>
     </div>
   </div>

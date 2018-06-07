@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlagResponse } from '../models/responses/plag-response';
-import * as jsPDF from 'jspdf';
+// import * as jsPDF from 'jspdf';
 import { TextShorteningService } from './text-shortening.service';
 import { SummarizedOutputTextPiece } from '../models/summarized-output-text-piece';
 
@@ -12,7 +12,7 @@ export class PdfGeneratorService {
   constructor(private textShorteningService: TextShorteningService) { }
 
   generatePDF(plagResponse: PlagResponse) {
-    console.log('Generating a pdf');
+    /*console.log('Generating a pdf');
     this.splittedText = this.textShorteningService.splittText(plagResponse.tagged_input_text);
 
 
@@ -70,7 +70,7 @@ export class PdfGeneratorService {
       }
     }
 
-    doc.save(plagResponse.name + '.pdf');
+    doc.save(plagResponse.name + '.pdf');*/
   }
 
   removeHTML(textWithHTML: string): string {

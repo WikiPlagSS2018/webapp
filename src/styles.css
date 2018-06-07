@@ -1,5 +1,5 @@
 img {
-  max-width: 100%;
+  max-width: 70%;
 }
 
 body {
@@ -9,12 +9,43 @@ body {
 }
 
 h1 {
-  color: #b4302e;
+  font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  color: #5e9400;
   font-size: 250%;
+
+}
+
+
+
+.output_header{
+  padding-top: 10px;
+}
+
+body {
+  background-color: white;
+}
+
+button {
+  font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+}
+
+.navbar {
+  font-family: "Hoefler Text", "Baskerville Old Face", Garamond, "Times New Roman", serif;
+  background-color: #dee2e6!important;
+  border-top:5px solid #c8e399;
+  height: 200px;
+}
+
+.input_header{
+  padding-top: 10px;
 }
 
 .slogan {
-  font-size: 22px;
+  font-size: 28px;
+}
+
+.nav-link {
+  font-size: 24px;
 }
 
 .input_textarea {
@@ -24,11 +55,11 @@ h1 {
   border-radius: 3px;
   box-shadow: none;
   outline: none;
-  border: 1px solid #b4302e;
+  border: 1px solid #AFAFAF;
 }
 
 .scrollview{
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 67vh;
 }
 
@@ -217,7 +248,7 @@ body {
 }
 
 .loading-screen {
-  background: #E95420;
+  background: #c8e399;
   min-height: 100%;
   position: fixed;
   width: 100%;
@@ -279,3 +310,33 @@ body {
   width: 30%;
   text-align: center;
 }
+
+
+.icon {
+  width: 45px;
+  height: 45px;
+  background-color: #dee2e6;
+  border-radius:100%;
+
+}
+
+p {
+  font-size: 20px;
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+.icon_div {
+  display: flex;
+  align-items:center;
+  float:left; /* add this */
+}
+
+.icons_output {
+  margin-left: 10px;
+}
+
+#pdf_div {
+  margin-left: 20px;
+}
+
