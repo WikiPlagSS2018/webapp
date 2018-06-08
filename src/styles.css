@@ -337,6 +337,33 @@ p {
 }
 
 #pdf_div {
-  margin-left: 20px;
+  margin-top:5px;
+  margin-left: 30px;
 }
+
+#new_div {
+  margin-top:5px;
+}
+
+.nav_home {
+  background: url(/assets/Icons/home.png);
+  width:45px;
+  height:45px;
+  line-height:45px;
+  background-color: yellow;
+}
+
+.descr_div {
+  margin-top: 10px;
+  margin-right: 25px;
+  display: flex;
+  align-items:center;
+  float:left; /* add this */
+}
+
+.descr_input {
+  font-size: 15px;
+  margin-right: 6px;
+}
+
 

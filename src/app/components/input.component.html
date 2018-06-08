@@ -8,7 +8,9 @@
                 [ngModelOptions]="{standalone: true}">
 
       </textarea><br/>
-      Beschreibung: <input placeholder="Mein Plagiat" [(ngModel)]="plagName"><br>
+     <div class="descr_div">
+       <p class="descr_input">Beschreibung: </p><input placeholder="Mein Plagiat" [(ngModel)]="plagName"><br>
+     </div>
      <!-- <button id="btn_analyse" class="btn btn-primary" (click)="send()" *ngIf="!loading">Analysieren</button>-->
       <div class="icon_div"> <input class="icon" type="image" src="/assets/Icons/analyse.png" (click)="send()" *ngIf="!loading" > <p>Analysieren </p></div>
       <span *ngIf="loading">Laden ...</span>
@@ -24,8 +26,9 @@
         -->
         <div [innerHTML]="storedPlag.name | slice:0:200"></div>
         <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml " (click)="loadStoredPlagDataWithId(i)"></div>...<hr>
-        <div class="icon_div"> <input class="icon" type="image" src="/assets/Icons/delete.png" id="btn_delete"  (click)="deleteLocalStorage()"><p>Alle löschen </p> </div>
+
       </div>
+      <div class="icon_div"> <input class="icon" type="image" src="/assets/Icons/delete.png" id="btn_delete"  (click)="deleteLocalStorage()"><p>Alle löschen </p> </div>
     </div>
   </div>
 </div>
