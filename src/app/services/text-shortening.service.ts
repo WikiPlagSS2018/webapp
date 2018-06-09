@@ -69,7 +69,12 @@ export class TextShorteningService {
       // Search for rest of normal text, split at startPos position, push to text array and remove from original text
       tagged_input_text = this.removeTextBeforeFirstPlagarism(tagged_input_text, startPosOfPlag);
 
+
       plagElem = plagElem.substring(firstSpacePos, lastSpacePos);
+      const count = plagElem.split('<span').length - 1;
+      if (count >= 2) {
+        plagElem = plagElem.substring(firstSpacePos, plagElem.lastIndexOf('<span'));
+      }
 
       this.shortenedPlagarismText.push({type: 'plag', text: plagElem, active: true});
 
@@ -93,9 +98,12 @@ export class TextShorteningService {
     let textBeforeSpanTag = '';
     if (tagged_input_text.indexOf('<span') !== -1) {
       textBeforeSpanTag = tagged_input_text.substring(0, nextStartTag);
+      if (textBeforeSpanTag.indexOf('<span') !== -1) {
+        textBeforeSpanTag = textBeforeSpanTag.substring(0, textBeforeSpanTag.indexOf('<span') - 5);
+      }
 
       if (textBeforeSpanTag !== '') {
-        // Add last part of text
+          // Add last part of text
         this.shortenedPlagarismText.push({type: 'text', text: textBeforeSpanTag, active: false});
       }
     } else {
