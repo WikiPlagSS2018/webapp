@@ -42,7 +42,7 @@ export class PlagPositionsService {
     /*return this.http.post<PlagResponse>(this.url, JSON.stringify({'text': inputText})).pipe(
       tap((result) => this.data = result)
     );*/
-    return this.http.get<PlagResponse>('assets/mock.json').pipe(
+    return this.http.get<PlagResponse>('assets/mock3.json').pipe(
       tap((result) => this.data = result)
     );
   }
