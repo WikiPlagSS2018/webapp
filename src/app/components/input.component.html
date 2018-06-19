@@ -1,19 +1,29 @@
-<div class="input-container container animated" [ngClass]="myAnimationClasses">
+<div class="body input-container container animated" [ngClass]="myAnimationClasses">
   <div class="row">
     <div class="col-sm-0 col-md-3 col-lg-3">
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-6">
-      <h1>Eingabe</h1>
-      <textarea class="input_textarea" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
+    <div class="textbox col-sm-12 col-md-6 col-lg-6">
+      <div class="textbox_h1_div">
+        <h1 class="textbox_h1">Eingabe</h1>
+      </div>
+
+      <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
                 [ngModelOptions]="{standalone: true}">
 
       </textarea><br/>
-      Beschreibung: <input placeholder="Mein Plagiat" [(ngModel)]="plagName"><br>
-      <button class="btn btn-primary" (click)="send()" *ngIf="!loading">Analysieren</button>
-      <span *ngIf="loading">Laden ...</span>
-      <input type='file' class="btn" accept=".txt" multiple (change)='openFile($event)'>
+      <div class="textbox_footer">
+        <div class="wordcount">
+          <!--<span *ngIf="loading">Laden ...</span>-->
+        </div>
+        <div class="historytag">
+          Beschreibung: <input placeholder="Mein Plagiat" [(ngModel)]="plagName"><br>
+
+        </div>
+      </div>
+
     </div>
-    <div class="col-sm-0 col-md-3 col-lg-3 scrollview" *ngIf="storedRequests != null && storedRequests.length > 0">
+
+    <!--<div class="col-sm-0 col-md-3 col-lg-3 scrollview" *ngIf="storedRequests != null && storedRequests.length > 0">
       <h1>Letzte Anfragen</h1>
       <button class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button>
       <hr>
@@ -24,6 +34,7 @@
         ...
         <hr>
       </div>
-    </div>
+    </div>-->
   </div>
+  <button class="btn btn-primary" (click)="send()" *ngIf="!loading">Analysieren</button>
 </div>
