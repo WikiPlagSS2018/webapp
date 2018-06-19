@@ -7,16 +7,16 @@
         <h1 class="textbox_h1">Eingabe</h1>
       </div>
 
-      <textarea class="textbox_textarea animated" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
+      <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
                 [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
 
       </textarea>
       <div class="animated textboxViewHistory" (click)="toggleHistory()" [ngClass]="viewHistory">View history</div>
-      <div class="textbox_footer">
-        <div class="wordcount">
-          <!--<span *ngIf="loading">Laden ...</span>-->
+      <div class="textbox_footer_container">
+        <div class="wordcount_div">
+          324 Wörter<!--<span *ngIf="loading">Laden ...</span>-->
         </div>
-        <div class="historytag">
+        <div class="historytag history_div">
           Beschreibung: <input placeholder="Mein Plagiat" [(ngModel)]="plagName"><br>
 
         </div>
