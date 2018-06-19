@@ -32,6 +32,20 @@ export class InputComponent {
     bounceOutRight: false
   };
 
+  textarea = {
+    textareaNormal: true,
+    displayNone: false
+  };
+
+  textarea = {
+    textareaNormal: true,
+    displayNone: false
+  };
+
+  viewHistory = {
+    viewHistoryExpanded: false
+  }
+
   minimumTextLength = 100;
   loading = false;
 
@@ -107,6 +121,17 @@ export class InputComponent {
       this.applyAnimationClasses();
       setTimeout(() => this.router.navigate(['/output']), 500);
     });
+  }
+
+  toggleHistory() {
+    this.textarea = {
+      textareaNormal: !this.textarea.textareaNormal,
+      displayNone: !this.textarea.displayNone
+    };
+
+    this.viewHistory = {
+      viewHistoryExpanded: !this.viewHistory.viewHistoryExpanded
+    };
   }
 
   /**

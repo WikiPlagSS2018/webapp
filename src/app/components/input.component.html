@@ -7,10 +7,11 @@
         <h1 class="textbox_h1">Eingabe</h1>
       </div>
 
-      <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
-                [ngModelOptions]="{standalone: true}">
+      <textarea class="textbox_textarea animated" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
+                [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
 
-      </textarea><br/>
+      </textarea>
+      <div class="animated textboxViewHistory" (click)="toggleHistory()" [ngClass]="viewHistory">View history</div>
       <div class="textbox_footer">
         <div class="wordcount">
           <!--<span *ngIf="loading">Laden ...</span>-->
