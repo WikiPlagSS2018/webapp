@@ -11,7 +11,21 @@
                 [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
 
       </textarea>
-      <div class="animated textboxViewHistory" (click)="toggleHistory()" [ngClass]="viewHistory">View history</div>
+      <div class="animated textboxViewHistory" (click)="toggleHistory()" [ngClass]="viewHistory">
+        View history
+        <div [ngClass]="historyHidden">
+          <h1>Letzte Anfragen</h1>
+          <button class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button>
+          <hr>
+          <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
+            <div [innerHTML]="storedPlag.name | slice:0:200"></div>
+            <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml "
+                 (click)="loadStoredPlagDataWithId(i)"></div>
+            ...
+            <hr>
+          </div>
+        </div>
+      </div>
       <div class="textbox_footer_container">
         <div class="wordcount_div">
           324 Wörter<!--<span *ngIf="loading">Laden ...</span>-->

@@ -39,8 +39,11 @@ export class InputComponent {
 
   viewHistory = {
     viewHistoryExpanded: false
-  }
+  };
 
+  historyHidden = {
+    historyHidden: true
+  }
   minimumTextLength = 100;
   loading = false;
 
@@ -126,6 +129,10 @@ export class InputComponent {
 
     this.viewHistory = {
       viewHistoryExpanded: !this.viewHistory.viewHistoryExpanded
+    };
+
+    this.historyHidden = {
+      historyHidden: !this.historyHidden.historyHidden
     };
   }
 

@@ -1,7 +1,49 @@
 <div class="animated bounceInLeft">
-  <h1>Ergebnis</h1>
   <div class="tbl_div">
     <div class="row">
+      <div class="col-sm-0 col-md-1 col-lg-1">
+      </div>
+      <div class="output-textbox col-sm-12 col-md-6 col-lg-6">
+        <div class="textbox_h1_div">
+          <h1 class="textbox_h1">Eingabetext</h1>
+        </div>
+        <div class="input_textbox" [innerHTML]="tagged_input_text | safeHtml" *ngIf="!shortened_text"></div>
+        <div id="splitted-text" class="output_shortened_text" *ngIf="shortened_text">
+          <br>
+          <div *ngFor="let plag of textPieces; let i=index" id="{{i}}">
+            <div [ngSwitch]="plag.active">
+              <div class="row">
+                <div class="col-sm-1 col-md-1 col-lg-1">
+                  <button class="btn-secondary btn" *ngIf="plag.type === 'text' && plag.active"
+                          (click)="changeViewState(i)"><i class="fas fa-caret-down"></i></button>
+                  <button class="btn-secondary btn" *ngIf="plag.type === 'text' && !plag.active"
+                          (click)="changeViewState(i)"><i class="fas fa-caret-right"></i></button>
+                </div>
+                <div class="col-sm-11 col-md-11 col-lg-11">
+                  <div [innerHTML]="plag.text | safeHtml" *ngIf="plag.active"></div>
+                  <div class="badge badge-info pointer-cursor" *ngIf="plag.type === 'text' && !plag.active"
+                       (click)="changeViewState(i)"> ...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="output-textbox col-sm-12 col-md-4 col-lg-4">
+        <div class="textbox_h1_div">
+          <h1 class="textbox_h1">Plagiate</h1>
+        </div>
+        <div class="alert alert-dismissible alert-info article_box" style="text-align: center;"
+             *ngFor="let plag of articleListOfSelectedPlag; let i=index" id="{{i}}">
+          {{plag.title}}
+        </div>
+        <div *ngIf="textOfSelectedArticle" class="alert alert-dismissible alert-info excerpt_textbox"
+             [innerHTML]="textOfSelectedArticle"></div>
+
+      </div>
+      <!--
       <div class="col-sm-12 col-md-6 col-lg-6">
         Eingabetext&nbsp;<span class="info">i<span
         class="tooltiptext">Eingabetext mit rot markierten Plagiatsstellen</span></span><br>
@@ -52,7 +94,7 @@
             Bitte einen Artikel anklicken.
           </div>
         </div>
-      </div>
+      </div>-->
 
     </div>
 
