@@ -37,11 +37,6 @@ export class InputComponent {
     displayNone: false
   };
 
-  textarea = {
-    textareaNormal: true,
-    displayNone: false
-  };
-
   viewHistory = {
     viewHistoryExpanded: false
   }
