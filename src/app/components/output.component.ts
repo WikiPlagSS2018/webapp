@@ -165,11 +165,17 @@ export class OutputComponent {
   onClick(event: any) {
     if (event.target.classList.contains('input_plag')) {
       this.clickedOnPlagiarism(event);
-    } else if (event.target.classList.contains('article_box')) {
+    }
+    /*else if (event.target.classList.contains('article_box')) {
       this.clickedOnArticle(event);
     } else if (event.target.classList.contains('wiki_plag')) {
       this.clickedOnWikipediaArticle(event);
-    }
+    }*/
+  }
+
+  showPlagOnWikipedia(id: any) {
+    this.articleUrl = 'https://de.wikipedia.org/?curid=' + id;
+    window.open(this.articleUrl);
   }
 
   /**
@@ -224,7 +230,7 @@ export class OutputComponent {
     // disables highlighting
     if (this.prevSelPlag) {
       this.prevSelPlag.style.boxShadow = 'none';
-      this.prevSelPlag.style.backgroundColor = '#b4302e';
+      this.prevSelPlag.style.backgroundColor = 'rgba(255, 192, 0, 0.36)';
     }
 
     // highlighting

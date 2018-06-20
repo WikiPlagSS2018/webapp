@@ -120,7 +120,76 @@ a:hover, a:visited, a:link, a:active .nav-index-link{
   display: none;
 }
 
+.output-textbox-content{
+  height: 50vh;
+  overflow-y: scroll;
+  padding: 1%;
+}
 
+.output-plagbox:hover{
+  background-color: rgba(145, 226, 3, 0.15);
+}
+
+.output-plagbox{
+
+  cursor: pointer;
+}
+
+.button{
+  /* Style for "Rectangle" */
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+.button-primary{
+  background-color: #ff5f00;
+  color: white;
+}
+
+.button-primary:hover{
+  background-color: #ff5503;
+}
+
+.button-secondary{
+  background-color: #00adff;
+  color: white;
+}
+
+.button-secondary:hover{
+  background-color: #0d9cff;
+}
+
+.buttons-output-component{
+  position: absolute;
+  right: 0%;
+  padding-top: 2%;
+  right: 2%;
+}
+
+.row-correction{
+  margin-right: 0;
+  margin-left: 0;
+}
+
+
+.input_plag{
+  background: rgba(255, 192, 0, 0.36);
+}
 .textbox {
   padding: 0;
   margin-top: -10%;
@@ -142,7 +211,7 @@ a:hover, a:visited, a:link, a:active .nav-index-link{
 
 
 .textbox_h1_div {
-  height: 7%;
+  /*height: 7%;*/
   border-radius: 10px 10px 0 0;
   background-color: rgba(9, 9, 9, 0.73);
 
