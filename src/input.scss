@@ -3,9 +3,10 @@
   margin-top: -10%;
   width: 37%;
   height: 671px;
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  background-color: #ffffff;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.15);
+  left: 15%;
+  right: 15%;
 }
 
 .historyHidden{
@@ -19,18 +20,19 @@
 
 .textboxViewHistory{
   width: 100%;
-  height: 4%;
+  height: 3%;
   text-align: center;
-  background-color: rgba(216, 216, 216, 0.51);
+  background-color: white;
+
 }
 
 .viewHistoryExpanded{
-  height: 84%;
+  height: 82%;
 }
 
 .textbox_textarea {
   width: 100%;
-  height: 80%;
+  height: 83.3%;
   color: #000000;
   font-family: "Avenir Next - Regular";
   font-size: 14px;
@@ -39,25 +41,67 @@
   border: 0;
 }
 
-.textbox_footer {
-  .textbox_footer_container {
+.textbox_h1_div {
+  /*height: 7%;*/
+  border-radius: 10px 10px 0 0;
+  background-color: rgba(9, 9, 9, 0.73);
+
+}
+
+.textbox_h1 {
+  width: 100%;
+  display: inline-block;
+  line-height:normal;
+  height: 100%;
+  color: #ffffff;
+  font-family: "Avenir Next";
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: baseline;
+}
+
+.textbox_footer_container {
     /* Style for "Rectangle" */
-    width: 100%;
-    height: 8%;
-    background-color: rgba(216, 216, 216, 0.51);
+  width: 100%;
+  height: 6%;
+  background-color: rgba(216, 216, 216, 0.51);
+  align-content: center;
   }
 
-  .wordcount_div {
+.wordcount_div {
     width: 35%;
     height: 100%;
     float: left;
+    line-height: 40px;
   }
 
-  .history_div {
+.history_div {
     height: 100%;
     width: 65%;
     float: left;
     border-left: 1px solid rgba(151, 151, 151, 0.19);
-  }
+    line-height: 40px;
+
+}
+
+.textbox_footer_image {
+  vertical-align: middle;
+  margin-left: 40px;
+  margin-right: 12px;
+}
+
+.label_input {
+  font-family: "Avenir Next - Regular";
+  color: dimgrey;
+  width: 50%;
+  margin-left: 10px;
+}
+
+.button_container {
+  align-self: right;
+  position: absolute;
+  padding-top: 2%;
+  right: 1%;
 }
 

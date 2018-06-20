@@ -1,8 +1,6 @@
 <div class="body input-container container animated" [ngClass]="myAnimationClasses">
   <div class="row">
-    <div class="col-sm-0 col-md-3 col-lg-3">
-    </div>
-    <div class="textbox col-sm-12 col-md-6 col-lg-6">
+    <div class="textbox col-sm-12 col-md-9 col-lg-9">
       <div class="textbox_h1_div">
         <h1 class="textbox_h1">Eingabe</h1>
       </div>
@@ -28,12 +26,15 @@
       </div>
       <div class="textbox_footer_container">
         <div class="wordcount_div">
-          324 Wörter<!--<span *ngIf="loading">Laden ...</span>-->
+          <img class="textbox_footer_image" src="../../assets/wordcount.svg">  324 Wörter<!--<span *ngIf="loading">Laden ...</span>-->
         </div>
         <div class="historytag history_div">
-          Beschreibung: <input placeholder="Mein Plagiat" [(ngModel)]="plagName"><br>
+          <img class="textbox_footer_image" src="../../assets/label.svg"> <input class="form-control label_input" placeholder="deine Bezeichnung" [(ngModel)]="plagName"><br>
 
         </div>
+      </div>
+      <div class="button_container">
+        <button id="analyseButton" class="button button-primary" (click)="send()" *ngIf="!loading">Analysieren</button>
       </div>
 
     </div>
@@ -51,5 +52,5 @@
       </div>
     </div>-->
   </div>
-  <button class="btn btn-primary" (click)="send()" *ngIf="!loading">Analysieren</button>
+
 </div>
