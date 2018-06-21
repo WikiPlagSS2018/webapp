@@ -1,14 +1,18 @@
 .textbox {
   padding: 0;
-  margin-top: -10%;
-  width: 37%;
   height: 671px;
   border-radius: 10px;
   box-shadow: 0 0 18px rgba(0, 0, 0, 0.15);
-  left: 15%;
-  right: 15%;
+  margin: auto;
+  margin-top: -10%;
 }
 
+@media only screen and (max-width: 960px) {
+
+  .textbox {
+    margin: auto;
+  }
+}
 .historyHidden{
   display: none;
 }
@@ -39,6 +43,7 @@
   font-weight: 400;
   line-height: 20px;
   border: 0;
+  min-width: 250px;
 }
 
 .textbox_h1_div {
@@ -67,7 +72,9 @@
   height: 6%;
   background-color: rgba(216, 216, 216, 0.51);
   align-content: center;
+  min-width: 250px;
   }
+
 
 .wordcount_div {
     width: 35%;
@@ -85,23 +92,45 @@
 
 }
 
+
+
+
 .textbox_footer_image {
   vertical-align: middle;
-  margin-left: 40px;
-  margin-right: 12px;
+  margin-left: 15%;
+  right: 15%;
 }
+
+
+
 
 .label_input {
   font-family: "Avenir Next - Regular";
   color: dimgrey;
   width: 50%;
-  margin-left: 10px;
+  margin-left: 5%;
 }
 
+
 .button_container {
-  align-self: right;
   position: absolute;
   padding-top: 2%;
   right: 1%;
 }
 
+@media only screen and (max-width: 960px) {
+  .wordcount_div {
+    width: 40%;
+  }
+
+  .history_div {
+    width: 60%;
+  }
+
+  .textbox_footer_image {
+  }
+
+  .label_input {
+    width: 65%;
+  }
+}
