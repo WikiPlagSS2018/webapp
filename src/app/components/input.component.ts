@@ -34,11 +34,13 @@ export class InputComponent {
 
   textarea = {
     textareaNormal: true,
+    showTextarea: true,
     displayNone: false
   };
 
   viewHistory = {
-    viewHistoryExpanded: false
+    viewHistoryExpanded: false,
+    minimizeHistory: true
   };
 
   historyHidden = {
@@ -124,11 +126,13 @@ export class InputComponent {
   toggleHistory() {
     this.textarea = {
       textareaNormal: !this.textarea.textareaNormal,
+      showTextarea: !this.textarea.showTextarea,
       displayNone: !this.textarea.displayNone
     };
 
     this.viewHistory = {
-      viewHistoryExpanded: !this.viewHistory.viewHistoryExpanded
+      viewHistoryExpanded: !this.viewHistory.viewHistoryExpanded,
+      minimizeHistory:  !this.viewHistory.minimizeHistory
     };
 
     this.historyHidden = {
