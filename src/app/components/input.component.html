@@ -26,7 +26,7 @@
       </div>
       <div class="textbox_footer_container">
         <div class="wordcount_div">
-          <img class="textbox_footer_image" src="../../assets/wordcount.svg">  324 Wörter<!--<span *ngIf="loading">Laden ...</span>-->
+          <img class="textbox_footer_image" src="../../assets/wordcount.svg">  {{inputText.split(" ").length}} Wörter <!--<span *ngIf="loading">Laden ...</span>-->
         </div>
         <div class="historytag history_div">
           <img class="textbox_footer_image" src="../../assets/label.svg"> <input class="form-control label_input" placeholder="deine Bezeichnung" [(ngModel)]="plagName"><br>
