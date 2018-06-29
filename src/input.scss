@@ -27,8 +27,16 @@
   margin-top: -4px;
   border-top: 1px solid black;
   overflow-y: scroll;
+  font-family: "Avenir Next";
 }
 
+.historyRotateViewHistoryIcon{
+  transform: rotate(180deg);
+}
+
+.icon-view-history{
+  cursor: pointer;
+}
 
 
 .textbox_textarea {

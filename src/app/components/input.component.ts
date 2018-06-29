@@ -15,19 +15,10 @@ import { PlagResponse } from '../models/responses/plag-response';
   templateUrl: './input.component.html'
 })
 export class InputComponent {
-  private inputText = 'Die Verwendung dieses oder eines anderen Pseudonyms ist für Mitglieder der DGA streng ' +
-    'reglementiert. Ein Regisseur, der für einen von ihm gedrehten Film seinen Namen nicht hergeben möchte,' +
-    ' hat nach Sichtung des fertigen Films drei Tage Zeit, anzuzeigen, dass er ein Pseudonym verwenden möchte. ' +
-    'Der Rat der DGA entscheidet binnen zwei Tagen über das Anliegen. Erhebt die Produktionsfirma Einspruch, ' +
-    'entscheidet ein Komitee aus Mitgliedern der DGA und der Vereinigung der Film- und Fernsehproduzenten, ob der ' +
-    'Regisseur ein Pseudonym angeben darf. Über die Beantragung muss der Regisseur Stillschweigen halten, ebenso darf ' +
-    'er den fertigen Film nicht öffentlich kritisieren, wenn die DGA ihm die Verwendung eines Pseudonyms zugesteht. ' +
-    'Ein Antrag des Regisseurs auf Pseudonymisierung kann abgelehnt werden, so durfte Tony Kaye den Namen Smithee ' +
-    'bei dem Film American History X nicht einsetzen, obwohl er den Antrag stellte.';
+
+  private inputText = '';
 
   private plagName = 'Mein Text';
-
-  historyToggleText = 'Verlauf anzeigen';
 
   private storedRequests: PlagResponse[];
   myAnimationClasses = {
@@ -49,6 +40,10 @@ export class InputComponent {
   historyHidden = {
     historyHidden: true
   };
+
+  historyRotateViewHistoryIcon = {
+    historyRotateViewHistoryIcon:  false
+  }
   minimumTextLength = 100;
   loading = false;
 
@@ -141,11 +136,9 @@ export class InputComponent {
       historyHidden: !this.historyHidden.historyHidden
     };
 
-    if (this.historyToggleText === 'Verlauf anzeigen') {
-      this.historyToggleText = 'Verlauf verbergen';
-    } else {
-      this.historyToggleText = 'Verlauf anzeigen';
-    }
+    this.historyRotateViewHistoryIcon = {
+      historyRotateViewHistoryIcon: !this.historyRotateViewHistoryIcon.historyRotateViewHistoryIcon
+    };
   }
 
   /**

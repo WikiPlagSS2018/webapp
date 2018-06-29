@@ -28,6 +28,14 @@ Global used styles for buttons and other elements ...
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
+.small-icon{
+  height: 2vh;
+}
+
+.white-icon path{
+  fill: white;
+}
+
 .button-primary{
   background-color: #ff5f00;
   color: white;

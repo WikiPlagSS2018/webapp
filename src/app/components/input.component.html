@@ -10,27 +10,42 @@
 
       </textarea>
 
-      <div class="animated textboxViewHistory" (click)="toggleHistory()" [ngClass]="viewHistory">
-        <div>{{historyToggleText}}</div>
+      <div class="animated textboxViewHistory" [ngClass]="viewHistory">
+        <img class="icon-view-history small-icon" [ngClass]="historyRotateViewHistoryIcon" (click)="toggleHistory()"
+             src="../../assets/up.svg">
         <div [ngClass]="historyHidden">
-          <h1>Letzte Anfragen</h1>
-          <button class="button button-primary" (click)="deleteLocalStorage()">Alle löschen</button>
           <hr>
-          <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
-            <div [innerHTML]="storedPlag.name | slice:0:200"></div>
-            <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml "
-                 (click)="loadStoredPlagDataWithId(i)"></div>
-            ...
+          <div *ngIf="storedRequests != null && storedRequests.length != 0">
+            <h1>Letzte Anfragen</h1>
+            <button class="button button-primary" (click)="deleteLocalStorage()">
+              <img class="small-icon white-icon" src="../../assets/rubbish.svg">
+              Alle löschen
+            </button>
             <hr>
+            <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
+              <div [innerHTML]="storedPlag.name | slice:0:200"></div>
+              <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml "
+                   (click)="loadStoredPlagDataWithId(i)"></div>
+              ...
+              <hr>
+            </div>
           </div>
+          <div *ngIf="storedRequests == null || storedRequests.length == 0;">
+            Keine ehemaligen Suchergebnisse vorhanden
+          </div>
+
+
         </div>
       </div>
       <div class="textbox_footer_container">
         <div class="wordcount_div">
-          <img class="textbox_footer_image" src="../../assets/wordcount.svg">  {{inputText.split(" ").length}} Wörter <!--<span *ngIf="loading">Laden ...</span>-->
+          <img class="textbox_footer_image" src="../../assets/wordcount.svg"> {{inputText.split(" ").length}} Wörter
+          <!--<span *ngIf="loading">Laden ...</span>-->
         </div>
         <div class="historytag history_div">
-          <img class="textbox_footer_image" src="../../assets/label.svg"> <input class="form-control label_input" placeholder="deine Bezeichnung" [(ngModel)]="plagName"><br>
+          <img class="textbox_footer_image" src="../../assets/label.svg"> <input class="form-control label_input"
+                                                                                 placeholder="deine Bezeichnung"
+                                                                                 [(ngModel)]="plagName"><br>
 
         </div>
       </div>
@@ -39,19 +54,6 @@
       </div>
 
     </div>
-
-    <!--<div class="col-sm-0 col-md-3 col-lg-3 scrollview" *ngIf="storedRequests != null && storedRequests.length > 0">
-      <h1>Letzte Anfragen</h1>
-      <button class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button>
-      <hr>
-      <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
-        <div [innerHTML]="storedPlag.name | slice:0:200"></div>
-        <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml "
-             (click)="loadStoredPlagDataWithId(i)"></div>
-        ...
-        <hr>
-      </div>
-    </div>-->
   </div>
 
 </div>
