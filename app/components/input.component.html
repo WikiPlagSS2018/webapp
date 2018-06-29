@@ -1,6 +1,0 @@
-<h1>Eingabe</h1>
-<div>
-  <textarea class="input_textarea" [(ngModel)]="inputText" placeholder="Text hier einfügen" [ngModelOptions]="{standalone: true}"></textarea><br />
-  <button [disabled]="buttonDisabled" (click)="send()" >Analysieren</button>
-  <input type='file' accept=".txt" multiple (change)='openFile($event)'>
-</div>

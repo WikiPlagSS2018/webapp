@@ -1,22 +1,27 @@
-# wikiplag new_webapp
-Based on old WikiPlag Webapp by GitHub users Jörg Holger and krie
+# WikiplagFrontend
 
-Developed With TypeScript and Angular JS 2
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
-Recieves user input text and displays plagiarisms detected by the WikiPlag cluster.
-Marks plagiarism excerpts in initial input text and provides links to the WikiPedia articles that have been plagiarized.
+## Development server
 
-### Requires:
-- Node.js (https://nodejs.org/en/download/ LTS Version)
-- npm (installed automatically with Node.js)
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Code scaffolding
 
-### Install and run locally via console:
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-1. git clone https://github.com/WikiplagWS17/webapp.git
-2. cd webapp
-3. npm install
-4. npm start
+## Build
 
-21-10-2017 Tested on Windows 10 with Node.js version 6.11.4
-07-02-2018 Tested on Windows 10 with Node.js version 8.9.1
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
