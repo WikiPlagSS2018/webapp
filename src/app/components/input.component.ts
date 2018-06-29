@@ -110,10 +110,10 @@ export class InputComponent {
       (<PlagResponse>result).created_at = Date.now();
 
       this.localStorageManager.saveResponseToLocalStorage(this.inputText.toString(), JSON.stringify(result));
-      console.log('Request is sent to server / mock file is loading ...');
+      // console.log('Request is sent to server / mock file is loading ...');
       // set the data to the result
       this.loading = false;
-      console.log('sent to output component');
+      // console.log('sent to output component');
       // Wait before switching to other component to make a smooth fadeout animation
       this.applyAnimationClasses();
       setTimeout(() => this.router.navigate(['/output']), 500);
@@ -145,9 +145,9 @@ export class InputComponent {
    * Load a already performed request from local storage with a given input text
    */
   loadResponseFromLocalStorage() {
-    console.log('Loading data from local storage');
+    // console.log('Loading data from local storage');
     this.plagPositionsService.data = <PlagResponse>JSON.parse(this.localStorageManager.getResponseFromLocalStorage(this.inputText));
-    console.log('sent to output component');
+    // console.log('sent to output component');
     // Wait before switching to other component to make a smooth fadeout animation
     this.applyAnimationClasses();
     setTimeout(() => this.router.navigate(['/output']), 500);
@@ -158,9 +158,9 @@ export class InputComponent {
    * @param {number} id the id of the plagiarism
    */
   loadStoredPlagDataWithId(id: number) {
-    console.log('Loading data from local storage');
+    // console.log('Loading data from local storage');
     this.plagPositionsService.data = this.storedRequests[id];
-    console.log('sent to output component');
+    // console.log('sent to output component');
     // Wait before switching to other component to make a smooth fadeout animation
     this.applyAnimationClasses();
     setTimeout(() => this.router.navigate(['/output']), 500);
