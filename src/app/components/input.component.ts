@@ -24,7 +24,10 @@ export class InputComponent {
     'er den fertigen Film nicht öffentlich kritisieren, wenn die DGA ihm die Verwendung eines Pseudonyms zugesteht. ' +
     'Ein Antrag des Regisseurs auf Pseudonymisierung kann abgelehnt werden, so durfte Tony Kaye den Namen Smithee ' +
     'bei dem Film American History X nicht einsetzen, obwohl er den Antrag stellte.';
+
   private plagName = 'Mein Text';
+
+  historyToggleText = 'Verlauf anzeigen';
 
   private storedRequests: PlagResponse[];
   myAnimationClasses = {
@@ -45,7 +48,7 @@ export class InputComponent {
 
   historyHidden = {
     historyHidden: true
-  }
+  };
   minimumTextLength = 100;
   loading = false;
 
@@ -138,6 +141,12 @@ export class InputComponent {
     this.historyHidden = {
       historyHidden: !this.historyHidden.historyHidden
     };
+
+    if (this.historyToggleText === 'Verlauf anzeigen') {
+      this.historyToggleText = 'Verlauf verbergen';
+    } else {
+      this.historyToggleText = 'Verlauf anzeigen';
+    }
   }
 
   /**

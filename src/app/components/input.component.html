@@ -9,8 +9,9 @@
                 [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
 
       </textarea>
+
       <div class="animated textboxViewHistory" (click)="toggleHistory()" [ngClass]="viewHistory">
-        View history
+        <div>{{historyToggleText}}</div>
         <div [ngClass]="historyHidden">
           <h1>Letzte Anfragen</h1>
           <button class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button>
