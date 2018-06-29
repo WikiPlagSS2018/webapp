@@ -1,26 +1,25 @@
 .textbox {
   padding: 0;
-  height: 65vh;
+  height: 75vh;
   border-radius: 10px;
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.15);
+  margin: 10px;
   margin: auto;
   margin-top: -10%;
+  margin-bottom: 200px;
 }
 
 @media only screen and (max-width: 960px) {
-
   .textbox {
     margin: auto;
     margin-top: 2%;
-
   }
 }
-.historyHidden{
+.historyHidden {
   display: none;
   background-color: rgba(216, 216, 216, 0.51);
 }
 
-.textboxViewHistory{
+.textboxViewHistory {
   width: 100%;
   text-align: center;
   background-color: white;
@@ -30,14 +29,14 @@
   font-family: "Avenir Next";
 }
 
-.historyRotateViewHistoryIcon{
+.historyRotateViewHistoryIcon {
   transform: rotate(180deg);
 }
 
-.icon-view-history{
+.icon-view-history {
+  padding-top: 7px;
   cursor: pointer;
 }
-
 
 .textbox_textarea {
   width: 100%;
@@ -46,21 +45,29 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+  padding: 15px;
   border: 0;
   margin: 0;
+
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .textbox_h1_div {
   height: 7%;
   border-radius: 10px 10px 0 0;
   background-color: rgba(9, 9, 9, 0.73);
-
 }
 
 .textbox_h1 {
   width: 100%;
   display: inline-block;
-  line-height:normal;
+  line-height: normal;
   color: #ffffff;
   font-family: "Avenir Next";
   font-size: 20px;
@@ -70,40 +77,38 @@
 }
 
 .textbox_footer_container {
-    /* Style for "Rectangle" */
   width: 100%;
-  height: 6%;
+  height: 60px;
   background-color: rgba(216, 216, 216, 0.51);
-  align-content: center;
-  min-width: 250px;
-  }
-
-
-.wordcount_div {
-    width: 35%;
-    float: left;
-    line-height: 40px;
-  }
-
-.history_div {
-    float: left;
-    border-left: 1px solid rgba(151, 151, 151, 0.19);
-    line-height: 40px;
-    width: 65%
-
+  display: inline-flex;
+  align-items: center;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
 }
 
+.wordcount_div {
+  width: 35%;
+  & span {
+    margin-left: 25px;
+    font-weight: 800;
+  }
+}
 
+.history_div {
+  border-left: 1px solid rgba(151, 151, 151, 0.19);
+  width: 65%;
 
+  & input {
+    padding: 7.5px;
+    border: none;
+    border-radius: 0.3em;
+  }
+}
 
 .textbox_footer_image {
   vertical-align: middle;
   margin-left: 10px;
-  right: 15%;
 }
-
-
-
 
 .label_input {
   font-family: "Avenir Next - Regular";
@@ -111,7 +116,6 @@
   width: 50%;
   margin-left: 10px;
 }
-
 
 .button_container {
   position: absolute;
@@ -137,7 +141,7 @@
   animation: viewHistory 0.3s ease-out forwards;
 }
 
-.displayNone{
+.displayNone {
   animation: hideTextarea 0.3s ease-out forwards;
 }
 
@@ -145,7 +149,7 @@
   animation: minHistory 0.3s ease-out forwards;
 }
 
-.showTextarea{
+.showTextarea {
   animation: showTextarea 0.3s ease-out forwards;
 }
 
@@ -156,11 +160,9 @@
   }
 
   to {
-    height: 4%;
+    height: 0%;
   }
 }
-
-
 
 @keyframes minHistory {
   from {
@@ -183,8 +185,6 @@
   }
 }
 
-
-
 @keyframes viewHistory {
   from {
     height: 4%;
@@ -194,4 +194,3 @@
     height: 83%;
   }
 }
-
