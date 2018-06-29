@@ -43,7 +43,7 @@ export class InputComponent {
 
   historyRotateViewHistoryIcon = {
     historyRotateViewHistoryIcon:  false
-  }
+  };
   minimumTextLength = 100;
   loading = false;
 
