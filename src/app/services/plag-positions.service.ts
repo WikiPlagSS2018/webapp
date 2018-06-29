@@ -10,8 +10,8 @@ import { PlagResponse } from '../models/responses/plag-response';
 export class PlagPositionsService {
 
   // post url cluster or localhost connection
-  url = 'http://localhost:8080/wikiplag/rest/analyse';
-  // url:string = 'http://wikiplag.f4.htw-berlin.de:8080/wikiplag/rest/analyse';
+  // url = 'http://localhost:8080/wikiplag/rest/analyse';
+  url = 'http://wikiplag.f4.htw-berlin.de:8080/wikiplag/rest/analyse';
 
   // data
   data: PlagResponse;
@@ -39,11 +39,11 @@ export class PlagPositionsService {
    * @returns {Observable<Object>}
    */
   checkForPlag(inputText: string) {
-    /*return this.http.post<PlagResponse>(this.url, JSON.stringify({'text': inputText})).pipe(
-      tap((result) => this.data = result)
-    );*/
-    return this.http.get<PlagResponse>('assets/mock3.json').pipe(
+    return this.http.post<PlagResponse>(this.url, JSON.stringify({'text': inputText})).pipe(
       tap((result) => this.data = result)
     );
+    /*return this.http.get<PlagResponse>('assets/mock3.json').pipe(
+      tap((result) => this.data = result)
+    );*/
   }
 }

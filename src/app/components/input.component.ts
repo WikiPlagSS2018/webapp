@@ -110,7 +110,6 @@ export class InputComponent {
     // post these json file to server
     this.loading = true;
     this.plagPositionsService.checkForPlag(this.inputText).subscribe(result => {
-
       // Apply plagiarism name and actual date to response object
       (<PlagResponse>result).name = this.plagName;
       (<PlagResponse>result).created_at = Date.now();
