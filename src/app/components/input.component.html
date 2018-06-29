@@ -14,7 +14,7 @@
         <div>{{historyToggleText}}</div>
         <div [ngClass]="historyHidden">
           <h1>Letzte Anfragen</h1>
-          <button class="btn btn-secondary" (click)="deleteLocalStorage()">Alle löschen</button>
+          <button class="button button-primary" (click)="deleteLocalStorage()">Alle löschen</button>
           <hr>
           <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
             <div [innerHTML]="storedPlag.name | slice:0:200"></div>

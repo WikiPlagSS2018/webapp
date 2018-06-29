@@ -15,9 +15,9 @@
               <div [ngSwitch]="plag.active">
                 <div class="row">
                   <div class="col-sm-1 col-md-1 col-lg-1">
-                    <button class="btn-secondary btn" *ngIf="plag.type === 'text' && plag.active"
+                    <button class="button button-secondary" *ngIf="plag.type === 'text' && plag.active"
                             (click)="changeViewState(i)"><i class="fas fa-caret-down"></i></button>
-                    <button class="btn-secondary btn" *ngIf="plag.type === 'text' && !plag.active"
+                    <button class="button button-secondary" *ngIf="plag.type === 'text' && !plag.active"
                             (click)="changeViewState(i)"><i class="fas fa-caret-right"></i></button>
                   </div>
                   <div class="col-sm-11 col-md-11 col-lg-11">
