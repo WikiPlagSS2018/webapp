@@ -17,8 +17,9 @@ import { PlagResponse } from '../models/responses/plag-response';
 export class InputComponent {
 
   private inputText = '';
-
-  private plagName = 'Mein Text';
+  private wordCount;
+  private plagName = 'Meine Beschreibung';
+  private wordString;
 
   private storedRequests: PlagResponse[];
   myAnimationClasses = {
@@ -46,6 +47,7 @@ export class InputComponent {
   };
   minimumTextLength = 100;
   loading = false;
+  WCController: any;
 
   constructor(private plagPositionsService: PlagPositionsService,
               private alertService: AlertService,
@@ -119,7 +121,6 @@ export class InputComponent {
       setTimeout(() => this.router.navigate(['/output']), 500);
     });
   }
-
   toggleHistory() {
     this.textarea = {
       textareaNormal: !this.textarea.textareaNormal,
@@ -140,7 +141,6 @@ export class InputComponent {
       historyRotateViewHistoryIcon: !this.historyRotateViewHistoryIcon.historyRotateViewHistoryIcon
     };
   }
-
   /**
    * Load a already performed request from local storage with a given input text
    */
@@ -192,6 +192,19 @@ export class InputComponent {
 
       reader.readAsBinaryString(input.files[index]);
 
+    }
+  }
+  /**
+   * called when input of textarea changes
+   * counts words of input
+   */
+  countWords() {
+    this.wordCount = this.inputText.split(/\s+/); // it splits the text on space/tab/enter
+    this.wordCount = (this.wordCount ? this.wordCount.length : '') - 1;
+    if (this.wordCount === 1) {
+      this.wordString = 'Wort';
+    } else {
+      this.wordString = 'Wörter';
     }
   }
 }

@@ -1,3 +1,6 @@
+
+
+
 <div class="body input-container container animated" [ngClass]="myAnimationClasses">
   <div class="row row-correction">
     <div class="textbox col-sm-12 col-md-6 col-lg-6">
@@ -5,7 +8,7 @@
         <h1 class="textbox_h1">Eingabe</h1>
       </div>
 
-      <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" placeholder="Text hier einfügen"
+      <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" (keyup)="countWords(inputText)"  placeholder="Text hier einfügen"
                 [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
 
       </textarea>
@@ -38,8 +41,9 @@
         </div>
       </div>
       <div class="textbox_footer_container">
-        <div class="wordcount_div">
-          <img class="textbox_footer_image" src="../../assets/wordcount.svg"> {{inputText.split(" ").length}} Wörter
+        <div class="wordcount_div" >
+
+          <img class="textbox_footer_image" src="../../assets/wordcount.svg"> {{wordCount}} {{wordString}}
           <!--<span *ngIf="loading">Laden ...</span>-->
         </div>
         <div class="historytag history_div">
@@ -57,3 +61,4 @@
   </div>
 
 </div>
+
