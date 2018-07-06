@@ -1,24 +1,22 @@
-import { Component } from '@angular/core';
-import { PlagPositionsService } from '../services/plag-positions.service';
-import { AlertService } from '../services/alert.service';
-import { Router } from '@angular/router';
-import { LocalStorageManagerService } from '../services/local-storage-manager.service';
-import { PlagResponse } from '../models/responses/plag-response';
-
+import { Component } from "@angular/core";
+import { PlagPositionsService } from "../services/plag-positions.service";
+import { AlertService } from "../services/alert.service";
+import { Router } from "@angular/router";
+import { LocalStorageManagerService } from "../services/local-storage-manager.service";
+import { PlagResponse } from "../models/responses/plag-response";
 
 /**
  * Transmits inputText to PlagPositionsService
  * Capable of reading from .txt files
  */
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html'
+  selector: "app-input",
+  templateUrl: "./input.component.html"
 })
 export class InputComponent {
-
-  private inputText = '';
+  private inputText = "";
   private wordCount;
-  private plagName = 'Meine Beschreibung';
+  private plagName = "Meine Beschreibung";
   private wordString;
 
   private storedRequests: PlagResponse[];
@@ -43,16 +41,18 @@ export class InputComponent {
   };
 
   historyRotateViewHistoryIcon = {
-    historyRotateViewHistoryIcon:  false
+    historyRotateViewHistoryIcon: false
   };
   minimumTextLength = 100;
   loading = false;
   WCController: any;
 
-  constructor(private plagPositionsService: PlagPositionsService,
-              private alertService: AlertService,
-              private router: Router,
-              private localStorageManager: LocalStorageManagerService) {
+  constructor(
+    private plagPositionsService: PlagPositionsService,
+    private alertService: AlertService,
+    private router: Router,
+    private localStorageManager: LocalStorageManagerService
+  ) {
     this.storedRequests = this.localStorageManager.getRecentlyStoredRequests();
   }
 
@@ -61,16 +61,20 @@ export class InputComponent {
    * Emits event to toggle components
    */
   send() {
-    if (this.inputText !== '' && this.inputText !== undefined && this.minimumTextLength <= this.inputText.length) {
-
+    if (
+      this.inputText !== "" &&
+      this.inputText !== undefined &&
+      this.minimumTextLength <= this.inputText.length
+    ) {
       // Check if the give input is already stored in cache
-      if (!this.localStorageManager.requestAlreadyInLocalStorage(this.inputText)) {
+      if (
+        !this.localStorageManager.requestAlreadyInLocalStorage(this.inputText)
+      ) {
         this.loadResponseFromServer();
       } else {
         this.loadResponseFromLocalStorage();
       }
-
-    } else if (this.inputText === '' || this.inputText === undefined) {
+    } else if (this.inputText === "" || this.inputText === undefined) {
       this.alertEmptyTextArea();
     } else {
       this.alertNotEnoughtCharsInTextArea();
@@ -81,15 +85,25 @@ export class InputComponent {
    * Alert an empty text area to alert service
    */
   alertEmptyTextArea() {
-    this.alertService.showAlert('Bitte Text eingeben', 'Bitte geben Sie einen Text zum analysieren ein!', 'warning');
+    this.alertService.showAlert(
+      "Bitte Text eingeben",
+      "Bitte geben Sie einen Text zum analysieren ein!",
+      "warning"
+    );
   }
 
   /**
    * Send alert to alert service in case not enought chars are entered from user
    */
   alertNotEnoughtCharsInTextArea() {
-    this.alertService.showAlert('Bitte mehr Text eingeben', 'Bitte geben ' +
-      'Sie mindestes ' + this.minimumTextLength + ' Zeichen zum analysieren ein!', 'warning');
+    this.alertService.showAlert(
+      "Bitte mehr Text eingeben",
+      "Bitte geben " +
+        "Sie mindestes " +
+        this.minimumTextLength +
+        " Zeichen zum analysieren ein!",
+      "warning"
+    );
   }
 
   /**
@@ -111,14 +125,17 @@ export class InputComponent {
       (<PlagResponse>result).name = this.plagName;
       (<PlagResponse>result).created_at = Date.now();
 
-      this.localStorageManager.saveResponseToLocalStorage(this.inputText.toString(), JSON.stringify(result));
+      this.localStorageManager.saveResponseToLocalStorage(
+        this.inputText.toString(),
+        JSON.stringify(result)
+      );
       // console.log('Request is sent to server / mock file is loading ...');
       // set the data to the result
       this.loading = false;
       // console.log('sent to output component');
       // Wait before switching to other component to make a smooth fadeout animation
       this.applyAnimationClasses();
-      setTimeout(() => this.router.navigate(['/output']), 500);
+      setTimeout(() => this.router.navigate(["/output"]), 500);
     });
   }
   toggleHistory() {
@@ -130,7 +147,7 @@ export class InputComponent {
 
     this.viewHistory = {
       viewHistoryExpanded: !this.viewHistory.viewHistoryExpanded,
-      minimizeHistory:  !this.viewHistory.minimizeHistory
+      minimizeHistory: !this.viewHistory.minimizeHistory
     };
 
     this.historyHidden = {
@@ -138,7 +155,8 @@ export class InputComponent {
     };
 
     this.historyRotateViewHistoryIcon = {
-      historyRotateViewHistoryIcon: !this.historyRotateViewHistoryIcon.historyRotateViewHistoryIcon
+      historyRotateViewHistoryIcon: !this.historyRotateViewHistoryIcon
+        .historyRotateViewHistoryIcon
     };
   }
   /**
@@ -146,11 +164,15 @@ export class InputComponent {
    */
   loadResponseFromLocalStorage() {
     // console.log('Loading data from local storage');
-    this.plagPositionsService.data = <PlagResponse>JSON.parse(this.localStorageManager.getResponseFromLocalStorage(this.inputText));
+    this.plagPositionsService.data = <PlagResponse>(
+      JSON.parse(
+        this.localStorageManager.getResponseFromLocalStorage(this.inputText)
+      )
+    );
     // console.log('sent to output component');
     // Wait before switching to other component to make a smooth fadeout animation
     this.applyAnimationClasses();
-    setTimeout(() => this.router.navigate(['/output']), 500);
+    setTimeout(() => this.router.navigate(["/output"]), 500);
   }
 
   /**
@@ -163,7 +185,7 @@ export class InputComponent {
     // console.log('sent to output component');
     // Wait before switching to other component to make a smooth fadeout animation
     this.applyAnimationClasses();
-    setTimeout(() => this.router.navigate(['/output']), 500);
+    setTimeout(() => this.router.navigate(["/output"]), 500);
   }
 
   /**
@@ -191,7 +213,6 @@ export class InputComponent {
       };
 
       reader.readAsBinaryString(input.files[index]);
-
     }
   }
   /**
@@ -200,11 +221,11 @@ export class InputComponent {
    */
   countWords() {
     this.wordCount = this.inputText.split(/\s+/); // it splits the text on space/tab/enter
-    this.wordCount = (this.wordCount ? this.wordCount.length : '') - 1;
+    this.wordCount = (this.wordCount ? this.wordCount.length : "") - 1;
     if (this.wordCount === 1) {
-      this.wordString = 'Wort';
+      this.wordString = "Wort";
     } else {
-      this.wordString = 'Wörter';
+      this.wordString = "Wörter";
     }
   }
 }

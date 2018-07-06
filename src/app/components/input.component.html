@@ -1,6 +1,3 @@
-
-
-
 <div class="body input-container container animated" [ngClass]="myAnimationClasses">
   <div class="row row-correction">
     <div class="textbox col-sm-12 col-md-6 col-lg-6">
@@ -8,27 +5,24 @@
         <h1 class="textbox_h1">Eingabe</h1>
       </div>
 
-      <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" (keyup)="countWords(inputText)"  placeholder="Text hier einfügen"
-                [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
+      <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" (keyup)="countWords(inputText)" placeholder="Text hier einfügen"
+        [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
 
       </textarea>
 
       <div class="animated textboxViewHistory" [ngClass]="viewHistory">
-        <img class="icon-view-history small-icon" [ngClass]="historyRotateViewHistoryIcon" (click)="toggleHistory()"
-             src="../../assets/up.svg">
+        <img class="icon-view-history small-icon" [ngClass]="historyRotateViewHistoryIcon" (click)="toggleHistory()" src="../../assets/up.svg">
         <div [ngClass]="historyHidden">
           <hr>
           <div *ngIf="storedRequests != null && storedRequests.length != 0">
             <h1>Letzte Anfragen</h1>
             <button class="button button-primary" (click)="deleteLocalStorage()">
-              <img class="small-icon white-icon" src="../../assets/rubbish.svg">
-              Alle löschen
+              <img class="small-icon white-icon" src="../../assets/rubbish.svg"> Alle löschen
             </button>
             <hr>
             <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
               <div [innerHTML]="storedPlag.name | slice:0:200"></div>
-              <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml "
-                   (click)="loadStoredPlagDataWithId(i)"></div>
+              <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml " (click)="loadStoredPlagDataWithId(i)"></div>
               ...
               <hr>
             </div>
@@ -41,16 +35,15 @@
         </div>
       </div>
       <div class="textbox_footer_container">
-        <div class="wordcount_div" >
-
-          <img class="textbox_footer_image" src="../../assets/wordcount.svg"> {{wordCount}} {{wordString}}
+        <div class="wordcount_div">
+          <img class="textbox_footer_image" src="../../assets/wordcount.svg">
+          <span>{{inputText.split(" ").length}} Wörter</span>
           <!--<span *ngIf="loading">Laden ...</span>-->
         </div>
         <div class="historytag history_div">
-          <img class="textbox_footer_image" src="../../assets/label.svg"> <input class="form-control label_input"
-                                                                                 placeholder="deine Bezeichnung"
-                                                                                 [(ngModel)]="plagName"><br>
-
+          <img class="textbox_footer_image" src="../../assets/label.svg">
+          <input class="form-control label_input" placeholder="deine Bezeichnung" [(ngModel)]="plagName">
+          <br>
         </div>
       </div>
       <div class="button_container">
@@ -61,4 +54,3 @@
   </div>
 
 </div>
-
