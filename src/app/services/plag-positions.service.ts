@@ -10,11 +10,7 @@ import { PlagResponse } from "../models/responses/plag-response";
 export class PlagPositionsService {
   // post url cluster or localhost connection
   // url = 'http://localhost:8080/wikiplag/rest/analyse';
-<<<<<<< HEAD
-  url = 'https://wikiplag.f4.htw-berlin.de/wikiplag/rest/analyse';
-=======
-  url = "/wikiplag/rest/analyse";
->>>>>>> origin/master
+  url = "https://wikiplag.f4.htw-berlin.de/wikiplag/rest/analyse";
 
   // data
   data: PlagResponse;
