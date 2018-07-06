@@ -15,15 +15,16 @@
               <div [ngSwitch]="plag.active">
                 <div class="row">
                   <div class="col-sm-1 col-md-1 col-lg-1">
-                    <button class="button button-secondary" *ngIf="plag.type === 'text' && plag.active"
-                            (click)="changeViewState(i)"><i class="fas fa-caret-down"></i></button>
-                    <button class="button button-secondary" *ngIf="plag.type === 'text' && !plag.active"
-                            (click)="changeViewState(i)"><i class="fas fa-caret-right"></i></button>
+                    <button class="button button-secondary" *ngIf="plag.type === 'text' && plag.active" (click)="changeViewState(i)">
+                      <i class="fas fa-caret-down"></i>
+                    </button>
+                    <button class="button button-secondary" *ngIf="plag.type === 'text' && !plag.active" (click)="changeViewState(i)">
+                      <i class="fas fa-caret-right"></i>
+                    </button>
                   </div>
                   <div class="col-sm-11 col-md-11 col-lg-11">
                     <div [innerHTML]="plag.text | safeHtml" *ngIf="plag.active"></div>
-                    <div class="badge badge-info pointer-cursor" *ngIf="plag.type === 'text' && !plag.active"
-                         (click)="changeViewState(i)"> ...
+                    <div class="badge badge-info pointer-cursor" *ngIf="plag.type === 'text' && !plag.active" (click)="changeViewState(i)"> ...
                     </div>
                   </div>
                 </div>
@@ -40,11 +41,14 @@
             <h1 class="textbox_h1">Plagiate</h1>
           </div>
           <div class="output-textbox-content">
-            <div class="wiki_plag output-plagbox" (click)="showPlagOnWikipedia(plag.id)" style="text-align: center;"
-                 *ngFor="let plag of articleListOfSelectedPlag; let i=index" id="{{i}}">
+            <div class="plag-placeholder" *ngIf="!articleListOfSelectedPlag">
+              Keine Plagiate ausgewählt!
+            </div>
+            <div class="wiki_plag output-plagbox" (click)="showPlagOnWikipedia(plag.id)" style="text-align: center;" *ngFor="let plag of articleListOfSelectedPlag; let i=index"
+              id="{{i}}">
               <h2>{{plag.title}}</h2>
-              <div class="alert alert-dismissible alert-info excerpt_textbox"
-                   [innerHTML]="plag.excerpt"></div>
+              <div class="alert alert-dismissible alert-info excerpt_textbox" [innerHTML]="plag.excerpt">
+              </div>
               <hr>
             </div>
           </div>
@@ -60,7 +64,7 @@
       </div>
       <div class="col-sm-12 col-md-10 col-lg-10">
         <div class="buttons-output-component">
-          <button class="button button-primary" (click)="newInput()">Neuer Text</button>
+          <button class="button button-primary" style="margin-right: 20px;" (click)="newInput()">Neuer Text</button>
           <button class="button button-secondary" (click)="pdfExport()">PDF generieren</button>
         </div>
       </div>

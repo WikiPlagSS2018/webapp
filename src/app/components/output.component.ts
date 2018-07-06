@@ -1,23 +1,22 @@
-import { Component, HostListener } from '@angular/core';
-import { PlagPositionsService } from '../services/plag-positions.service';
-import { WikipediaAPIService } from '../services/wikipedia-api.service';
-import { AlertService } from '../services/alert.service';
-import { PlagResponse } from '../models/responses/plag-response';
-import { Plagarism } from '../models/plagarism';
-import { TextShorteningService } from '../services/text-shortening.service';
-import { SummarizedOutputTextPiece } from '../models/summarized-output-text-piece';
-import { Router } from '@angular/router';
-import { PdfGeneratorService } from '../services/pdf-generator.service';
+import { Component, HostListener } from "@angular/core";
+import { PlagPositionsService } from "../services/plag-positions.service";
+import { WikipediaAPIService } from "../services/wikipedia-api.service";
+import { AlertService } from "../services/alert.service";
+import { PlagResponse } from "../models/responses/plag-response";
+import { Plagarism } from "../models/plagarism";
+import { TextShorteningService } from "../services/text-shortening.service";
+import { SummarizedOutputTextPiece } from "../models/summarized-output-text-piece";
+import { Router } from "@angular/router";
+import { PdfGeneratorService } from "../services/pdf-generator.service";
 
 /**
  * Displays json provided by PlagPositionsService
  */
 @Component({
-  selector: 'app-output',
-  templateUrl: './output.component.html'
+  selector: "app-output",
+  templateUrl: "./output.component.html"
 })
 export class OutputComponent {
-
   /**
    * object read from json
    */
@@ -92,13 +91,15 @@ export class OutputComponent {
    * @param router
    * @param pdfGenerator
    */
-  constructor(private plagPositionsService: PlagPositionsService,
-              private wikipediaAPIService: WikipediaAPIService,
-              private alertService: AlertService,
-              private textShorteningService: TextShorteningService,
-              private router: Router,
-              private pdfGenerator: PdfGeneratorService) {
-    this.tagged_input_text = 'Lädt ...'; // displayed while service is loading
+  constructor(
+    private plagPositionsService: PlagPositionsService,
+    private wikipediaAPIService: WikipediaAPIService,
+    private alertService: AlertService,
+    private textShorteningService: TextShorteningService,
+    private router: Router,
+    private pdfGenerator: PdfGeneratorService
+  ) {
+    this.tagged_input_text = "Lädt ..."; // displayed while service is loading
 
     // assigns plagResponse from json to local variable
     this.plagResponse = this.plagPositionsService.getPlagData();
@@ -115,7 +116,7 @@ export class OutputComponent {
    * Navigate back to index route
    */
   navigateToIndexRoute() {
-    this.router.navigate(['/']);
+    window.location.href = "/";
   }
 
   /**
@@ -127,7 +128,10 @@ export class OutputComponent {
 
     this.shortened_text = true;
     if (this.shortened_text) {
-      this.textPieces = this.textShorteningService.shorteningText(this.tagged_input_text, 100);
+      this.textPieces = this.textShorteningService.shorteningText(
+        this.tagged_input_text,
+        100
+      );
     }
     // assigns plags from json to local variable
     this.plags = this.plagResponse.plags;
@@ -138,12 +142,19 @@ export class OutputComponent {
    */
   alertNumberOfPlags(plagCount: number) {
     if (plagCount === 0) {
-      this.alertService.showAlert('Keine Ergebnisse', 'Keine Plagiate im Text gefunden.', 'success');
+      this.alertService.showAlert(
+        "Keine Ergebnisse",
+        "Keine Plagiate im Text gefunden.",
+        "success"
+      );
     } else {
-      this.alertService.showAlert('Potentielle Plagiate', plagCount + ' potentielle Plagiate gefunden.', 'warning');
+      this.alertService.showAlert(
+        "Potentielle Plagiate",
+        plagCount + " potentielle Plagiate gefunden.",
+        "warning"
+      );
     }
   }
-
 
   changeViewState(index: number) {
     this.textPieces[index].active = !this.textPieces[index].active;
@@ -156,14 +167,13 @@ export class OutputComponent {
     this.pdfGenerator.generatePDF(this.plagResponse);
   }
 
-
   /**
    * Listen for click events in output component
    * @param event
    */
-  @HostListener('click', ['$event'])
+  @HostListener("click", ["$event"])
   onClick(event: any) {
-    if (event.target.classList.contains('input_plag')) {
+    if (event.target.classList.contains("input_plag")) {
       this.clickedOnPlagiarism(event);
     }
     /*else if (event.target.classList.contains('article_box')) {
@@ -174,7 +184,7 @@ export class OutputComponent {
   }
 
   showPlagOnWikipedia(id: any) {
-    this.articleUrl = 'https://de.wikipedia.org/?curid=' + id;
+    this.articleUrl = "https://de.wikipedia.org/?curid=" + id;
     window.open(this.articleUrl);
   }
 
@@ -199,7 +209,9 @@ export class OutputComponent {
     this.highlightSelectedPlag(event);
 
     // array of wiki_excerpts is assigned
-    this.articleListOfSelectedPlag = this.plags[this.clickedPlagId].wiki_excerpts;
+    this.articleListOfSelectedPlag = this.plags[
+      this.clickedPlagId
+    ].wiki_excerpts;
 
     // reset textOfSelectedArticle
     this.textOfSelectedArticle = null;
@@ -219,7 +231,9 @@ export class OutputComponent {
     this.getArticleURLFromWikipediaAPI();
 
     // excerpt text is assigned
-    this.textOfSelectedArticle = this.articleListOfSelectedPlag[this.clickedArticleId].excerpt;
+    this.textOfSelectedArticle = this.articleListOfSelectedPlag[
+      this.clickedArticleId
+    ].excerpt;
   }
 
   /**
@@ -229,13 +243,13 @@ export class OutputComponent {
   highlightSelectedPlag(event: any) {
     // disables highlighting
     if (this.prevSelPlag) {
-      this.prevSelPlag.style.boxShadow = 'none';
-      this.prevSelPlag.style.backgroundColor = 'rgba(255, 192, 0, 0.36)';
+      this.prevSelPlag.style.boxShadow = "none";
+      this.prevSelPlag.style.backgroundColor = "rgba(255, 192, 0, 0.36)";
     }
 
     // highlighting
-    event.target.style.boxShadow = '0 0 4px 1px gray';
-    event.target.style.background = 'lightcoral';
+    event.target.style.boxShadow = "0 0 4px 1px gray";
+    event.target.style.background = "lightcoral";
     this.prevSelPlag = event.target;
   }
 
@@ -246,13 +260,13 @@ export class OutputComponent {
   highlightSelectedArticle(event: any) {
     // disables highlighting
     if (this.prevSelArticle) {
-      this.prevSelArticle.classList.add('alert-info');
-      this.prevSelArticle.classList.remove('alert-danger');
+      this.prevSelArticle.classList.add("alert-info");
+      this.prevSelArticle.classList.remove("alert-danger");
     }
 
     // highlighting
-    event.target.classList.add('alert-danger');
-    event.target.classList.remove('alert-info');
+    event.target.classList.add("alert-danger");
+    event.target.classList.remove("alert-info");
     this.prevSelArticle = event.target;
   }
 
@@ -260,14 +274,18 @@ export class OutputComponent {
    * get article url from wikipedia api
    */
   getArticleURLFromWikipediaAPI() {
-    this.clickedArticleWikiId = this.plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
-    this.articleUrl = 'https://de.wikipedia.org/?curid=' + this.plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
+    this.clickedArticleWikiId = this.plags[this.clickedPlagId].wiki_excerpts[
+      this.clickedArticleId
+    ].id;
+    this.articleUrl =
+      "https://de.wikipedia.org/?curid=" +
+      this.plags[this.clickedPlagId].wiki_excerpts[this.clickedArticleId].id;
   }
 
   /**
    * called when 'Neuer Text' button was clicked
    */
   newInput() {
-    this.router.navigate(['/']);
+    this.router.navigate(["/"]);
   }
 }

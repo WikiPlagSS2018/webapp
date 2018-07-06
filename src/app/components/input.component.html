@@ -7,7 +7,6 @@
 
       <textarea class="textbox_textarea" width="100%" [(ngModel)]="inputText" (keyup)="countWords(inputText)" placeholder="Text hier einfügen"
         [ngModelOptions]="{standalone: true}" [ngClass]="textarea">
-
       </textarea>
 
       <div class="animated textboxViewHistory" [ngClass]="viewHistory">
@@ -20,11 +19,9 @@
               <img class="small-icon white-icon" src="../../assets/rubbish.svg"> Alle löschen
             </button>
             <hr>
-            <div *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}">
-              <div [innerHTML]="storedPlag.name | slice:0:200"></div>
-              <div [innerHTML]="storedPlag.tagged_input_text | slice:0:200 | safeHtml " (click)="loadStoredPlagDataWithId(i)"></div>
-              ...
-              <hr>
+            <div class="text-history-box" *ngFor="let storedPlag of storedRequests; let i=index" id="{{i}}" style="word-wrap: break-word;">
+              <h5 [innerHTML]="storedPlag.name"></h5>
+              <div class="preview-text" [innerHTML]="storedPlag.tagged_input_text | safeHtml " (click)="loadStoredPlagDataWithId(i)"></div>
             </div>
           </div>
           <div *ngIf="storedRequests == null || storedRequests.length == 0;">
@@ -48,6 +45,7 @@
       </div>
       <div class="button_container">
         <button id="analyseButton" class="button button-primary" (click)="send()" *ngIf="!loading">Analysieren</button>
+        <button id="analyseButton" class="button button-secondary" disabled="true" *ngIf="loading">Analysieren</button>
       </div>
 
     </div>

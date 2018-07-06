@@ -1,28 +1,30 @@
-
-.output-textbox-content{
+.output-textbox-content {
+  word-wrap: break-word;
   height: 50vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 1%;
+  padding: 10px;
 }
 
-.output-plagbox:hover{
+.plag-placeholder {
+  text-align: center;
+  margin: 60% auto;
+}
+
+.output-plagbox:hover {
   background-color: rgba(145, 226, 3, 0.15);
 }
 
-.output-plagbox{
-
+.output-plagbox {
   cursor: pointer;
 }
 
-
-.buttons-output-component{
+.buttons-output-component {
   position: absolute;
   right: 0%;
   padding-top: 2%;
   right: 2%;
 }
-
 
 .output-textbox {
   padding: 0;
@@ -33,6 +35,6 @@
   background-color: #ffffff;
 }
 
-.input_plag{
+.input_plag {
   background: rgba(255, 192, 0, 0.36);
 }
