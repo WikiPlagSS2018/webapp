@@ -11,7 +11,7 @@ export class PlagPositionsService {
 
   // post url cluster or localhost connection
   // url = 'http://localhost:8080/wikiplag/rest/analyse';
-  url = 'http://wikiplag.f4.htw-berlin.de:8080/wikiplag/rest/analyse';
+  url = 'https://wikiplag.f4.htw-berlin.de/wikiplag/rest/analyse';
 
   // data
   data: PlagResponse;
