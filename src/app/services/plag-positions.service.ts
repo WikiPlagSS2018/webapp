@@ -1,29 +1,25 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
-import { PlagResponse } from '../models/responses/plag-response';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { map, tap } from "rxjs/operators";
+import { PlagResponse } from "../models/responses/plag-response";
 
 /**
  * transmits input text to cluster rest api and retrieves json output
  */
 @Injectable()
 export class PlagPositionsService {
-
   // post url cluster or localhost connection
   // url = 'http://localhost:8080/wikiplag/rest/analyse';
-  url = 'http://wikiplag.f4.htw-berlin.de:8080/wikiplag/rest/analyse';
+  url = "/wikiplag/rest/analyse";
 
   // data
   data: PlagResponse;
-
 
   /**
    * constructor of PlagPositionsService
    * @param http http service
    */
-  constructor(private http: HttpClient) {
-  }
-
+  constructor(private http: HttpClient) {}
 
   /**
    * returns observable with plagResponse
@@ -39,9 +35,9 @@ export class PlagPositionsService {
    * @returns {Observable<Object>}
    */
   checkForPlag(inputText: string) {
-    return this.http.post<PlagResponse>(this.url, JSON.stringify({'text': inputText})).pipe(
-      tap((result) => this.data = result)
-    );
+    return this.http
+      .post<PlagResponse>(this.url, JSON.stringify({ text: inputText }))
+      .pipe(tap(result => (this.data = result)));
     /*return this.http.get<PlagResponse>('assets/mock3.json').pipe(
       tap((result) => this.data = result)
     );*/
